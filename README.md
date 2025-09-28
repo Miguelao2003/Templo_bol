@@ -260,12 +260,6 @@ Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 - **Gimnasio TEMPLO.BOL** - Por proporcionar el caso de estudio
 - **Escuela Militar de Ingeniería** - Por el apoyo académico y recursos
 
-## 📞 Soporte
-
-Para reportar bugs o solicitar características:
-- Crea un [Issue](https://github.com/Miguelao2003/Templo/issues)
-- Contacta al equipo de desarrollo
-
 ---
 
 **Desarrollado con ❤️ para revolutionar la gestión de gimnasios mediante inteligencia artificial**

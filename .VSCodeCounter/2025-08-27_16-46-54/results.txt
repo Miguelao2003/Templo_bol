@@ -1,0 +1,85 @@
+Date : 2025-08-27 16:46:54
+Directory : c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend
+Total : 49 files,  347279 codes, 640 comments, 1207 blanks, all 349126 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| Log              |          1 |    343,185 |          0 |        380 |    343,565 |
+| Python           |         46 |      4,083 |        639 |        827 |      5,549 |
+| pip requirements |          1 |         10 |          1 |          0 |         11 |
+| Properties       |          1 |          1 |          0 |          0 |          1 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                               | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                  |         49 |    347,279 |        640 |      1,207 |    349,126 |
+| . (Files)                                                                          |          3 |    343,196 |          1 |        380 |    343,577 |
+| app                                                                                |         46 |      4,083 |        639 |        827 |      5,549 |
+| app (Files)                                                                        |          6 |        359 |         53 |         86 |        498 |
+| app\ai_system                                                                      |          4 |          0 |          0 |          4 |          4 |
+| app\crud                                                                           |          7 |      1,541 |        186 |        309 |      2,036 |
+| app\models                                                                         |          8 |        502 |         73 |        133 |        708 |
+| app\routers                                                                        |         10 |      1,147 |        318 |        182 |      1,647 |
+| app\schemas                                                                        |          8 |        472 |          7 |         99 |        578 |
+| app\utils                                                                          |          3 |         62 |          2 |         14 |         78 |
++------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                           | language         | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\.env                               | Properties       |          1 |          0 |          0 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app.log                            | Log              |    343,185 |          0 |        380 |    343,565 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\__init__.py                    | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\__init__.py          | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\calisthenics_ai.py   | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\database_conector.py | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\test_integracion.py  | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\__init__.py               | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\equipos.py                | Python           |        114 |         13 |         22 |        149 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\horarios.py               | Python           |        555 |         78 |         90 |        723 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\metricas_usuario.py       | Python           |        118 |          7 |         30 |        155 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\reservas.py               | Python           |        264 |         51 |         57 |        372 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\rutina.py                 | Python           |        290 |         31 |         68 |        389 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\users.py                  | Python           |        200 |          6 |         41 |        247 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\database.py                    | Python           |         16 |          0 |          5 |         21 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\enums.py                       | Python           |         17 |          0 |          4 |         21 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\main.py                        | Python           |         97 |         34 |         22 |        153 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\__init__.py             | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\ai_routines.py          | Python           |        384 |         72 |        113 |        569 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\equipos.py              | Python           |         12 |          0 |          2 |         14 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\horarios.py             | Python           |         28 |          0 |          4 |         32 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\metricas_usuario.py     | Python           |         13 |          1 |          4 |         18 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\reservas.py             | Python           |         22 |          0 |          3 |         25 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\rutina.py               | Python           |         17 |          0 |          3 |         20 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\users.py                | Python           |         26 |          0 |          3 |         29 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\__init__.py            | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\ai_routines.py         | Python           |        309 |         38 |         61 |        408 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\auth.py                | Python           |        125 |         14 |         25 |        164 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\equipos.py             | Python           |        121 |         21 |         12 |        154 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\horarios.py            | Python           |        132 |         19 |          8 |        159 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\metricas_usuario.py    | Python           |         64 |          3 |          9 |         76 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\reservas.py            | Python           |        175 |         14 |         31 |        220 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\rutina.py              | Python           |        147 |         20 |         16 |        183 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\rutinas_ai.py          | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\users.py               | Python           |         74 |        189 |         18 |        281 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\__init__.py            | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\ai_schemas.py          | Python           |         32 |          1 |          7 |         40 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\equipos.py             | Python           |         22 |          0 |          5 |         27 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\horarios.py            | Python           |        152 |          1 |         29 |        182 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\metricas_usuario.py    | Python           |         40 |          0 |          9 |         49 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\reservas.py            | Python           |         76 |          5 |         20 |        101 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\rutina.py              | Python           |         45 |          0 |         10 |         55 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\users.py               | Python           |        105 |          0 |         18 |        123 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\test_original_api.py           | Python           |        154 |         14 |         40 |        208 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\utils\__init.py                | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\utils\fechas.py                | Python           |          5 |          0 |          2 |          7 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\utils\security.py              | Python           |         57 |          2 |         11 |         70 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\verify_dataset_path.py         | Python           |         75 |          5 |         14 |         94 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\requirements.txt                   | pip requirements |         10 |          1 |          0 |         11 |
+| Total                                                                              |                  |    347,279 |        640 |      1,207 |    349,126 |
++------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

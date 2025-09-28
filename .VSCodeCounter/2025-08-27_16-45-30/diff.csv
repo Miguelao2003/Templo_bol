@@ -1,0 +1,197 @@
+"filename", "language", "JavaScript", "PostCSS", "Properties", "JavaScript JSX", "Markdown", "JSON", "XML", "HTML", "pip requirements", "Python", "Log", "comment", "blank", "total"
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\.env", "Properties", 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app.log", "Log", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -343185, 0, -380, -343565
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\__init__.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\__init__.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\calisthenics_ai.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\database_conector.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\test_integracion.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\__init__.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\equipos.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -114, 0, -13, -22, -149
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\horarios.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -555, 0, -78, -90, -723
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\metricas_usuario.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -118, 0, -7, -30, -155
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\reservas.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -264, 0, -51, -57, -372
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\rutina.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -290, 0, -31, -68, -389
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\users.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -200, 0, -6, -41, -247
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\database.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -16, 0, 0, -5, -21
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\enums.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -17, 0, 0, -4, -21
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\main.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -97, 0, -34, -22, -153
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\__init__.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\ai_routines.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -384, 0, -72, -113, -569
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\equipos.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -12, 0, 0, -2, -14
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\horarios.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -28, 0, 0, -4, -32
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\metricas_usuario.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -13, 0, -1, -4, -18
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\reservas.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -22, 0, 0, -3, -25
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\rutina.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -17, 0, 0, -3, -20
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\users.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -26, 0, 0, -3, -29
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\__init__.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\ai_routines.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -309, 0, -38, -61, -408
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\auth.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -125, 0, -14, -25, -164
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\equipos.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -121, 0, -21, -12, -154
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\horarios.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -132, 0, -19, -8, -159
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\metricas_usuario.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -64, 0, -3, -9, -76
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\reservas.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -175, 0, -14, -31, -220
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\rutina.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -147, 0, -20, -16, -183
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\rutinas_ai.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\users.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -74, 0, -189, -18, -281
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\__init__.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\ai_schemas.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -32, 0, -1, -7, -40
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\equipos.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -22, 0, 0, -5, -27
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\horarios.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -152, 0, -1, -29, -182
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\metricas_usuario.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -40, 0, 0, -9, -49
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\reservas.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -76, 0, -5, -20, -101
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\rutina.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -45, 0, 0, -10, -55
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\users.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -105, 0, 0, -18, -123
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\test_original_api.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -154, 0, -14, -40, -208
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\utils\__init.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\utils\fechas.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -5, 0, 0, -2, -7
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\utils\security.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -57, 0, -2, -11, -70
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\verify_dataset_path.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -75, 0, -5, -14, -94
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\requirements.txt", "pip requirements", 0, 0, 0, 0, 0, 0, 0, 0, -10, 0, 0, -1, 0, -11
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\.env", "Properties", 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\README.md", "Markdown", 0, 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 2, 23
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\index.html", "HTML", 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 1, 14
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\package-lock.json", "JSON", 0, 0, 0, 0, 0, 3328, 0, 0, 0, 0, 0, 0, 1, 3329
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\package.json", "JSON", 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 0, 0, 1, 40
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\postcss.config.cjs", "JavaScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\public\portada.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\public\vite.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\App.jsx", "JavaScript JSX", 0, 0, 0, 86, 0, 0, 0, 0, 0, 0, 0, 12, 11, 109
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\assets\react.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\Header.jsx", "JavaScript JSX", 0, 0, 0, 112, 0, 0, 0, 0, 0, 0, 0, 6, 14, 132
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\IntegratedLayout.jsx", "JavaScript JSX", 0, 0, 0, 320, 0, 0, 0, 0, 0, 0, 0, 24, 37, 381
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\IntegratedLayoutCliente.jsx", "JavaScript JSX", 0, 0, 0, 407, 0, 0, 0, 0, 0, 0, 0, 33, 43, 483
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\IntegratedLayoutEntrenador.jsx", "JavaScript JSX", 0, 0, 0, 315, 0, 0, 0, 0, 0, 0, 0, 24, 38, 377
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\Notification.jsx", "JavaScript JSX", 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 1, 4, 24
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ProtectedRoute.jsx", "JavaScript JSX", 0, 0, 0, 71, 0, 0, 0, 0, 0, 0, 0, 7, 15, 93
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\Sidebar.jsx", "JavaScript JSX", 0, 0, 0, 149, 0, 0, 0, 0, 0, 0, 0, 16, 20, 185
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\restringidos\AdminEntrenador.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\restringidos\AdminEntrenadorCliente.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\restringidos\SoloAdmin.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\restringidos\SoloCliente.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\Boton.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\BotonAuth.jsx", "JavaScript JSX", 0, 0, 0, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\Input.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\InputAuth.jsx", "JavaScript JSX", 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 1, 41
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\SelectAuth.jsx", "JavaScript JSX", 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 1, 30
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\Selector.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\SelectorFecha.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\SelectorHora.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\Etiqueta.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\Modal.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\TablaDatos.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\Tarjeta.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\contextos\AuthContext.jsx", "JavaScript JSX", 0, 0, 0, 130, 0, 0, 0, 0, 0, 0, 0, 10, 21, 161
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\contextos\EquipoContext.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\contextos\HorarioContext.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\contextos\ReservaContext.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\contextos\RutinaContext.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\diseños\LayoutAdmin.jsx", "JavaScript JSX", 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 1, 2, 14
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\diseños\LayoutAuth.jsx", "JavaScript JSX", 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\diseños\LayoutCliente.jsx", "JavaScript JSX", 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 4, 15
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\diseños\LayoutEntrenador.jsx", "JavaScript JSX", 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 3, 14
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useAuth.js", "JavaScript", 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 12, 90
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useClientType.js", "JavaScript", 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 15, 120
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useEquipos.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useHorarios.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useNotification.js", "JavaScript", 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 17
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useReservas.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useRutinas.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useUsuarios.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\index.css", "PostCSS", 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\main.jsx", "JavaScript JSX", 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 2, 11
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\AdminDashboard.jsx", "JavaScript JSX", 0, 0, 0, 654, 0, 0, 0, 0, 0, 0, 0, 42, 69, 765
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\PerfilAdmin.jsx", "JavaScript JSX", 0, 0, 0, 313, 0, 0, 0, 0, 0, 0, 0, 19, 40, 372
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\componentes\BodyMetricsCard.jsx", "JavaScript JSX", 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\componentes\CalculatedMetrics.jsx", "JavaScript JSX", 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 1, 4, 34
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\componentes\PersonalInfoCard.jsx", "JavaScript JSX", 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 2, 14
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\componentes\charts\MetricsRadarChart.jsx", "JavaScript JSX", 0, 0, 0, 88, 0, 0, 0, 0, 0, 0, 0, 2, 7, 97
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\Equipos.jsx", "JavaScript JSX", 0, 0, 0, 481, 0, 0, 0, 0, 0, 0, 0, 23, 57, 561
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\componentes\EquipoFilters.jsx", "JavaScript JSX", 0, 0, 0, 266, 0, 0, 0, 0, 0, 0, 0, 10, 23, 299
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\componentes\EquipoSearch.jsx", "JavaScript JSX", 0, 0, 0, 196, 0, 0, 0, 0, 0, 0, 0, 0, 18, 214
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\componentes\EquipoTable.jsx", "JavaScript JSX", 0, 0, 0, 275, 0, 0, 0, 0, 0, 0, 0, 8, 28, 311
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\modales\CambiarEstadoModal.jsx", "JavaScript JSX", 0, 0, 0, 145, 0, 0, 0, 0, 0, 0, 0, 9, 12, 166
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\modales\CrearEquipoModal.jsx", "JavaScript JSX", 0, 0, 0, 157, 0, 0, 0, 0, 0, 0, 0, 9, 15, 181
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\modales\EditarEquipoModal.jsx", "JavaScript JSX", 0, 0, 0, 157, 0, 0, 0, 0, 0, 0, 0, 9, 15, 181
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\Horarios.jsx", "JavaScript JSX", 0, 0, 0, 483, 0, 0, 0, 0, 0, 0, 0, 25, 61, 569
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\HorariosTurno.jsx", "JavaScript JSX", 0, 0, 0, 388, 0, 0, 0, 0, 0, 0, 0, 23, 42, 453
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\componentes\HorarioFilters.jsx", "JavaScript JSX", 0, 0, 0, 151, 0, 0, 0, 0, 0, 0, 0, 9, 15, 175
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\componentes\HorarioSearch.jsx", "JavaScript JSX", 0, 0, 0, 220, 0, 0, 0, 0, 0, 0, 0, 13, 19, 252
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\componentes\HorarioTable.jsx", "JavaScript JSX", 0, 0, 0, 390, 0, 0, 0, 0, 0, 0, 0, 12, 40, 442
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\modales\CambiarEstadoModal.jsx", "JavaScript JSX", 0, 0, 0, 232, 0, 0, 0, 0, 0, 0, 0, 17, 25, 274
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\modales\CrearHorarioModal.jsx", "JavaScript JSX", 0, 0, 0, 454, 0, 0, 0, 0, 0, 0, 0, 40, 57, 551
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\modales\EditarHorarioModal.jsx", "JavaScript JSX", 0, 0, 0, 473, 0, 0, 0, 0, 0, 0, 0, 39, 57, 569
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\modales\EliminarHorarioModal.jsx", "JavaScript JSX", 0, 0, 0, 260, 0, 0, 0, 0, 0, 0, 0, 15, 27, 302
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reportes\Reportes.jsx", "JavaScript JSX", 0, 0, 0, 1836, 0, 0, 0, 0, 0, 0, 0, 109, 251, 2196
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reportes\componentes\Reporte0cupacion.jsx", "JavaScript JSX", 0, 0, 0, 676, 0, 0, 0, 0, 0, 0, 0, 51, 90, 817
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reportes\componentes\ReporteSaludUsuarios.jsx", "JavaScript JSX", 0, 0, 0, 804, 0, 0, 0, 0, 0, 0, 0, 42, 89, 935
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reservas\Reservas.jsx", "JavaScript JSX", 0, 0, 0, 437, 0, 0, 0, 0, 0, 0, 0, 41, 57, 535
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reservas\componentes\ReservaTable.jsx", "JavaScript JSX", 0, 0, 0, 452, 0, 0, 0, 0, 0, 0, 0, 34, 36, 522
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reservas\modales\CancelarReservaModal.jsx", "JavaScript JSX", 0, 0, 0, 316, 0, 0, 0, 0, 0, 0, 0, 25, 39, 380
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reservas\modales\CrearReservaModal.jsx", "JavaScript JSX", 0, 0, 0, 565, 0, 0, 0, 0, 0, 0, 0, 50, 72, 687
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\Rutinas.jsx", "JavaScript JSX", 0, 0, 0, 519, 0, 0, 0, 0, 0, 0, 0, 25, 57, 601
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\componentes\RutinaFilters.jsx", "JavaScript JSX", 0, 0, 0, 130, 0, 0, 0, 0, 0, 0, 0, 7, 17, 154
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\componentes\RutinaSearch.jsx", "JavaScript JSX", 0, 0, 0, 233, 0, 0, 0, 0, 0, 0, 0, 18, 23, 274
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\componentes\RutinaTable.jsx", "JavaScript JSX", 0, 0, 0, 334, 0, 0, 0, 0, 0, 0, 0, 8, 24, 366
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\modales\CambiarEstadoModal.jsx", "JavaScript JSX", 0, 0, 0, 209, 0, 0, 0, 0, 0, 0, 0, 12, 17, 238
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\modales\CrearRutinaModal.jsx", "JavaScript JSX", 0, 0, 0, 274, 0, 0, 0, 0, 0, 0, 0, 10, 22, 306
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\modales\EditarRutinaModal.jsx", "JavaScript JSX", 0, 0, 0, 315, 0, 0, 0, 0, 0, 0, 0, 11, 26, 352
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\Usuario.jsx", "JavaScript JSX", 0, 0, 0, 621, 0, 0, 0, 0, 0, 0, 0, 21, 88, 730
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\componentes\UsuarioActions.jsx", "JavaScript JSX", 0, 0, 0, 142, 0, 0, 0, 0, 0, 0, 0, 12, 20, 174
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\componentes\UsuarioFilters.jsx", "JavaScript JSX", 0, 0, 0, 352, 0, 0, 0, 0, 0, 0, 0, 14, 30, 396
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\componentes\UsuarioSearch.jsx", "JavaScript JSX", 0, 0, 0, 193, 0, 0, 0, 0, 0, 0, 0, 13, 18, 224
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\componentes\UsuarioTable.jsx", "JavaScript JSX", 0, 0, 0, 274, 0, 0, 0, 0, 0, 0, 0, 13, 34, 321
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\modales\CambiarEstadoModal.jsx", "JavaScript JSX", 0, 0, 0, 135, 0, 0, 0, 0, 0, 0, 0, 5, 12, 152
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\modales\CrearUsuarioModal.jsx", "JavaScript JSX", 0, 0, 0, 278, 0, 0, 0, 0, 0, 0, 0, 6, 20, 304
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\modales\EditarUsuarioModal.jsx", "JavaScript JSX", 0, 0, 0, 297, 0, 0, 0, 0, 0, 0, 0, 7, 19, 323
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\auth\Login.jsx", "JavaScript JSX", 0, 0, 0, 182, 0, 0, 0, 0, 0, 0, 0, 15, 24, 221
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\auth\Registro.jsx", "JavaScript JSX", 0, 0, 0, 416, 0, 0, 0, 0, 0, 0, 0, 15, 41, 472
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\PerfilCliente.jsx", "JavaScript JSX", 0, 0, 0, 336, 0, 0, 0, 0, 0, 0, 0, 20, 42, 398
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\componentes\BodyMetricsCard.jsx", "JavaScript JSX", 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\componentes\CalculatedMetrics.jsx", "JavaScript JSX", 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 1, 4, 34
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\componentes\PersonalInfoCard.jsx", "JavaScript JSX", 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 2, 14
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\componentes\charts\MetricsRadarChart.jsx", "JavaScript JSX", 0, 0, 0, 88, 0, 0, 0, 0, 0, 0, 0, 2, 7, 97
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\equipos\EquiposPowerplate.jsx", "JavaScript JSX", 0, 0, 0, 367, 0, 0, 0, 0, 0, 0, 0, 30, 45, 442
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\horarios\HorariosTurnoCliente.jsx", "JavaScript JSX", 0, 0, 0, 640, 0, 0, 0, 0, 0, 0, 0, 47, 70, 757
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\iaroutines\RutinaIA.jsx", "JavaScript JSX", 0, 0, 0, 648, 0, 0, 0, 0, 0, 0, 0, 10, 22, 680
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\reservas\ReservasCliente.jsx", "JavaScript JSX", 0, 0, 0, 574, 0, 0, 0, 0, 0, 0, 0, 43, 56, 673
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\reservas\modales\CancelarReservaModalCliente.jsx", "JavaScript JSX", 0, 0, 0, 334, 0, 0, 0, 0, 0, 0, 0, 28, 43, 405
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\reservas\modales\CrearReservaModalCliente.jsx", "JavaScript JSX", 0, 0, 0, 557, 0, 0, 0, 0, 0, 0, 0, 43, 63, 663
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\usuarios\modales\EditarUsuarioModal.jsx", "JavaScript JSX", 0, 0, 0, 298, 0, 0, 0, 0, 0, 0, 0, 7, 19, 324
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\PerfilEntrenador.jsx", "JavaScript JSX", 0, 0, 0, 336, 0, 0, 0, 0, 0, 0, 0, 20, 42, 398
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\componentes\BodyMetricsCard.jsx", "JavaScript JSX", 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\componentes\CalculatedMetrics.jsx", "JavaScript JSX", 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 1, 4, 34
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\componentes\PersonalInfoCard.jsx", "JavaScript JSX", 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 2, 14
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\componentes\charts\MetricsRadarChart.jsx", "JavaScript JSX", 0, 0, 0, 88, 0, 0, 0, 0, 0, 0, 0, 2, 7, 97
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\HorariosEntrenador.jsx", "JavaScript JSX", 0, 0, 0, 493, 0, 0, 0, 0, 0, 0, 0, 31, 62, 586
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\componentes\HorarioFilters.jsx", "JavaScript JSX", 0, 0, 0, 151, 0, 0, 0, 0, 0, 0, 0, 9, 15, 175
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\componentes\HorarioSearch.jsx", "JavaScript JSX", 0, 0, 0, 220, 0, 0, 0, 0, 0, 0, 0, 13, 19, 252
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\componentes\HorarioTable.jsx", "JavaScript JSX", 0, 0, 0, 396, 0, 0, 0, 0, 0, 0, 0, 12, 40, 448
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\modales\CambiarEstadoModal.jsx", "JavaScript JSX", 0, 0, 0, 232, 0, 0, 0, 0, 0, 0, 0, 17, 25, 274
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\modales\CrearHorarioModal.jsx", "JavaScript JSX", 0, 0, 0, 420, 0, 0, 0, 0, 0, 0, 0, 33, 51, 504
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\modales\EditarHorarioModal.jsx", "JavaScript JSX", 0, 0, 0, 422, 0, 0, 0, 0, 0, 0, 0, 29, 49, 500
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\modales\EliminarHorarioModal.jsx", "JavaScript JSX", 0, 0, 0, 260, 0, 0, 0, 0, 0, 0, 0, 15, 27, 302
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\reservas\componentes\AsistenciaModal.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\RutinasEntrenador.jsx", "JavaScript JSX", 0, 0, 0, 514, 0, 0, 0, 0, 0, 0, 0, 24, 59, 597
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\componentes\RutinaFilters.jsx", "JavaScript JSX", 0, 0, 0, 130, 0, 0, 0, 0, 0, 0, 0, 7, 17, 154
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\componentes\RutinaSearch.jsx", "JavaScript JSX", 0, 0, 0, 233, 0, 0, 0, 0, 0, 0, 0, 18, 23, 274
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\componentes\RutinaTable.jsx", "JavaScript JSX", 0, 0, 0, 334, 0, 0, 0, 0, 0, 0, 0, 8, 24, 366
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\modales\CambiarEstadoModal.jsx", "JavaScript JSX", 0, 0, 0, 171, 0, 0, 0, 0, 0, 0, 0, 7, 16, 194
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\modales\CrearRutinaModal.jsx", "JavaScript JSX", 0, 0, 0, 205, 0, 0, 0, 0, 0, 0, 0, 6, 17, 228
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\modales\EditarRutinaModal.jsx", "JavaScript JSX", 0, 0, 0, 281, 0, 0, 0, 0, 0, 0, 0, 8, 21, 310
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\usuarios\modales\EditarUsuarioModal.jsx", "JavaScript JSX", 0, 0, 0, 286, 0, 0, 0, 0, 0, 0, 0, 7, 19, 312
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\api.js", "JavaScript", 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 36
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\auth.js", "JavaScript", 78, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 13, 101
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\equipos.js", "JavaScript", 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 6, 69
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\horarios.js", "JavaScript", 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 8, 52
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\ia_routines_client.js", "JavaScript", 169, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 26, 260
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\reservas.js", "JavaScript", 173, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 32, 222
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\rutinas.js", "JavaScript", 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 54
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\usuarios.js", "JavaScript", 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 87
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\utilidades\constantes.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\utilidades\helper.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\utilidades\roles.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\utilidades\validaciones.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\tailwind.config.cjs", "JavaScript", 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 17
+"c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\vite.config.js", "JavaScript", 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 15
+"Total", "-", 830, 6, 0, 26707, 21, 3367, 3, 13, -10, -4083, -343185, 1056, 1864, -313411

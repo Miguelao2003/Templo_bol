@@ -1,0 +1,316 @@
+Date : 2025-08-27 16:45:30
+Directory : c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend
+Total : 195 files,  -316331 codes, 1056 comments, 1864 blanks, all -313411 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| JavaScript JSX   |        114 |     26,707 |      1,521 |      2,914 |     31,142 |
+| JSON             |          2 |      3,367 |          0 |          2 |      3,369 |
+| JavaScript       |         23 |        830 |        175 |        151 |      1,156 |
+| Markdown         |          1 |         21 |          0 |          2 |         23 |
+| HTML             |          1 |         13 |          0 |          1 |         14 |
+| PostCSS          |          1 |          6 |          0 |          1 |          7 |
+| XML              |          3 |          3 |          0 |          0 |          3 |
+| Properties       |          2 |          0 |          0 |          0 |          0 |
+| pip requirements |          1 |        -10 |         -1 |          0 |        -11 |
+| Python           |         46 |     -4,083 |       -639 |       -827 |     -5,549 |
+| Log              |          1 |   -343,185 |          0 |       -380 |   -343,565 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                  | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                     |        195 |   -316,331 |      1,056 |      1,864 |   -313,411 |
+| . (Files)                                                                                                             |          8 |      3,437 |          1 |          8 |      3,446 |
+| ..                                                                                                                    |         49 |   -347,279 |       -640 |     -1,207 |   -349,126 |
+| ..\Backend                                                                                                            |         49 |   -347,279 |       -640 |     -1,207 |   -349,126 |
+| ..\Backend (Files)                                                                                                    |          3 |   -343,196 |         -1 |       -380 |   -343,577 |
+| ..\Backend\app                                                                                                        |         46 |     -4,083 |       -639 |       -827 |     -5,549 |
+| ..\Backend\app (Files)                                                                                                |          6 |       -359 |        -53 |        -86 |       -498 |
+| ..\Backend\app\ai_system                                                                                              |          4 |          0 |          0 |         -4 |         -4 |
+| ..\Backend\app\crud                                                                                                   |          7 |     -1,541 |       -186 |       -309 |     -2,036 |
+| ..\Backend\app\models                                                                                                 |          8 |       -502 |        -73 |       -133 |       -708 |
+| ..\Backend\app\routers                                                                                                |         10 |     -1,147 |       -318 |       -182 |     -1,647 |
+| ..\Backend\app\schemas                                                                                                |          8 |       -472 |         -7 |        -99 |       -578 |
+| ..\Backend\app\utils                                                                                                  |          3 |        -62 |         -2 |        -14 |        -78 |
+| public                                                                                                                |          2 |          2 |          0 |          0 |          2 |
+| src                                                                                                                   |        136 |     27,509 |      1,695 |      3,063 |     32,267 |
+| src (Files)                                                                                                           |          3 |        101 |         12 |         14 |        127 |
+| src\assets                                                                                                            |          1 |          1 |          0 |          0 |          1 |
+| src\componentes                                                                                                       |         23 |      1,488 |        111 |        186 |      1,785 |
+| src\componentes (Files)                                                                                               |          7 |      1,393 |        111 |        171 |      1,675 |
+| src\componentes\restringidos                                                                                          |          4 |          0 |          0 |          4 |          4 |
+| src\componentes\ui                                                                                                    |         12 |         95 |          0 |         11 |        106 |
+| src\componentes\ui (Files)                                                                                            |          6 |         26 |          0 |          5 |         31 |
+| src\componentes\ui\ControlesFormulario                                                                                |          6 |         69 |          0 |          6 |         75 |
+| src\contextos                                                                                                         |          5 |        130 |         10 |         25 |        165 |
+| src\diseños                                                                                                           |          4 |         39 |          1 |         12 |         52 |
+| src\hooks                                                                                                             |          8 |        171 |         25 |         36 |        232 |
+| src\paginas                                                                                                           |         80 |     24,955 |      1,387 |      2,678 |     29,020 |
+| src\paginas\admin                                                                                                     |         44 |     15,231 |        859 |      1,696 |     17,786 |
+| src\paginas\admin (Files)                                                                                             |          2 |        967 |         61 |        109 |      1,137 |
+| src\paginas\admin\componentes                                                                                         |          4 |        144 |          3 |         15 |        162 |
+| src\paginas\admin\componentes (Files)                                                                                 |          3 |         56 |          1 |          8 |         65 |
+| src\paginas\admin\componentes\charts                                                                                  |          1 |         88 |          2 |          7 |         97 |
+| src\paginas\admin\equipos                                                                                             |          7 |      1,677 |         68 |        168 |      1,913 |
+| src\paginas\admin\equipos (Files)                                                                                     |          1 |        481 |         23 |         57 |        561 |
+| src\paginas\admin\equipos\componentes                                                                                 |          3 |        737 |         18 |         69 |        824 |
+| src\paginas\admin\equipos\modales                                                                                     |          3 |        459 |         27 |         42 |        528 |
+| src\paginas\admin\horarios                                                                                            |          9 |      3,051 |        193 |        343 |      3,587 |
+| src\paginas\admin\horarios (Files)                                                                                    |          2 |        871 |         48 |        103 |      1,022 |
+| src\paginas\admin\horarios\componentes                                                                                |          3 |        761 |         34 |         74 |        869 |
+| src\paginas\admin\horarios\modales                                                                                    |          4 |      1,419 |        111 |        166 |      1,696 |
+| src\paginas\admin\reportes                                                                                            |          3 |      3,316 |        202 |        430 |      3,948 |
+| src\paginas\admin\reportes (Files)                                                                                    |          1 |      1,836 |        109 |        251 |      2,196 |
+| src\paginas\admin\reportes\componentes                                                                                |          2 |      1,480 |         93 |        179 |      1,752 |
+| src\paginas\admin\reservas                                                                                            |          4 |      1,770 |        150 |        204 |      2,124 |
+| src\paginas\admin\reservas (Files)                                                                                    |          1 |        437 |         41 |         57 |        535 |
+| src\paginas\admin\reservas\componentes                                                                                |          1 |        452 |         34 |         36 |        522 |
+| src\paginas\admin\reservas\modales                                                                                    |          2 |        881 |         75 |        111 |      1,067 |
+| src\paginas\admin\rutinas                                                                                             |          7 |      2,014 |         91 |        186 |      2,291 |
+| src\paginas\admin\rutinas (Files)                                                                                     |          1 |        519 |         25 |         57 |        601 |
+| src\paginas\admin\rutinas\componentes                                                                                 |          3 |        697 |         33 |         64 |        794 |
+| src\paginas\admin\rutinas\modales                                                                                     |          3 |        798 |         33 |         65 |        896 |
+| src\paginas\admin\usuarios                                                                                            |          8 |      2,292 |         91 |        241 |      2,624 |
+| src\paginas\admin\usuarios (Files)                                                                                    |          1 |        621 |         21 |         88 |        730 |
+| src\paginas\admin\usuarios\componentes                                                                                |          4 |        961 |         52 |        102 |      1,115 |
+| src\paginas\admin\usuarios\modales                                                                                    |          3 |        710 |         18 |         51 |        779 |
+| src\paginas\auth                                                                                                      |          2 |        598 |         30 |         65 |        693 |
+| src\paginas\cliente                                                                                                   |         12 |      3,898 |        231 |        375 |      4,504 |
+| src\paginas\cliente (Files)                                                                                           |          1 |        336 |         20 |         42 |        398 |
+| src\paginas\cliente\componentes                                                                                       |          4 |        144 |          3 |         15 |        162 |
+| src\paginas\cliente\componentes (Files)                                                                               |          3 |         56 |          1 |          8 |         65 |
+| src\paginas\cliente\componentes\charts                                                                                |          1 |         88 |          2 |          7 |         97 |
+| src\paginas\cliente\equipos                                                                                           |          1 |        367 |         30 |         45 |        442 |
+| src\paginas\cliente\horarios                                                                                          |          1 |        640 |         47 |         70 |        757 |
+| src\paginas\cliente\iaroutines                                                                                        |          1 |        648 |         10 |         22 |        680 |
+| src\paginas\cliente\reservas                                                                                          |          3 |      1,465 |        114 |        162 |      1,741 |
+| src\paginas\cliente\reservas (Files)                                                                                  |          1 |        574 |         43 |         56 |        673 |
+| src\paginas\cliente\reservas\modales                                                                                  |          2 |        891 |         71 |        106 |      1,068 |
+| src\paginas\cliente\usuarios                                                                                          |          1 |        298 |          7 |         19 |        324 |
+| src\paginas\cliente\usuarios\modales                                                                                  |          1 |        298 |          7 |         19 |        324 |
+| src\paginas\entrenador                                                                                                |         22 |      5,228 |        267 |        542 |      6,037 |
+| src\paginas\entrenador (Files)                                                                                        |          1 |        336 |         20 |         42 |        398 |
+| src\paginas\entrenador\componentes                                                                                    |          4 |        144 |          3 |         15 |        162 |
+| src\paginas\entrenador\componentes (Files)                                                                            |          3 |         56 |          1 |          8 |         65 |
+| src\paginas\entrenador\componentes\charts                                                                             |          1 |         88 |          2 |          7 |         97 |
+| src\paginas\entrenador\horarios                                                                                       |          8 |      2,594 |        159 |        288 |      3,041 |
+| src\paginas\entrenador\horarios (Files)                                                                               |          1 |        493 |         31 |         62 |        586 |
+| src\paginas\entrenador\horarios\componentes                                                                           |          3 |        767 |         34 |         74 |        875 |
+| src\paginas\entrenador\horarios\modales                                                                               |          4 |      1,334 |         94 |        152 |      1,580 |
+| src\paginas\entrenador\reservas                                                                                       |          1 |          0 |          0 |          1 |          1 |
+| src\paginas\entrenador\reservas\componentes                                                                           |          1 |          0 |          0 |          1 |          1 |
+| src\paginas\entrenador\rutinas                                                                                        |          7 |      1,868 |         78 |        177 |      2,123 |
+| src\paginas\entrenador\rutinas (Files)                                                                                |          1 |        514 |         24 |         59 |        597 |
+| src\paginas\entrenador\rutinas\componentes                                                                            |          3 |        697 |         33 |         64 |        794 |
+| src\paginas\entrenador\rutinas\modales                                                                                |          3 |        657 |         21 |         54 |        732 |
+| src\paginas\entrenador\usuarios                                                                                       |          1 |        286 |          7 |         19 |        312 |
+| src\paginas\entrenador\usuarios\modales                                                                               |          1 |        286 |          7 |         19 |        312 |
+| src\services                                                                                                          |          8 |        624 |        149 |        108 |        881 |
+| src\utilidades                                                                                                        |          4 |          0 |          0 |          4 |          4 |
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                                              | language         | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\.env                                                                  | Properties       |         -1 |          0 |          0 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app.log                                                               | Log              |   -343,185 |          0 |       -380 |   -343,565 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\__init__.py                                                       | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\__init__.py                                             | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\calisthenics_ai.py                                      | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\database_conector.py                                    | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\ai_system\test_integracion.py                                     | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\__init__.py                                                  | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\equipos.py                                                   | Python           |       -114 |        -13 |        -22 |       -149 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\horarios.py                                                  | Python           |       -555 |        -78 |        -90 |       -723 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\metricas_usuario.py                                          | Python           |       -118 |         -7 |        -30 |       -155 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\reservas.py                                                  | Python           |       -264 |        -51 |        -57 |       -372 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\rutina.py                                                    | Python           |       -290 |        -31 |        -68 |       -389 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\crud\users.py                                                     | Python           |       -200 |         -6 |        -41 |       -247 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\database.py                                                       | Python           |        -16 |          0 |         -5 |        -21 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\enums.py                                                          | Python           |        -17 |          0 |         -4 |        -21 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\main.py                                                           | Python           |        -97 |        -34 |        -22 |       -153 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\__init__.py                                                | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\ai_routines.py                                             | Python           |       -384 |        -72 |       -113 |       -569 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\equipos.py                                                 | Python           |        -12 |          0 |         -2 |        -14 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\horarios.py                                                | Python           |        -28 |          0 |         -4 |        -32 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\metricas_usuario.py                                        | Python           |        -13 |         -1 |         -4 |        -18 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\reservas.py                                                | Python           |        -22 |          0 |         -3 |        -25 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\rutina.py                                                  | Python           |        -17 |          0 |         -3 |        -20 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\models\users.py                                                   | Python           |        -26 |          0 |         -3 |        -29 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\__init__.py                                               | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\ai_routines.py                                            | Python           |       -309 |        -38 |        -61 |       -408 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\auth.py                                                   | Python           |       -125 |        -14 |        -25 |       -164 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\equipos.py                                                | Python           |       -121 |        -21 |        -12 |       -154 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\horarios.py                                               | Python           |       -132 |        -19 |         -8 |       -159 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\metricas_usuario.py                                       | Python           |        -64 |         -3 |         -9 |        -76 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\reservas.py                                               | Python           |       -175 |        -14 |        -31 |       -220 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\rutina.py                                                 | Python           |       -147 |        -20 |        -16 |       -183 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\rutinas_ai.py                                             | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\routers\users.py                                                  | Python           |        -74 |       -189 |        -18 |       -281 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\__init__.py                                               | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\ai_schemas.py                                             | Python           |        -32 |         -1 |         -7 |        -40 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\equipos.py                                                | Python           |        -22 |          0 |         -5 |        -27 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\horarios.py                                               | Python           |       -152 |         -1 |        -29 |       -182 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\metricas_usuario.py                                       | Python           |        -40 |          0 |         -9 |        -49 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\reservas.py                                               | Python           |        -76 |         -5 |        -20 |       -101 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\rutina.py                                                 | Python           |        -45 |          0 |        -10 |        -55 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\schemas\users.py                                                  | Python           |       -105 |          0 |        -18 |       -123 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\test_original_api.py                                              | Python           |       -154 |        -14 |        -40 |       -208 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\utils\__init.py                                                   | Python           |          0 |          0 |         -1 |         -1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\utils\fechas.py                                                   | Python           |         -5 |          0 |         -2 |         -7 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\utils\security.py                                                 | Python           |        -57 |         -2 |        -11 |        -70 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\app\verify_dataset_path.py                                            | Python           |        -75 |         -5 |        -14 |        -94 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Backend\requirements.txt                                                      | pip requirements |        -10 |         -1 |          0 |        -11 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\.env                                                                 | Properties       |          1 |          0 |          0 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\README.md                                                            | Markdown         |         21 |          0 |          2 |         23 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\index.html                                                           | HTML             |         13 |          0 |          1 |         14 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\package-lock.json                                                    | JSON             |      3,328 |          0 |          1 |      3,329 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\package.json                                                         | JSON             |         39 |          0 |          1 |         40 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\postcss.config.cjs                                                   | JavaScript       |          6 |          0 |          1 |          7 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\public\portada.svg                                                   | XML              |          1 |          0 |          0 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\public\vite.svg                                                      | XML              |          1 |          0 |          0 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\App.jsx                                                          | JavaScript JSX   |         86 |         12 |         11 |        109 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\assets\react.svg                                                 | XML              |          1 |          0 |          0 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\Header.jsx                                           | JavaScript JSX   |        112 |          6 |         14 |        132 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\IntegratedLayout.jsx                                 | JavaScript JSX   |        320 |         24 |         37 |        381 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\IntegratedLayoutCliente.jsx                          | JavaScript JSX   |        407 |         33 |         43 |        483 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\IntegratedLayoutEntrenador.jsx                       | JavaScript JSX   |        315 |         24 |         38 |        377 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\Notification.jsx                                     | JavaScript JSX   |         19 |          1 |          4 |         24 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ProtectedRoute.jsx                                   | JavaScript JSX   |         71 |          7 |         15 |         93 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\Sidebar.jsx                                          | JavaScript JSX   |        149 |         16 |         20 |        185 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\restringidos\AdminEntrenador.jsx                     | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\restringidos\AdminEntrenadorCliente.jsx              | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\restringidos\SoloAdmin.jsx                           | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\restringidos\SoloCliente.jsx                         | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\Boton.jsx                                         | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\BotonAuth.jsx                                     | JavaScript JSX   |         26 |          0 |          0 |         26 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\Input.jsx                     | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\InputAuth.jsx                 | JavaScript JSX   |         40 |          0 |          1 |         41 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\SelectAuth.jsx                | JavaScript JSX   |         29 |          0 |          1 |         30 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\Selector.jsx                  | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\SelectorFecha.jsx             | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\ControlesFormulario\SelectorHora.jsx              | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\Etiqueta.jsx                                      | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\Modal.jsx                                         | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\TablaDatos.jsx                                    | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\componentes\ui\Tarjeta.jsx                                       | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\contextos\AuthContext.jsx                                        | JavaScript JSX   |        130 |         10 |         21 |        161 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\contextos\EquipoContext.jsx                                      | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\contextos\HorarioContext.jsx                                     | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\contextos\ReservaContext.jsx                                     | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\contextos\RutinaContext.jsx                                      | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\diseños\LayoutAdmin.jsx                                          | JavaScript JSX   |         11 |          1 |          2 |         14 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\diseños\LayoutAuth.jsx                                           | JavaScript JSX   |          6 |          0 |          3 |          9 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\diseños\LayoutCliente.jsx                                        | JavaScript JSX   |         11 |          0 |          4 |         15 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\diseños\LayoutEntrenador.jsx                                     | JavaScript JSX   |         11 |          0 |          3 |         14 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useAuth.js                                                 | JavaScript       |         71 |          7 |         12 |         90 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useClientType.js                                           | JavaScript       |         88 |         17 |         15 |        120 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useEquipos.js                                              | JavaScript       |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useHorarios.js                                             | JavaScript       |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useNotification.js                                         | JavaScript       |         12 |          1 |          4 |         17 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useReservas.js                                             | JavaScript       |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useRutinas.js                                              | JavaScript       |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\hooks\useUsuarios.js                                             | JavaScript       |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\index.css                                                        | PostCSS          |          6 |          0 |          1 |          7 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\main.jsx                                                         | JavaScript JSX   |          9 |          0 |          2 |         11 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\AdminDashboard.jsx                                 | JavaScript JSX   |        654 |         42 |         69 |        765 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\PerfilAdmin.jsx                                    | JavaScript JSX   |        313 |         19 |         40 |        372 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\componentes\BodyMetricsCard.jsx                    | JavaScript JSX   |         15 |          0 |          2 |         17 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\componentes\CalculatedMetrics.jsx                  | JavaScript JSX   |         29 |          1 |          4 |         34 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\componentes\PersonalInfoCard.jsx                   | JavaScript JSX   |         12 |          0 |          2 |         14 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\componentes\charts\MetricsRadarChart.jsx           | JavaScript JSX   |         88 |          2 |          7 |         97 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\Equipos.jsx                                | JavaScript JSX   |        481 |         23 |         57 |        561 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\componentes\EquipoFilters.jsx              | JavaScript JSX   |        266 |         10 |         23 |        299 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\componentes\EquipoSearch.jsx               | JavaScript JSX   |        196 |          0 |         18 |        214 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\componentes\EquipoTable.jsx                | JavaScript JSX   |        275 |          8 |         28 |        311 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\modales\CambiarEstadoModal.jsx             | JavaScript JSX   |        145 |          9 |         12 |        166 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\modales\CrearEquipoModal.jsx               | JavaScript JSX   |        157 |          9 |         15 |        181 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\equipos\modales\EditarEquipoModal.jsx              | JavaScript JSX   |        157 |          9 |         15 |        181 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\Horarios.jsx                              | JavaScript JSX   |        483 |         25 |         61 |        569 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\HorariosTurno.jsx                         | JavaScript JSX   |        388 |         23 |         42 |        453 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\componentes\HorarioFilters.jsx            | JavaScript JSX   |        151 |          9 |         15 |        175 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\componentes\HorarioSearch.jsx             | JavaScript JSX   |        220 |         13 |         19 |        252 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\componentes\HorarioTable.jsx              | JavaScript JSX   |        390 |         12 |         40 |        442 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\modales\CambiarEstadoModal.jsx            | JavaScript JSX   |        232 |         17 |         25 |        274 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\modales\CrearHorarioModal.jsx             | JavaScript JSX   |        454 |         40 |         57 |        551 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\modales\EditarHorarioModal.jsx            | JavaScript JSX   |        473 |         39 |         57 |        569 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\horarios\modales\EliminarHorarioModal.jsx          | JavaScript JSX   |        260 |         15 |         27 |        302 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reportes\Reportes.jsx                              | JavaScript JSX   |      1,836 |        109 |        251 |      2,196 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reportes\componentes\Reporte0cupacion.jsx          | JavaScript JSX   |        676 |         51 |         90 |        817 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reportes\componentes\ReporteSaludUsuarios.jsx      | JavaScript JSX   |        804 |         42 |         89 |        935 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reservas\Reservas.jsx                              | JavaScript JSX   |        437 |         41 |         57 |        535 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reservas\componentes\ReservaTable.jsx              | JavaScript JSX   |        452 |         34 |         36 |        522 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reservas\modales\CancelarReservaModal.jsx          | JavaScript JSX   |        316 |         25 |         39 |        380 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\reservas\modales\CrearReservaModal.jsx             | JavaScript JSX   |        565 |         50 |         72 |        687 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\Rutinas.jsx                                | JavaScript JSX   |        519 |         25 |         57 |        601 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\componentes\RutinaFilters.jsx              | JavaScript JSX   |        130 |          7 |         17 |        154 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\componentes\RutinaSearch.jsx               | JavaScript JSX   |        233 |         18 |         23 |        274 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\componentes\RutinaTable.jsx                | JavaScript JSX   |        334 |          8 |         24 |        366 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\modales\CambiarEstadoModal.jsx             | JavaScript JSX   |        209 |         12 |         17 |        238 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\modales\CrearRutinaModal.jsx               | JavaScript JSX   |        274 |         10 |         22 |        306 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\rutinas\modales\EditarRutinaModal.jsx              | JavaScript JSX   |        315 |         11 |         26 |        352 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\Usuario.jsx                               | JavaScript JSX   |        621 |         21 |         88 |        730 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\componentes\UsuarioActions.jsx            | JavaScript JSX   |        142 |         12 |         20 |        174 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\componentes\UsuarioFilters.jsx            | JavaScript JSX   |        352 |         14 |         30 |        396 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\componentes\UsuarioSearch.jsx             | JavaScript JSX   |        193 |         13 |         18 |        224 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\componentes\UsuarioTable.jsx              | JavaScript JSX   |        274 |         13 |         34 |        321 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\modales\CambiarEstadoModal.jsx            | JavaScript JSX   |        135 |          5 |         12 |        152 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\modales\CrearUsuarioModal.jsx             | JavaScript JSX   |        278 |          6 |         20 |        304 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\admin\usuarios\modales\EditarUsuarioModal.jsx            | JavaScript JSX   |        297 |          7 |         19 |        323 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\auth\Login.jsx                                           | JavaScript JSX   |        182 |         15 |         24 |        221 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\auth\Registro.jsx                                        | JavaScript JSX   |        416 |         15 |         41 |        472 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\PerfilCliente.jsx                                | JavaScript JSX   |        336 |         20 |         42 |        398 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\componentes\BodyMetricsCard.jsx                  | JavaScript JSX   |         15 |          0 |          2 |         17 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\componentes\CalculatedMetrics.jsx                | JavaScript JSX   |         29 |          1 |          4 |         34 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\componentes\PersonalInfoCard.jsx                 | JavaScript JSX   |         12 |          0 |          2 |         14 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\componentes\charts\MetricsRadarChart.jsx         | JavaScript JSX   |         88 |          2 |          7 |         97 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\equipos\EquiposPowerplate.jsx                    | JavaScript JSX   |        367 |         30 |         45 |        442 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\horarios\HorariosTurnoCliente.jsx                | JavaScript JSX   |        640 |         47 |         70 |        757 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\iaroutines\RutinaIA.jsx                          | JavaScript JSX   |        648 |         10 |         22 |        680 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\reservas\ReservasCliente.jsx                     | JavaScript JSX   |        574 |         43 |         56 |        673 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\reservas\modales\CancelarReservaModalCliente.jsx | JavaScript JSX   |        334 |         28 |         43 |        405 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\reservas\modales\CrearReservaModalCliente.jsx    | JavaScript JSX   |        557 |         43 |         63 |        663 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\cliente\usuarios\modales\EditarUsuarioModal.jsx          | JavaScript JSX   |        298 |          7 |         19 |        324 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\PerfilEntrenador.jsx                          | JavaScript JSX   |        336 |         20 |         42 |        398 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\componentes\BodyMetricsCard.jsx               | JavaScript JSX   |         15 |          0 |          2 |         17 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\componentes\CalculatedMetrics.jsx             | JavaScript JSX   |         29 |          1 |          4 |         34 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\componentes\PersonalInfoCard.jsx              | JavaScript JSX   |         12 |          0 |          2 |         14 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\componentes\charts\MetricsRadarChart.jsx      | JavaScript JSX   |         88 |          2 |          7 |         97 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\HorariosEntrenador.jsx               | JavaScript JSX   |        493 |         31 |         62 |        586 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\componentes\HorarioFilters.jsx       | JavaScript JSX   |        151 |          9 |         15 |        175 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\componentes\HorarioSearch.jsx        | JavaScript JSX   |        220 |         13 |         19 |        252 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\componentes\HorarioTable.jsx         | JavaScript JSX   |        396 |         12 |         40 |        448 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\modales\CambiarEstadoModal.jsx       | JavaScript JSX   |        232 |         17 |         25 |        274 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\modales\CrearHorarioModal.jsx        | JavaScript JSX   |        420 |         33 |         51 |        504 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\modales\EditarHorarioModal.jsx       | JavaScript JSX   |        422 |         29 |         49 |        500 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\horarios\modales\EliminarHorarioModal.jsx     | JavaScript JSX   |        260 |         15 |         27 |        302 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\reservas\componentes\AsistenciaModal.jsx      | JavaScript JSX   |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\RutinasEntrenador.jsx                 | JavaScript JSX   |        514 |         24 |         59 |        597 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\componentes\RutinaFilters.jsx         | JavaScript JSX   |        130 |          7 |         17 |        154 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\componentes\RutinaSearch.jsx          | JavaScript JSX   |        233 |         18 |         23 |        274 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\componentes\RutinaTable.jsx           | JavaScript JSX   |        334 |          8 |         24 |        366 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\modales\CambiarEstadoModal.jsx        | JavaScript JSX   |        171 |          7 |         16 |        194 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\modales\CrearRutinaModal.jsx          | JavaScript JSX   |        205 |          6 |         17 |        228 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\rutinas\modales\EditarRutinaModal.jsx         | JavaScript JSX   |        281 |          8 |         21 |        310 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\paginas\entrenador\usuarios\modales\EditarUsuarioModal.jsx       | JavaScript JSX   |        286 |          7 |         19 |        312 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\api.js                                                  | JavaScript       |         28 |          4 |          4 |         36 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\auth.js                                                 | JavaScript       |         78 |         10 |         13 |        101 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\equipos.js                                              | JavaScript       |         37 |         26 |          6 |         69 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\horarios.js                                             | JavaScript       |         35 |          9 |          8 |         52 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\ia_routines_client.js                                   | JavaScript       |        169 |         65 |         26 |        260 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\reservas.js                                             | JavaScript       |        173 |         17 |         32 |        222 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\rutinas.js                                              | JavaScript       |         36 |          9 |          9 |         54 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\services\usuarios.js                                             | JavaScript       |         68 |          9 |         10 |         87 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\utilidades\constantes.js                                         | JavaScript       |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\utilidades\helper.js                                             | JavaScript       |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\utilidades\roles.js                                              | JavaScript       |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\src\utilidades\validaciones.js                                       | JavaScript       |          0 |          0 |          1 |          1 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\tailwind.config.cjs                                                  | JavaScript       |         15 |          1 |          1 |         17 |
+| c:\Users\USUARIO\Desktop\Proyecto_Grado\Forntend\vite.config.js                                                       | JavaScript       |         14 |          0 |          1 |         15 |
+| Total                                                                                                                 |                  |   -316,331 |      1,056 |      1,864 |   -313,411 |
++-----------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

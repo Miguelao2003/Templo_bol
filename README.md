@@ -1,92 +1,195 @@
-# 🏋️ Templo - Sistema de Gestión Administrativa y Asistente Inteligente
+# Frontend - Sistema Templo
 
-## 📋 Descripción del Proyecto
+Este proyecto corresponde al **frontend** del sistema **web de gestión administrativa automatizada de horarios y asistente inteligente** para entrenamientos calisténicos en el Gimnasio TEMPLO.BOL.
 
-Sistema web para la gestión administrativa automatizada de horarios y asistente inteligente de entrenamientos calisténicos en el Gimnasio TEMPLO.BOL. El sistema utiliza algoritmos de machine learning para personalizar rutinas según características físicas individuales, optimizando la distribución de recursos y mejorando significativamente la experiencia del usuario.
+Está desarrollado en **React.js**, desplegado en **Vercel** y consume la **API del backend** desarrollada en FastAPI.
 
-**Caso de Estudio:** TEMPLO.BOL - Cochabamba, Bolivia
+---
 
-## 🚀 Características Principales
+## Tecnologías principales
 
-- **Gestión Automatizada de Horarios**: Sistema completo de reservas y programación
-- **Asistente Inteligente con IA**: Rutinas personalizadas usando Random Forest (99.5% precisión)
-- **Gestión de Usuarios**: Control de roles diferenciados (Administrador, Entrenador, Cliente)
-- **Dashboard Analítico**: Reportes y visualizaciones para toma de decisiones
-- **Interfaz Responsiva**: Diseño optimizado para diferentes dispositivos
-- **Autenticación Segura**: Sistema JWT con roles y permisos
+- [**React.js**](https://reactjs.org/) - Librería para la construcción de interfaces de usuario
+- [**Vite**](https://vitejs.dev/) - Herramienta de desarrollo rápida para proyectos frontend
+- [**TailwindCSS**](https://tailwindcss.com/) - Framework CSS para diseño responsivo
+- [**Axios**](https://axios-http.com/) - Cliente HTTP para consumir APIs
+- [**React Router**](https://reactrouter.com/) - Enrutamiento para aplicaciones React
+- [**Context API**] - Gestión de estado global de la aplicación
 
-## 🛠️ Tecnologías Principales
+---
 
-### Backend
-- **Framework**: FastAPI 0.104+
-- **Lenguaje**: Python 3.11+
-- **Base de Datos**: PostgreSQL 15+
-- **ORM**: SQLAlchemy 2.0+
-- **Machine Learning**: scikit-learn 1.3+, pandas 2.0+
+## Requisitos previos
 
-### Frontend
-- **Framework**: React.js 18.2+
-- **Bundler**: Vite 4+
-- **Gestión de Estado**: Context API
-- **Estilos**: TailwindCSS
+- Node.js **18.0.0** o superior
+- npm **9+** o yarn **3+** instalado
+- Backend del sistema ejecutándose
 
-### Herramientas de Desarrollo
-- **API Testing**: Postman
-- **Documentación**: Swagger/OpenAPI
-- **Control de Versiones**: Git
-- **Metodología**: Scrum
+---
 
-## 🏗️ Arquitectura del Sistema
+## Instalación en local
 
-El sistema implementa una arquitectura **Modelo-Vista-Controlador (MVC)** con separación clara de responsabilidades:
+```bash
+# Clonar el repositorio
+git clone https://github.com/Miguelao2003/Templo.git
+cd Templo/Frontend
 
-- **Modelo**: Gestión de datos con PostgreSQL y SQLAlchemy
-- **Vista**: Interfaz React.js con componentes reutilizables  
-- **Controlador**: APIs RESTful con FastAPI
+# Instalar dependencias
+npm install
 
-### Módulos Principales
+# Configurar variables de entorno
+cp .env.example .env.local
 
-1. **Gestión de Usuarios** - Registro, autenticación y control de acceso
-2. **Gestión de Horarios** - Programación y reservas en tiempo real
-3. **Gestión de Rutinas** - Biblioteca de ejercicios calisténicos
-4. **Asistente Inteligente** - Recomendaciones personalizadas con IA
-5. **Módulo de Reportes** - Analytics y exportación PDF/Excel
+# Ejecutar en modo desarrollo
+npm run dev
+```
 
-## 📊 Inteligencia Artificial
+---
 
-### Modelo Seleccionado: Random Forest
-- **Precisión**: 99.5%
-- **Recall**: 99.4%
-- **F1-Score**: 99.4%
-- **Tiempo de Entrenamiento**: 2.3 segundos
+## Variables de entorno
 
-### Características de Entrada
-- Edad, peso, altura
-- Género y objetivos de entrenamiento
-- Métricas calculadas: IMC, TMB, grasa corporal
+Crear archivo `.env.local` con las siguientes variables:
 
-### Evaluación Rigurosa
-Se evaluaron 4 modelos (Random Forest, SVM, Gradient Boosting, Red Neuronal MLP) con pruebas exhaustivas anti-overfitting, seleccionando Random Forest por su estabilidad y generalización.
+```env
+VITE_API_URL=http://localhost:8000
+VITE_APP_NAME=Templo
+VITE_APP_VERSION=1.0.0
+```
 
-## ⚡ Requisitos del Sistema
+---
 
-### Requisitos Mínimos
-- **SO**: Windows 10 / macOS 10.15 / Ubuntu 18.04
-- **RAM**: 8 GB
-- **Procesador**: Intel Core i5 8va generación
-- **Almacenamiento**: 256 GB SSD
-- **Conexión**: 10 Mbps
+## Scripts disponibles
 
-### Requisitos Ideales
-- **SO**: Windows 11 / macOS 12+ / Ubuntu 20.04+
-- **RAM**: 32 GB
-- **Procesador**: Intel Core i7 10ma generación
-- **Almacenamiento**: 512 GB SSD
-- **Conexión**: 50 Mbps
+```bash
+# Desarrollo
+npm run dev
 
-## 🔧 Instalación en Local
+# Construcción para producción
+npm run build
 
-### Backend
+# Vista previa de la construcción
+npm run preview
+
+# Linting del código
+npm run lint
+
+# Formateo de código
+npm run format
+```
+
+---
+
+## Estructura del proyecto
+
+```
+Frontend/
+├── public/
+│   ├── favicon.ico
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── common/       # Componentes reutilizables
+│   │   ├── layout/       # Layout y navegación
+│   │   └── forms/        # Formularios
+│   ├── pages/
+│   │   ├── auth/         # Autenticación
+│   │   ├── dashboard/    # Panel principal
+│   │   ├── users/        # Gestión de usuarios
+│   │   ├── schedules/    # Gestión de horarios
+│   │   ├── routines/     # Gestión de rutinas
+│   │   ├── ai/           # Asistente inteligente
+│   │   └── reports/      # Reportes
+│   ├── services/
+│   │   ├── api.js        # Configuración de Axios
+│   │   ├── auth.js       # Servicios de autenticación
+│   │   ├── users.js      # Servicios de usuarios
+│   │   ├── schedules.js  # Servicios de horarios
+│   │   ├── routines.js   # Servicios de rutinas
+│   │   └── ai.js         # Servicios de IA
+│   ├── hooks/
+│   │   ├── useAuth.js    # Hook de autenticación
+│   │   ├── useApi.js     # Hook para llamadas API
+│   │   └── useForm.js    # Hook para formularios
+│   ├── utils/
+│   │   ├── constants.js  # Constantes de la app
+│   │   ├── helpers.js    # Funciones auxiliares
+│   │   └── validators.js # Validaciones
+│   ├── styles/
+│   │   └── globals.css   # Estilos globales
+│   ├── App.jsx
+│   └── main.jsx
+├── package.json
+└── vite.config.js
+```
+
+---
+
+## Características implementadas
+
+### Autenticación y Autorización
+- **Login/Register** con validación de formularios
+- **JWT Token** management y renovación automática
+- **Roles de usuario** (Administrador, Entrenador, Cliente)
+- **Rutas protegidas** según permisos
+
+### Dashboard y Navegación
+- **Sidebar responsiva** con menú dinámico por rol
+- **Breadcrumbs** para navegación
+- **Notificaciones** en tiempo real
+- **Tema claro/oscuro** (opcional)
+
+### Gestión de Usuarios
+- **CRUD completo** de usuarios
+- **Búsqueda y filtros** avanzados
+- **Activación/desactivación** de cuentas
+- **Gestión de perfiles** personales
+
+### Gestión de Horarios
+- **Vista de calendario** semanal
+- **Reservas en tiempo real** con disponibilidad
+- **Filtros por tipo** de entrenamiento
+- **Notificaciones** de cambios
+
+### Asistente Inteligente
+- **Formulario de datos** antropométricos
+- **Visualización de rutinas** personalizadas
+- **Plan semanal** generado por IA
+- **Interfaz interactiva** para recomendaciones
+
+### Reportes y Analytics
+- **Gráficos interactivos** con Chart.js
+- **Exportación** a PDF y Excel
+- **Filtros temporales** y por categorías
+- **Dashboard ejecutivo** con métricas
+
+# Backend - Sistema Templo
+
+Este proyecto corresponde al **backend** del sistema **web de gestión administrativa automatizada de horarios y asistente inteligente** para entrenamientos calisténicos en el Gimnasio TEMPLO.BOL.
+
+Está desarrollado en **FastAPI** con **Python**, desplegado en **Render** y utiliza **PostgreSQL** como base de datos.
+
+---
+
+## Tecnologías principales
+
+- [**FastAPI**](https://fastapi.tiangolo.com/) - Framework web moderno para construir APIs con Python
+- [**SQLAlchemy**](https://www.sqlalchemy.org/) - ORM para Python y manejo de base de datos
+- [**PostgreSQL**](https://www.postgresql.org/) - Base de datos relacional avanzada
+- [**scikit-learn**](https://scikit-learn.org/) - Biblioteca de machine learning para Python
+- [**pandas**](https://pandas.pydata.org/) - Análisis y manipulación de datos
+- [**Alembic**](https://alembic.sqlalchemy.org/) - Migraciones de base de datos
+- [**JWT**](https://pyjwt.readthedocs.io/) - Autenticación basada en tokens
+
+---
+
+## Requisitos previos
+
+- Python **3.11.0** o superior
+- PostgreSQL **15+** instalado
+- pip o pipenv instalado
+
+---
+
+## Instalación en local
+
 ```bash
 # Clonar el repositorio
 git clone https://github.com/Miguelao2003/Templo.git
@@ -95,171 +198,111 @@ cd Templo/Backend
 # Crear entorno virtual
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-# venv\Scripts\activate    # Windows
+venv\Scripts\activate     # Windows
 
 # Instalar dependencias
 pip install -r requirements.txt
 
 # Configurar variables de entorno
 cp .env.example .env
-# Editar .env con tus credenciales de base de datos
+
+# Configurar base de datos
+createdb templo_db
 
 # Ejecutar migraciones
 alembic upgrade head
 
-# Iniciar servidor
-uvicorn main:app --reload
+# Ejecutar en modo desarrollo
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
-
-### Frontend
-```bash
-# Navegar al frontend
-cd ../Frontend
-
-# Instalar dependencias
-npm install
-
-# Configurar variables de entorno
-cp .env.example .env.local
-# Editar .env.local con la URL del backend
-
-# Iniciar en modo desarrollo
-npm run dev
-```
-
-### Base de Datos
-```sql
--- Crear base de datos PostgreSQL
-CREATE DATABASE templo_db;
-CREATE USER templo_user WITH PASSWORD 'tu_password';
-GRANT ALL PRIVILEGES ON DATABASE templo_db TO templo_user;
-```
-
-## 📁 Estructura del Proyecto
-
-```
-Templo/
-├── Backend/
-│   ├── app/
-│   │   ├── api/          # Endpoints de la API
-│   │   ├── core/         # Configuración y seguridad
-│   │   ├── db/           # Modelos y conexión DB
-│   │   ├── ml/           # Módulos de Machine Learning
-│   │   └── services/     # Lógica de negocio
-│   ├── tests/            # Pruebas unitarias
-│   └── requirements.txt
-├── Frontend/
-│   ├── src/
-│   │   ├── components/   # Componentes reutilizables
-│   │   ├── pages/        # Páginas principales
-│   │   ├── services/     # Servicios API
-│   │   ├── hooks/        # Custom hooks
-│   │   └── utils/        # Utilidades
-│   ├── public/           # Archivos estáticos
-│   └── package.json
-└── VSCodeCounter/        # Métricas del código
-```
-
-## 🧪 Pruebas y Validación
-
-### Pruebas Implementadas
-- **82 pruebas funcionales** - 100% de éxito
-- **Pruebas de carga** - 28.50 requests/segundo
-- **Pruebas de aceptación** - Validadas por usuarios reales
-- **Pruebas de estrés** - Evaluación bajo carga extrema
-
-### Métricas de Rendimiento
-- **Tiempo de respuesta promedio**: 66ms
-- **Percentil 90**: 275ms
-- **Percentil 95**: 330ms
-- **Percentil 99**: 616ms
-
-## 📊 Resultados del Proyecto
-
-### Métricas de Desarrollo
-- **Líneas de código**: 31,293 total
-  - Backend: 3,714 líneas
-  - Frontend: 27,579 líneas
-- **Tiempo de desarrollo**: 15.19 meses (estimado COCOMO II)
-- **Esfuerzo**: 173.36 persona-mes
-
-### Análisis Económico
-- **Relación Beneficio-Costo**: 4.85:1
-- **Costo de desarrollo**: Bs 28,560
-- **Ahorro anual estimado**: Bs 17,000
-- **ROI**: Proyecto económicamente viable
-
-## 🔐 Seguridad
-
-- **Autenticación JWT** con tokens seguros
-- **Encriptación de contraseñas** con bcrypt
-- **Validación de roles** y permisos granulares
-- **Sanitización de entradas** para prevenir inyecciones
-- **HTTPS** en producción
-
-## 📈 Funcionalidades por Rol
-
-### 👨‍💼 Administrador
-- Gestión completa de usuarios
-- Configuración de horarios y equipos
-- Generación de reportes analíticos
-- Supervisión del sistema
-
-### 🏋️‍♂️ Entrenador
-- Creación y gestión de rutinas
-- Programación de horarios personales
-- Visualización de clientes asignados
-
-### 👤 Cliente
-- Reserva de turnos en tiempo real
-- Rutinas personalizadas con IA
-- Seguimiento de progreso
-- Historial de entrenamientos
-
-## 🚀 Roadmap Futuro
-
-### Mejoras Planificadas
-- [ ] Aplicación móvil nativa
-- [ ] Integración con dispositivos wearables
-- [ ] Módulo de pagos en línea
-- [ ] Sistema de notificaciones push
-- [ ] Análisis predictivo de demanda
-- [ ] Recomendaciones nutricionales
-
-### Expansiones Técnicas
-- [ ] Microservicios architecture
-- [ ] Implementación de GraphQL
-- [ ] Cache con Redis
-- [ ] Containerización con Docker
-- [ ] CI/CD pipeline
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
-
-## 👨‍💻 Autor
-
-**José Miguel Atora Yugar**
-- Email: miguel.atora@ejemplo.com
-- LinkedIn: [tu-perfil-linkedin]
-- Universidad: Escuela Militar de Ingeniería "Mcal. Antonio José de Sucre"
-
-## 🙏 Agradecimientos
-
-- **Tutor**: M. Sc. Ariel Luis Gruich Arratia
-- **Gimnasio TEMPLO.BOL** - Por proporcionar el caso de estudio
-- **Escuela Militar de Ingeniería** - Por el apoyo académico y recursos
 
 ---
 
-**Desarrollado con ❤️ para revolutionar la gestión de gimnasios mediante inteligencia artificial**
+## Variables de entorno
+
+Crear archivo `.env` con las siguientes variables:
+
+```env
+# Base de datos
+DATABASE_URL=postgresql://usuario:password@localhost/templo_db
+
+# JWT
+SECRET_KEY=tu_secret_key_super_seguro
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# CORS
+FRONTEND_URL=http://localhost:3000
+
+# Ambiente
+ENVIRONMENT=development
+DEBUG=True
+```
+
+---
+
+## Estructura del proyecto
+
+```
+Backend/
+├── app/
+│   ├── api/
+│   │   ├── endpoints/
+│   │   │   ├── auth.py      # Autenticación
+│   │   │   ├── users.py     # Gestión de usuarios
+│   │   │   ├── schedules.py # Gestión de horarios
+│   │   │   ├── routines.py  # Gestión de rutinas
+│   │   │   ├── ai.py        # Asistente inteligente
+│   │   │   └── reports.py   # Reportes
+│   │   └── api.py           # Router principal
+│   ├── core/
+│   │   ├── config.py        # Configuración
+│   │   ├── security.py      # Seguridad y JWT
+│   │   └── deps.py          # Dependencias
+│   ├── db/
+│   │   ├── models/
+│   │   │   ├── user.py      # Modelo Usuario
+│   │   │   ├── schedule.py  # Modelo Horario
+│   │   │   ├── routine.py   # Modelo Rutina
+│   │   │   └── base.py      # Clase base
+│   │   ├── schemas/
+│   │   │   ├── user.py      # Esquemas Usuario
+│   │   │   ├── schedule.py  # Esquemas Horario
+│   │   │   └── routine.py   # Esquemas Rutina
+│   │   ├── database.py      # Conexión DB
+│   │   └── base.py          # Base para modelos
+│   ├── ml/
+│   │   ├── models/
+│   │   │   ├── random_forest.py # Modelo Random Forest
+│   │   │   └── trainer.py   # Entrenador de modelos
+│   │   ├── preprocessing/
+│   │   │   ├── features.py  # Extracción de características
+│   │   │   └── metrics.py   # Cálculo de métricas
+│   │   └── predictions/
+│   │       └── routines.py  # Predicciones de rutinas
+│   ├── services/
+│   │   ├── auth_service.py  # Lógica de autenticación
+│   │   ├── user_service.py  # Lógica de usuarios
+│   │   ├── schedule_service.py # Lógica de horarios
+│   │   ├── routine_service.py  # Lógica de rutinas
+│   │   └── ai_service.py    # Lógica de IA
+│   ├── utils/
+│   │   ├── validators.py    # Validaciones
+│   │   ├── helpers.py       # Funciones auxiliares
+│   │   └── constants.py     # Constantes
+│   └── main.py              # Aplicación principal
+├── alembic/
+│   ├── versions/            # Migraciones
+│   └── env.py              # Configuración Alembic
+├── tests/
+│   ├── api/                # Tests de endpoints
+│   ├── ml/                 # Tests de ML
+│   └── conftest.py         # Configuración tests
+├── requirements.txt
+└── alembic.ini
+```
+
+
+---
+
+*Fuente: Elaboración propia, 2025.*

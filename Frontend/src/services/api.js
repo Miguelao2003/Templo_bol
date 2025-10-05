@@ -2,13 +2,13 @@ import axios from 'axios';
 
 // Configuración base de axios con la URL de tu backend
 const api = axios.create({
-  baseURL: 'http://localhost:8000', // Usamos directamente la URL del backend
+  baseURL: 'http://localhost:8000/api', // ✅ Agregado /api
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   },
-  withCredentials: true // Importante para las cookies/sesión
+  withCredentials: true
 });
 
 // Interceptor para añadir token
@@ -25,7 +25,6 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Redirige a login si no está autorizado
       window.location.href = '/login';
       localStorage.removeItem('token');
     }
@@ -33,4 +32,4 @@ api.interceptors.response.use(
   }
 );
 
-export { api }; // Exportamos como named export
+export { api };

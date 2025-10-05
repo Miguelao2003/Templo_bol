@@ -34,14 +34,14 @@ class CalisthenicsAI:
             'intermedio': {
                 'total_dia': (8, 10), 
                 'por_grupo': (2, 3),
-                'tipo_entrenamiento': 'split',  # Split normal
+                'tipo_entrenamiento': 'split',
                 'frecuencia_semanal': 5,
-                'dias_entrenamiento': ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
+                'dias_entrenamiento': ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']  # Incluir sábado
             },
             'avanzado': {
                 'total_dia': (9, 12), 
                 'por_grupo': (3, 4),
-                'tipo_entrenamiento': 'split',  # Split avanzado
+                'tipo_entrenamiento': 'split',
                 'frecuencia_semanal': 6,
                 'dias_entrenamiento': ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
             }
@@ -197,18 +197,36 @@ class CalisthenicsAI:
         print(f"🎯 Distribuciones por nivel creadas")
 
     def _crear_distribuciones_por_nivel(self):
-        """NUEVO: Crear distribuciones específicas según el nivel de entrenamiento"""
+        """
+        Crear distribuciones respetando frecuencia_semanal de cada nivel
+        """
         distribuciones = {}
         
-        # PRINCIPIANTES: Full Body (3 días por semana)
+        # PRINCIPIANTES: Full Body (3 días)
         distribuciones['principiante'] = self._crear_distribucion_principiante()
         
-        # INTERMEDIO Y AVANZADO: Split (como antes)
-        distribuciones['intermedio'] = self._crear_distribucion_split(['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'])
-        distribuciones['avanzado'] = self._crear_distribucion_split(['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'])
+        # INTERMEDIO: Split 5 días (Lunes-Viernes + opción Sábado si es necesario)
+        dias_intermedios = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+        dist_intermedio = self._crear_distribucion_split(dias_intermedios)
+        
+        # Forzar al menos 5 días de entrenamiento para intermedio
+        dias_con_entrenamiento = [d for d, g in dist_intermedio.items() if g and d != 'Domingo']
+        if len(dias_con_entrenamiento) < 5:
+            print("Ajustando intermedio para tener al menos 5 días de entrenamiento...")
+            # Buscar día vacío y llenarlo
+            for dia in ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']:
+                if not dist_intermedio.get(dia):
+                    # Asignar grupos que puedan trabajarse
+                    dist_intermedio[dia] = ['abdomen', 'hombro']
+                    break
+        
+        distribuciones['intermedio'] = dist_intermedio
+        
+        # AVANZADO: Split 6 días
+        dias_avanzados = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+        distribuciones['avanzado'] = self._crear_distribucion_split(dias_avanzados)
         
         self.distribucion_dias = distribuciones
-        print(f"🎯 Distribuciones creadas: {list(distribuciones.keys())}")
 
     def _crear_distribucion_principiante(self):
         """NUEVO: Crear distribución específica para principiantes (FULL BODY)"""
@@ -240,17 +258,18 @@ class CalisthenicsAI:
         return distribucion_principiante
 
     def _crear_distribucion_split(self, dias_entrenamiento):
-        """CORREGIDO: Crear distribución split asegurando que bícep y trícep aparezcan"""
-        print(f"🏋️ Creando distribución SPLIT mejorada para {len(dias_entrenamiento)} días...")
+        """
+        VERSIÓN CORREGIDA: Asegura que se usen TODOS los días de entrenamiento disponibles
+        """
+        print(f"Creando distribución SPLIT para {len(dias_entrenamiento)} días...")
         
-        # GRUPOS OBLIGATORIOS que deben aparecer en la semana
         grupos_obligatorios = ['pecho', 'espalda', 'pierna', 'hombro', 'bicep', 'tricep', 'abdomen']
-        grupos_asignados = set()  # Para trackear qué grupos ya fueron asignados
+        grupos_asignados = set()
         
         distribucion = {}
-        ultimo_dia_trabajado = {}  # musculo -> indice_dia
+        ultimo_dia_trabajado = {}
         
-        # PRIMERA PASADA: Asignar grupos obligatorios
+        # PRIMERA PASADA: Asignar grupos a TODOS los días de entrenamiento
         for i, dia in enumerate(dias_entrenamiento):
             musculos_disponibles_hoy = []
             
@@ -270,32 +289,37 @@ class CalisthenicsAI:
             grupos_no_asignados = [m for m in musculos_disponibles_hoy if m not in grupos_asignados]
             
             if grupos_no_asignados:
-                # Seleccionar músculos priorizando los no asignados
                 musculos_dia = self._seleccionar_con_prioridad(grupos_no_asignados, musculos_disponibles_hoy)
-            else:
-                # Si todos los grupos ya fueron asignados, usar selección normal
+            elif musculos_disponibles_hoy:
+                # Todos los grupos ya fueron asignados, hacer segundo ciclo
                 musculos_dia = self._seleccionar_musculos_balance(musculos_disponibles_hoy)
+            else:
+                # No hay músculos disponibles (muy raro), usar abdomen
+                musculos_dia = ['abdomen']
             
             # Actualizar tracking
             for musculo in musculos_dia:
                 ultimo_dia_trabajado[musculo] = i
                 grupos_asignados.add(musculo)
-                
+            
             distribucion[dia] = musculos_dia
             print(f"   {dia}: {musculos_dia}")
         
-        # VERIFICACIÓN: Asegurar que bícep y trícep están incluidos
+        # VERIFICACIÓN CRÍTICA: Asegurar que bícep y trícep están incluidos
         if 'bicep' not in grupos_asignados or 'tricep' not in grupos_asignados:
-            print("⚠️ Bícep o trícep faltantes, reajustando distribución...")
+            print("Reajustando para incluir bícep y trícep...")
             distribucion = self._reajustar_para_incluir_faltantes(distribucion, dias_entrenamiento, grupos_asignados)
         
         # Completar días de descanso
         todos_los_dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
         for dia in todos_los_dias:
             if dia not in distribucion:
-                distribucion[dia] = []  # Día de descanso
+                distribucion[dia] = []
         
-        print(f"✅ Distribución split finalizada con grupos: {grupos_asignados}")
+        # CRÍTICO: Domingo siempre es descanso (gimnasio cerrado)
+        distribucion['Domingo'] = []
+        
+        print(f"Distribución finalizada con grupos: {grupos_asignados}")
         return distribucion
 
     def _seleccionar_con_prioridad(self, grupos_prioritarios, todos_disponibles):
@@ -1049,6 +1073,172 @@ class CalisthenicsAI:
             recomendaciones.append("💪 No olvides trabajar el core/abdomen regularmente.")
         
         return recomendaciones
+    
+    def generar_plan_semanal_completo(self, usuario_nivel, fecha_inicio=None):
+        """
+        Genera plan de 7 días con descanso dinámico según fecha de inicio
+        """
+        from datetime import datetime, timedelta
+        
+        if fecha_inicio is None:
+            fecha_inicio = datetime.now()
+        
+        config = self.config_ejercicios[usuario_nivel]
+        frecuencia = config['frecuencia_semanal']
+        
+        print(f"📅 Generando plan desde {fecha_inicio.strftime('%d/%m/%Y')} - Nivel: {usuario_nivel}")
+        print(f"🏋️ Frecuencia: {frecuencia} días de entrenamiento + descanso")
+        
+        plan_semanal = []
+        dias_semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+        
+        # ✅ NUEVO: Para principiantes, calcular días de forma alterna desde HOY
+        if usuario_nivel == 'principiante':
+            dias_descanso_indices = self._calcular_dias_descanso_principiante(fecha_inicio)
+        else:
+            dias_descanso_indices = self._calcular_dias_descanso(fecha_inicio, frecuencia)
+        
+        # Generar plan día por día
+        for i in range(7):
+            fecha_dia = fecha_inicio + timedelta(days=i)
+            dia_nombre = dias_semana[fecha_dia.weekday()]
+            fecha_str = fecha_dia.strftime('%d/%m')
+            
+            # Determinar si es día de descanso
+            es_descanso = i in dias_descanso_indices
+            
+            # ✅ Obtener config_nivel AQUÍ (antes de usarlo)
+            config_nivel = self.config_ejercicios.get(usuario_nivel, self.config_ejercicios['intermedio'])
+            
+            if es_descanso:
+                tipo_descanso = 'Gimnasio cerrado' if dia_nombre == 'Domingo' else 'Descanso activo'
+                plan_semanal.append({
+                    'dia': f"{dia_nombre} ({fecha_str})",
+                    'fecha_real': fecha_dia.strftime('%Y-%m-%d'),
+                    'grupos_musculares': [],
+                    'ejercicios': [],
+                    'total_ejercicios': 0,
+                    'volumen_total': 0,
+                    'es_dia_descanso': True,
+                    'tipo_descanso': tipo_descanso
+                })
+            else:
+                # ✅ Para principiantes: siempre full body
+                if usuario_nivel == 'principiante':
+                    grupos_del_dia = ['pecho', 'espalda', 'pierna', 'hombro', 'bicep', 'tricep', 'abdomen']
+                else:
+                    # Para intermedio/avanzado: usar distribución por día de la semana
+                    if hasattr(self, 'distribucion_dias') and usuario_nivel in self.distribucion_dias:
+                        distribucion = self.distribucion_dias[usuario_nivel]
+                        grupos_del_dia = distribucion.get(dia_nombre, [])
+                    else:
+                        grupos_del_dia = []
+                
+                # Generar ejercicios para estos grupos
+                ejercicios_dia = []
+                if grupos_del_dia:
+                    genero_dataset = 'Masculino'  # Por defecto
+                    
+                    for grupo in grupos_del_dia:
+                        num_ej = 1 if config_nivel['tipo_entrenamiento'] == 'full_body' else config_nivel['por_grupo'][1]
+                        ejercicios_grupo = self.obtener_ejercicios_por_musculo(
+                            genero_dataset, 'aumento de peso', usuario_nivel, grupo, num_ejercicios=num_ej
+                        )
+                        ejercicios_dia.extend(ejercicios_grupo)
+                
+                volumen = sum(ej['series'] * ej['repeticiones'] for ej in ejercicios_dia)
+                
+                plan_semanal.append({
+                    'dia': f"{dia_nombre} ({fecha_str})",
+                    'fecha_real': fecha_dia.strftime('%Y-%m-%d'),
+                    'grupos_musculares': grupos_del_dia,
+                    'ejercicios': ejercicios_dia,
+                    'total_ejercicios': len(ejercicios_dia),
+                    'volumen_total': volumen,
+                    'es_dia_descanso': False,
+                    'tipo_entrenamiento': config_nivel['tipo_entrenamiento']
+                })
+        
+        # Verificación
+        dias_entrenamiento_count = sum(1 for d in plan_semanal if not d['es_dia_descanso'])
+        print(f"✅ Plan generado: {dias_entrenamiento_count} días entrenamiento + {7-dias_entrenamiento_count} descanso")
+        
+        return plan_semanal
+
+    def _calcular_dias_descanso(self, fecha_inicio, frecuencia_semanal):
+        """
+        VERSIÓN CORREGIDA: Calcula dinámicamente los días de descanso
+        - Domingo: Siempre descanso (gimnasio cerrado)
+        - Segundo descanso: Después de completar los días de entrenamiento requeridos
+        """
+        from datetime import timedelta
+        
+        dias_descanso = []
+        dias_semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+        
+        # Encontrar domingo
+        indice_domingo = None
+        for i in range(7):
+            fecha_dia = fecha_inicio + timedelta(days=i)
+            if dias_semana[fecha_dia.weekday()] == 'Domingo':
+                indice_domingo = i
+                break
+        
+        # Contador de entrenamientos
+        dias_entrenamiento_completados = 0  # ✅ RENOMBRADO para claridad
+        
+        for i in range(7):
+            fecha_dia = fecha_inicio + timedelta(days=i)
+            dia_nombre = dias_semana[fecha_dia.weekday()]
+            
+            # Domingo siempre descanso
+            if i == indice_domingo:
+                dias_descanso.append(i)
+                print(f"🛌 DESCANSO 1: {dia_nombre} ({fecha_dia.strftime('%d/%m/%Y')}) - Gimnasio cerrado")
+            else:
+                # ✅ CORRECCIÓN: Verificar ANTES de incrementar
+                if dias_entrenamiento_completados < frecuencia_semanal:
+                    dias_entrenamiento_completados += 1
+                    print(f"🏋️ Entrenamiento {dias_entrenamiento_completados}: {dia_nombre} ({fecha_dia.strftime('%d/%m/%Y')})")
+                else:
+                    # Ya completamos los entrenamientos, este día es descanso
+                    dias_descanso.append(i)
+                    print(f"🛌 DESCANSO 2: {dia_nombre} ({fecha_dia.strftime('%d/%m/%Y')}) - Descanso activo")
+        
+        return sorted(dias_descanso)
+    def _calcular_dias_descanso_principiante(self, fecha_inicio):
+        """
+        NUEVO: Calcula días de descanso para principiantes de forma ALTERNA desde la fecha de inicio
+        - Patrón: Entrena, Descansa, Entrena, Descansa...
+        - Domingo SIEMPRE descanso (gimnasio cerrado)
+        """
+        from datetime import timedelta
+        
+        dias_descanso = []
+        dias_semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+        
+        print(f"🌟 Calculando plan ALTERNO para principiante desde {fecha_inicio.strftime('%d/%m/%Y')}")
+        
+        # Encontrar índice del domingo
+        for i in range(7):
+            fecha_dia = fecha_inicio + timedelta(days=i)
+            dia_nombre = dias_semana[fecha_dia.weekday()]
+            
+            # Domingo siempre descanso
+            if dia_nombre == 'Domingo':
+                dias_descanso.append(i)
+                print(f"   🛌 DÍA {i}: {dia_nombre} ({fecha_dia.strftime('%d/%m')}) - DESCANSO (gimnasio cerrado)")
+                continue
+            
+            # Patrón alterno: día par entrena, día impar descansa (o viceversa)
+            # Si HOY (día 0) es de entrenamiento, entonces días impares descansan
+            if i % 2 == 1:  # Días impares = descanso
+                dias_descanso.append(i)
+                print(f"   🛌 DÍA {i}: {dia_nombre} ({fecha_dia.strftime('%d/%m')}) - DESCANSO (alterno)")
+            else:  # Días pares = entrenamiento
+                print(f"   🏋️ DÍA {i}: {dia_nombre} ({fecha_dia.strftime('%d/%m')}) - ENTRENAMIENTO")
+        
+        return sorted(dias_descanso)
 
 
 # Instancia global del modelo de IA

@@ -264,11 +264,12 @@ const Rutinas = () => {
   };
 
   return (
-    <div className="relative z-10 py-8">
+    <>
       <Notification
         notification={notification}
         onClose={() => showNotification(null, null)}
       />
+    <div className="relative z-10 py-8">
 
       {/* Header principal */}
       <div className="mb-10">
@@ -556,8 +557,8 @@ const Rutinas = () => {
           }}
         />
       </div>
-
-      {/* Modales */}
+    </div>
+          {/* Modales */}
       <CrearRutinaModal
         isOpen={modalState.crear}
         onClose={() => setModalState((prev) => ({ ...prev, crear: false }))}
@@ -578,7 +579,8 @@ const Rutinas = () => {
         rutina={selectedRutina}
         error={deleteError}
       />
-    </div>
+
+    </>
   );
 };
 

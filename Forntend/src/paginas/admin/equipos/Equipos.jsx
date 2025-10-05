@@ -253,11 +253,12 @@ const Equipos = () => {
   const resetForm = () => setNewEquipo(initialEquipoState);
 
   return (
-    <div className="relative z-10 py-8">
+    <>
       <Notification
         notification={notification}
         onClose={() => showNotification(null, null)}
       />
+    <div className="relative z-10 py-8">
 
       {/* Header principal */}
       <div className="mb-10">
@@ -511,8 +512,8 @@ const Equipos = () => {
           }}
         />
       </div>
-
-      {/* Modales */}
+    </div>
+          {/* Modales */}
       <CrearEquipoModal
         isOpen={modalState.crear}
         onClose={() => setModalState((prev) => ({ ...prev, crear: false }))}
@@ -535,7 +536,7 @@ const Equipos = () => {
         onConfirm={handleChangeEstado}
         equipo={selectedEquipo}
       />
-    </div>
+    </>
   );
 };
 

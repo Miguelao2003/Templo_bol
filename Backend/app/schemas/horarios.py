@@ -112,7 +112,7 @@ class HorarioUpdate(BaseModel):
 
 class RutinaInfo(BaseModel):  # Esquema actualizado para información de rutina
     id_rutina: int
-    nombre_ejercicio: List[str]  # Array de nombres de ejercicios
+    ejercicios: List[str]  # Array de nombres de ejercicios
     partes_musculo: List[str]      # Array de partes musculares
     repeticiones: List[int]        # Array de repeticiones
     series: List[int]              # Array de series

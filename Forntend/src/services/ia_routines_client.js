@@ -9,41 +9,42 @@ class IAClientService {
    * @param {Object} user - Usuario desde localStorage/auth
    * @returns {Promise<Object>} Rutina personalizada
    */
-  async generarRutinaUsuarioLogueado(user) {
+  async generarRutinaUsuarioLogueado(user, usarHistorial = true) {
     try {
       console.log('🎯 Generando rutina para usuario logueado:', user);
       
-      // Validar que el usuario tenga los datos necesarios
       const validacion = this.validarDatosUsuario(user);
       if (!validacion.esValido) {
         throw new Error(`Datos incompletos: ${validacion.errores.join(', ')}`);
       }
 
-      // Si tiene id_usuario, usar endpoint para usuario existente
-      if (user.id_usuario) {
-        console.log('📡 Usando endpoint para usuario registrado');
-        const response = await api.post(`/ai/predict-routine-for-user/${user.id_usuario}`);
-        
-        return {
-          success: true,
-          data: this.formatearRutina(response.data),
-          message: 'Rutina generada exitosamente usando tu perfil',
-          sistemaDescanso: response.data.sistemaDescanso || true
-        };
-      } else {
-        // Si no tiene id_usuario, usar datos del perfil directamente
-        console.log('📡 Usando datos del perfil sin ID');
-        const datosUsuario = {
-          genero: this.normalizarGenero(user.genero),
-          edad: parseInt(user.edad),
-          peso: parseFloat(user.peso),
-          altura: this.normalizarAltura(user.altura),
-          objetivo: user.objetivo,
-          nivel: user.nivel || 'intermedio'
-        };
-        
-        return await this.generarRutinaPersonalizada(datosUsuario);
+      if (user.id_usuario && usarHistorial) {
+        try {
+          console.log('📡 Intentando generar rutina con historial...');
+          const resultadoHistorial = await this.generarRutinaConHistorial(user.id_usuario);
+          
+          if (resultadoHistorial.success && resultadoHistorial.data.historial.totalEntrenamientos > 0) {
+            return {
+              ...resultadoHistorial,
+              message: 'Rutina generada considerando tu historial de entrenamientos'
+            };
+          }
+        } catch (errorHistorial) {
+          console.warn('⚠️ No se pudo usar historial, usando rutina estándar:', errorHistorial);
+        }
       }
+
+      console.log('📡 Usando endpoint estándar para usuario registrado');
+      const response = await api.post(`/ai/predict-routine-for-user/${user.id_usuario}`);
+      
+      return {
+        success: true,
+        data: this.formatearRutina(response.data),
+        message: 'Rutina generada usando tu perfil',
+        sistemaDescanso: true,
+        historialUsado: false
+      };
+
     } catch (error) {
       console.error('❌ Error generando rutina:', error);
       throw {
@@ -96,9 +97,7 @@ class IAClientService {
   normalizarAltura(altura) {
     if (!altura) return 0;
     const h = parseFloat(altura);
-    if (h > 10) {
-      return h / 100;
-    }
+    if (h > 10) return h / 100;
     return h;
   }
 
@@ -241,8 +240,9 @@ class IAClientService {
    * @returns {Object} Rutina formateada para UI
    */
   formatearRutina(rutina) {
+    console.log('🔄 Formateando rutina recibida del backend:', rutina);
+    
     return {
-      // Información del usuario
       perfil: {
         nombre: rutina.usuario_nombre || 'Usuario',
         nivel: rutina.perfil.nivel,
@@ -250,42 +250,83 @@ class IAClientService {
         imc: parseFloat(rutina.perfil.imc.toFixed(1)),
         rangoImc: rutina.perfil.rango_imc,
         colorImc: this.getColorIMC(rutina.perfil.rango_imc),
+        tipoEntrenamiento: rutina.perfil.tipo_entrenamiento,
+        frecuenciaSemanal: rutina.perfil.frecuencia_semanal,
         nivelEmoji: this.getEmojiNivel(rutina.perfil.nivel),
         nivelDescripcion: this.getDescripcionNivel(rutina.perfil.nivel)
       },
 
-      // Plan semanal formateado
-      planSemanal: rutina.plan_semanal.map(dia => ({
-        dia: dia.dia,
-        gruposMusculares: dia.grupos_musculares,
-        ejercicios: dia.ejercicios.map(ejercicio => ({
-          id: `${dia.dia}-${ejercicio.ejercicio}`,
-          musculo: ejercicio.musculo,
-          nombre: ejercicio.ejercicio,
-          series: ejercicio.series,
-          repeticiones: ejercicio.repeticiones,
-          descripcion: `${ejercicio.series} series × ${ejercicio.repeticiones} reps`,
-          muscleColor: this.getColorMusculo(ejercicio.musculo),
-          intensidad: this.calcularIntensidad(ejercicio.series, ejercicio.repeticiones),
-          volumen: ejercicio.series * ejercicio.repeticiones
-        })),
-        totalEjercicios: dia.ejercicios.length,
-        diaIndex: this.getDiaIndex(dia.dia),
-        gruposTrabajos: dia.grupos_musculares.length,
-        volumenTotal: dia.ejercicios.reduce((total, ej) => total + (ej.series * ej.repeticiones), 0),
-        tipoEntrenamiento: this.clasificarTipoEntrenamiento(dia.grupos_musculares)
-      })),
+      // CORREGIDO: Procesar plan semanal incluyendo días de descanso
+      planSemanal: rutina.plan_semanal.map(dia => {
+        // Verificar si es día de descanso
+        const esDiaDescanso = dia.es_dia_descanso === true;
+        
+        if (esDiaDescanso) {
+          // Formateo especial para días de descanso
+          return {
+            dia: dia.dia,
+            fechaReal: dia.fecha_real, // NUEVO: incluir fecha real
+            gruposMusculares: [],
+            ejercicios: [],
+            esDiaDescanso: true,
+            tipoDescanso: dia.tipo_descanso || 'Descanso', // NUEVO
+            totalEjercicios: 0,
+            diaIndex: this.getDiaIndex(dia.dia),
+            gruposTrabajos: 0,
+            volumenTotal: 0,
+            tipoEntrenamiento: 'descanso'
+          };
+        }
 
-      // Resumen mejorado
+        // Día de entrenamiento normal
+        return {
+          dia: dia.dia,
+          fechaReal: dia.fecha_real, // NUEVO
+          gruposMusculares: dia.grupos_musculares || [],
+          ejercicios: (dia.ejercicios || []).map(ejercicio => ({
+            id: `${dia.dia}-${ejercicio.ejercicio}`,
+            musculo: ejercicio.musculo,
+            nombre: ejercicio.ejercicio,
+            series: ejercicio.series,
+            repeticiones: ejercicio.repeticiones,
+            descripcion: `${ejercicio.series} series × ${ejercicio.repeticiones} reps`,
+            muscleColor: this.getColorMusculo(ejercicio.musculo),
+            intensidad: this.calcularIntensidad(ejercicio.series, ejercicio.repeticiones),
+            volumen: ejercicio.series * ejercicio.repeticiones
+          })),
+          esDiaDescanso: false,
+          totalEjercicios: dia.total_ejercicios || dia.ejercicios?.length || 0,
+          diaIndex: this.getDiaIndex(dia.dia),
+          gruposTrabajos: dia.grupos_musculares?.length || 0,
+          volumenTotal: dia.volumen_total || (dia.ejercicios || []).reduce(
+            (total, ej) => total + (ej.series * ej.repeticiones), 0
+          ),
+          tipoEntrenamiento: dia.tipo_entrenamiento || this.clasificarTipoEntrenamiento(dia.grupos_musculares || [])
+        };
+      }),
+
+      // ACTUALIZADO: Resumen considerando días de descanso
       resumen: {
-        mensaje: rutina.mensaje,
-        totalDias: rutina.plan_semanal.length,
-        totalEjercicios: rutina.plan_semanal.reduce((total, dia) => total + dia.ejercicios.length, 0),
-        gruposUnicos: [...new Set(rutina.plan_semanal.flatMap(dia => dia.grupos_musculares))].length,
+        mensaje: rutina.resumen?.mensaje_nivel || rutina.mensaje,
+        totalDias: rutina.resumen?.total_dias_entrenamiento || 
+                   rutina.plan_semanal.filter(d => !d.es_dia_descanso).length,
+        totalDiasDescanso: rutina.plan_semanal.filter(d => d.es_dia_descanso).length,
+        totalEjercicios: rutina.resumen?.total_ejercicios_semana || 
+                        rutina.plan_semanal.reduce((total, dia) => 
+                          total + (dia.ejercicios?.length || 0), 0
+                        ),
+        promedioEjerciciosPorDia: rutina.resumen?.promedio_ejercicios_por_dia || 0,
+        gruposUnicos: [...new Set(
+          rutina.plan_semanal
+            .filter(d => !d.es_dia_descanso)
+            .flatMap(dia => dia.grupos_musculares || [])
+        )].length,
         volumenSemanal: rutina.plan_semanal.reduce((total, dia) => 
-          total + dia.ejercicios.reduce((subtotal, ej) => subtotal + (ej.series * ej.repeticiones), 0), 0
+          total + (dia.volumen_total || 0), 0
         ),
-        distribucionGrupos: this.analizarDistribucionGrupos(rutina.plan_semanal),
+        distribucionGrupos: this.analizarDistribucionGrupos(
+          rutina.plan_semanal.filter(d => !d.es_dia_descanso)
+        ),
         sistemaDescanso: true,
         recomendacionesDescanso: this.generarRecomendacionesDescanso(rutina.plan_semanal)
       }
@@ -342,18 +383,42 @@ class IAClientService {
    * @returns {Array}
    */
   generarRecomendacionesDescanso(planSemanal) {
-    const recomendaciones = [
+    const recomendaciones = [];
+    
+    const diasDescanso = planSemanal.filter(d => d.es_dia_descanso);
+    const diasEntrenamiento = planSemanal.filter(d => !d.es_dia_descanso);
+    
+    // Información sobre días de descanso
+    if (diasDescanso.length > 0) {
+      const gimnasioF = diasDescanso.find(d => d.tipo_descanso === 'Gimnasio cerrado');
+      const adicionales = diasDescanso.filter(d => d.tipo_descanso === 'Descanso activo');
+      
+      if (gimnasioF) {
+        const nombreDia = gimnasioF.dia.split('(')[0].trim();
+        recomendaciones.push(`${nombreDia}: Gimnasio cerrado - Descanso completo obligatorio`);
+      }
+      
+      if (adicionales.length > 0) {
+        adicionales.forEach(descanso => {
+          const nombreDia = descanso.dia.split('(')[0].trim();
+          recomendaciones.push(`${nombreDia}: Descanso activo - Puedes hacer estiramientos o caminar`);
+        });
+      }
+    }
+    
+    // Información sobre días de entrenamiento
+    if (diasEntrenamiento.length > 0) {
+      recomendaciones.push(
+        `Entrenarás ${diasEntrenamiento.length} días esta semana con descanso muscular inteligente`
+      );
+    }
+    
+    // Reglas generales
+    recomendaciones.push(
       'El sistema respeta automáticamente los tiempos de descanso muscular',
       'Músculos grandes (pecho, espalda, pierna) descansan 48-72h',
-      'Músculos pequeños (bicep, tricep) descansan 24-48h',
-      'Puedes entrenar abdomen diariamente si lo deseas'
-    ];
-
-    const gruposUsados = [...new Set(planSemanal.flatMap(dia => dia.grupos_musculares))];
-    
-    if (gruposUsados.includes('pecho') && gruposUsados.includes('tricep')) {
-      recomendaciones.push('Pecho y tricep están distribuidos correctamente para evitar sobreentrenamiento');
-    }
+      'Músculos pequeños (bícep, trícep) descansan 24-48h'
+    );
 
     return recomendaciones;
   }
@@ -632,11 +697,9 @@ class IAClientService {
   formatearRutinaConHistorial(rutinaConHistorial) {
     const rutinaBase = this.formatearRutina(rutinaConHistorial);
     
-    // Agregar información específica del historial
     return {
       ...rutinaBase,
       
-      // Información del historial analizado
       historial: {
         entrenamientosPorSemana: rutinaConHistorial.historial_analizado.entrenamientos_por_semana,
         asistenciaPromedio: rutinaConHistorial.historial_analizado.asistencia_promedio,
@@ -646,21 +709,21 @@ class IAClientService {
         ultimoEntrenamiento: rutinaConHistorial.historial_analizado.ultimo_entrenamiento
       },
       
-      // Plan semanal con información de ajustes
-      planSemanal: rutinaConHistorial.plan_semanal.map(dia => ({
-        ...this.formatearDiaConAjustes(dia),
-        diaIndex: this.getDiaIndex(dia.dia)
-      })),
+      planSemanal: rutinaConHistorial.plan_semanal.map(dia => {
+        const diaFormateado = this.formatearDiaConAjustes(dia);
+        return {
+          ...diaFormateado,
+          diaIndex: this.getDiaIndex(dia.dia),
+          fechaReal: dia.fecha_real
+        };
+      }),
       
-      // Recomendaciones personales basadas en historial
       recomendacionesPersonales: rutinaConHistorial.recomendaciones_personales || [],
       
-      // Resumen mejorado con historial
       resumen: {
         ...rutinaBase.resumen,
         mensaje: rutinaConHistorial.mensaje,
         historialConsiderado: true,
-        diasAnalizados: rutinaConHistorial.historial_analizado.total_entrenamientos > 0,
         ajustesAplicados: this.contarAjustesAplicados(rutinaConHistorial.plan_semanal)
       }
     };
@@ -672,10 +735,29 @@ class IAClientService {
    * @returns {Object} Día formateado con ajustes
    */
   formatearDiaConAjustes(dia) {
+    const esDiaDescanso = dia.es_dia_descanso === true;
+    
+    if (esDiaDescanso) {
+      return {
+        dia: dia.dia,
+        fechaReal: dia.fecha_real,
+        gruposMusculares: [],
+        ejercicios: [],
+        esDiaDescanso: true,
+        tipoDescanso: dia.tipo_descanso,
+        totalEjercicios: 0,
+        ajustesAplicados: [],
+        intensidadModificada: false,
+        tipoEntrenamiento: 'descanso',
+        volumenTotal: 0
+      };
+    }
+
     return {
       dia: dia.dia,
-      gruposMusculares: dia.grupos_musculares,
-      ejercicios: dia.ejercicios.map(ejercicio => ({
+      fechaReal: dia.fecha_real,
+      gruposMusculares: dia.grupos_musculares || [],
+      ejercicios: (dia.ejercicios || []).map(ejercicio => ({
         id: `${dia.dia}-${ejercicio.ejercicio}`,
         musculo: ejercicio.musculo,
         nombre: ejercicio.ejercicio,
@@ -686,12 +768,14 @@ class IAClientService {
         intensidad: this.calcularIntensidad(ejercicio.series, ejercicio.repeticiones),
         volumen: ejercicio.series * ejercicio.repeticiones
       })),
-      totalEjercicios: dia.ejercicios.length,
-      esDiaDescanso: dia.es_dia_descanso,
+      totalEjercicios: dia.ejercicios?.length || 0,
+      esDiaDescanso: false,
       ajustesAplicados: dia.ajustes_aplicados || [],
       intensidadModificada: dia.intensidad_modificada || false,
-      tipoEntrenamiento: this.clasificarTipoEntrenamiento(dia.grupos_musculares),
-      volumenTotal: dia.ejercicios.reduce((total, ej) => total + (ej.series * ej.repeticiones), 0)
+      tipoEntrenamiento: this.clasificarTipoEntrenamiento(dia.grupos_musculares || []),
+      volumenTotal: (dia.ejercicios || []).reduce(
+        (total, ej) => total + (ej.series * ej.repeticiones), 0
+      )
     };
   }
 

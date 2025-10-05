@@ -170,7 +170,7 @@ def create_horario(db: Session, horario: HorarioCreate, user_rol: str, user_id: 
             } if db_horario_completo.entrenador else None,
             "rutina": {
                 "id_rutina": db_horario_completo.rutina.id_rutina,
-                "nombre_ejercicio": db_horario_completo.rutina.nombre_ejercicio,  # Actualizado
+                "ejercicios": db_horario_completo.rutina.ejercicios,  # Actualizado
                 "partes_musculo": db_horario_completo.rutina.partes_musculo,
                 "repeticiones": db_horario_completo.rutina.repeticiones,
                 "series": db_horario_completo.rutina.series,
@@ -212,7 +212,7 @@ def _build_horario_response(horarios):
             } if h.entrenador else None,
             "rutina": {
                 "id_rutina": h.rutina.id_rutina,
-                "nombre_ejercicio": h.rutina.nombre_ejercicio,  # Corregido: usar nombre_ejercicio
+                "ejercicios": h.rutina.ejercicios,  # Corregido: usar ejercicios
                 "partes_musculo": h.rutina.partes_musculo,
                 "repeticiones": h.rutina.repeticiones,
                 "series": h.rutina.series,

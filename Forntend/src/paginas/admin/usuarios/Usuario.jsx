@@ -495,6 +495,12 @@ const Usuario = () => {
   };
 
   return (
+    <>
+        {/* Notification */}
+        <Notification
+          notification={notification}
+          onClose={hideNotification}
+        />
     <div className="relative z-10 py-8">
       {/* 🚨 NOTIFICATION SIEMPRE VISIBLE CUANDO HAY NOTIFICACIÓN */}
       <Notification
@@ -697,8 +703,8 @@ const Usuario = () => {
           }}
         />
       </div>
-
-      {/* Modales */}
+    </div>
+      {/* ✅ Modales FUERA del contenedor principal */}
       <CrearUsuarioModal
         isOpen={modalState.crear}
         onClose={() => setModalState({ ...modalState, crear: false })}
@@ -727,7 +733,7 @@ const Usuario = () => {
         onConfirm={handleChangeStatus}
         usuario={selectedUser}
       />
-    </div>
+    </>
   );
 };
 

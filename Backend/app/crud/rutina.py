@@ -72,7 +72,7 @@ def create_rutina(
 
     # Crear la rutina con arrays JSON
     db_rutina = Rutina(
-        nombre_ejercicio=rutina.nombres_ejercicios,  # Array de strings
+        ejercicios=rutina.nombres_ejercicios,  # Array de strings
         partes_musculo=partes_musculo,               # Array de strings (o array de arrays)
         repeticiones=rutina.repeticiones,            # Array de integers
         series=rutina.series,                        # Array de integers
@@ -104,7 +104,7 @@ def get_rutina_with_entrenador(db: Session, rutina_id: int) -> Optional[Dict[str
     
     return {
         "id_rutina": rutina.id_rutina,
-        "nombres_ejercicios": rutina.nombre_ejercicio,    # Array JSON
+        "nombres_ejercicios": rutina.ejercicios,    # Array JSON
         "partes_musculo": rutina.partes_musculo,          # Array JSON
         "repeticiones": rutina.repeticiones,              # Array JSON
         "series": rutina.series,                          # Array JSON
@@ -154,7 +154,7 @@ def list_rutinas(
         
         result.append({
             "id_rutina": rutina.id_rutina,
-            "nombres_ejercicios": rutina.nombre_ejercicio,    # Array JSON
+            "nombres_ejercicios": rutina.ejercicios,    # Array JSON
             "partes_musculo": rutina.partes_musculo,          # Array JSON
             "repeticiones": rutina.repeticiones,              # Array JSON
             "series": rutina.series,                          # Array JSON
@@ -207,8 +207,8 @@ def search_rutinas(
             palabra_encontrada = False
             
             # Buscar en nombres de ejercicios
-            if rutina.nombre_ejercicio:
-                for ejercicio in rutina.nombre_ejercicio:
+            if rutina.ejercicios:
+                for ejercicio in rutina.ejercicios:
                     if palabra in str(ejercicio).lower():
                         palabra_encontrada = True
                         break
@@ -254,7 +254,7 @@ def search_rutinas(
         
         result.append({
             "id_rutina": rutina.id_rutina,
-            "nombres_ejercicios": rutina.nombre_ejercicio,
+            "nombres_ejercicios": rutina.ejercicios,
             "partes_musculo": rutina.partes_musculo,
             "repeticiones": rutina.repeticiones,
             "series": rutina.series,
@@ -346,9 +346,9 @@ def update_rutina(
                     musculo.value for musculo in update_data["partes_musculo"]
                 ]
         
-        # CAMBIO: Mapear nombres_ejercicios a nombre_ejercicio (campo de base de datos)
+        # CAMBIO: Mapear nombres_ejercicios a ejercicios (campo de base de datos)
         if "nombres_ejercicios" in update_data:
-            update_data["nombre_ejercicio"] = update_data["nombres_ejercicios"]
+            update_data["ejercicios"] = update_data["nombres_ejercicios"]
             del update_data["nombres_ejercicios"]
         
         # Actualizar solo los campos que vinieron en la petición
@@ -369,7 +369,7 @@ def update_rutina(
         
         return {
             "id_rutina": db_rutina.id_rutina,
-            "nombres_ejercicios": db_rutina.nombre_ejercicio,
+            "nombres_ejercicios": db_rutina.ejercicios,
             "partes_musculo": db_rutina.partes_musculo,
             "repeticiones": db_rutina.repeticiones,
             "series": db_rutina.series,

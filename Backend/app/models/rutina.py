@@ -8,7 +8,7 @@ class Rutina(Base):
     __tablename__ = "rutina"
 
     id_rutina = Column(Integer, primary_key=True, index=True)
-    nombre_ejercicio = Column(JSON, nullable=False)  # Array JSON de strings
+    ejercicios = Column(JSON, nullable=False)  # Array JSON de strings
     partes_musculo = Column(JSON, nullable=False)    # Array JSON de strings
     repeticiones = Column(JSON, nullable=False)      # Array JSON de integers
     series = Column(JSON, nullable=False)           # Array JSON de integers

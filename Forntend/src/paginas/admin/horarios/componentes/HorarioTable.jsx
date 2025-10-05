@@ -63,17 +63,17 @@ const HorarioTable = ({
       }
 
       if (sortField === "rutina_nombre") {
-        // NUEVA ESTRUCTURA: Usar nombres_ejercicios o nombre_ejercicio
+        // NUEVA ESTRUCTURA: Usar nombres_ejercicios o ejercicios
         aValue = Array.isArray(a.rutina?.nombres_ejercicios) 
           ? a.rutina.nombres_ejercicios.join(', ')
-          : Array.isArray(a.rutina?.nombre_ejercicio) 
-            ? a.rutina.nombre_ejercicio.join(', ') 
-            : a.rutina?.nombres_ejercicios || a.rutina?.nombre_ejercicio || "";
+          : Array.isArray(a.rutina?.ejercicios) 
+            ? a.rutina.ejercicios.join(', ') 
+            : a.rutina?.nombres_ejercicios || a.rutina?.ejercicios || "";
         bValue = Array.isArray(b.rutina?.nombres_ejercicios) 
           ? b.rutina.nombres_ejercicios.join(', ')
-          : Array.isArray(b.rutina?.nombre_ejercicio) 
-            ? b.rutina.nombre_ejercicio.join(', ') 
-            : b.rutina?.nombres_ejercicios || b.rutina?.nombre_ejercicio || "";
+          : Array.isArray(b.rutina?.ejercicios) 
+            ? b.rutina.ejercicios.join(', ') 
+            : b.rutina?.nombres_ejercicios || b.rutina?.ejercicios || "";
       }
 
       if (typeof aValue === "string") {
@@ -206,7 +206,7 @@ const HorarioTable = ({
 
   // NUEVA FUNCIÓN: Formatear ejercicios con nueva estructura
   const formatEjercicios = (ejercicios) => {
-    // Manejar tanto nombres_ejercicios como nombre_ejercicio
+    // Manejar tanto nombres_ejercicios como ejercicios
     const ejerciciosArray = ejercicios || [];
     
     if (!Array.isArray(ejerciciosArray)) return ejerciciosArray || "";
@@ -462,7 +462,7 @@ const HorarioTable = ({
                                   <FaDumbbell className="w-4 h-4 text-green-400" />
                                   <span className="text-white text-sm font-medium">
                                     {formatEjercicios(
-                                      horario.rutina?.nombres_ejercicios || horario.rutina?.nombre_ejercicio
+                                      horario.rutina?.nombres_ejercicios || horario.rutina?.ejercicios
                                     )}
                                   </span>
                                 </div>
@@ -560,9 +560,9 @@ const HorarioTable = ({
                               Detalles de la Rutina - {horario.nombre_horario}
                             </h4>
                             
-                            {/* Manejar tanto nombres_ejercicios como nombre_ejercicio */}
+                            {/* Manejar tanto nombres_ejercicios como ejercicios */}
                             {(() => {
-                              const ejercicios = horario.rutina.nombres_ejercicios || horario.rutina.nombre_ejercicio;
+                              const ejercicios = horario.rutina.nombres_ejercicios || horario.rutina.ejercicios;
                               return Array.isArray(ejercicios) && ejercicios.length > 0 ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                   {ejercicios.map((ejercicio, idx) => (

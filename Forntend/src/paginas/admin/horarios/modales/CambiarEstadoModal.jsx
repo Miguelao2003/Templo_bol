@@ -71,7 +71,7 @@ const CambiarEstadoModal = ({ isOpen, onClose, onConfirm, horario }) => {
 
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm p-4">
-      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl shadow-2xl shadow-yellow-500/20 w-full max-w-lg max-h-[80vh] overflow-y-auto">
+      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl shadow-2xl shadow-yellow-500/20 w-full max-w-lg max-h-[95vh] overflow-y-auto">
 
         
         {/* Header */}

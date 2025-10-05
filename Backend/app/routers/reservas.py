@@ -164,7 +164,7 @@ async def cancelar_reserva(
 
             # Rutina - CON JSON
             "rutina_id": rutina.id_rutina if rutina else None,
-            "rutina_ejercicios": parse_json_field(rutina.nombre_ejercicio) if rutina else [],
+            "rutina_ejercicios": parse_json_field(rutina.ejercicios) if rutina else [],
             "rutina_partes_musculo": parse_json_field(rutina.partes_musculo) if rutina else [],
             "rutina_repeticiones": parse_json_field(rutina.repeticiones) if rutina else [],
             "rutina_series": parse_json_field(rutina.series) if rutina else [],
@@ -242,7 +242,7 @@ def registrar_asistencia_endpoint(
             
             # Rutina
             "rutina_id": reserva.horario.rutina.id_rutina if reserva.horario.rutina else None,
-            "rutina_ejercicios": parse_json_field(reserva.horario.rutina.nombre_ejercicio) if reserva.horario.rutina else [],
+            "rutina_ejercicios": parse_json_field(reserva.horario.rutina.ejercicios) if reserva.horario.rutina else [],
             "rutina_partes_musculo": parse_json_field(reserva.horario.rutina.partes_musculo) if reserva.horario.rutina else [],
             "rutina_repeticiones": parse_json_field(reserva.horario.rutina.repeticiones) if reserva.horario.rutina else [],
             "rutina_series": parse_json_field(reserva.horario.rutina.series) if reserva.horario.rutina else [],

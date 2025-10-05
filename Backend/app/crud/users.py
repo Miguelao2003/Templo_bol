@@ -50,7 +50,7 @@ def create_user(db: Session, user: UserCreate):
         categoria=categoria_value,
         genero=user.genero,
         objetivo=user.objetivo,
-        nivel=user.nivel or "principiante",  # <-- NUEVO
+        nivel=user.nivel or "principiante",
         activo=True
     )
     

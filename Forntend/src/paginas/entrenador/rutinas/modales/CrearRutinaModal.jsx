@@ -24,7 +24,7 @@ const CrearRutinaModal = ({ isOpen, onClose, onCreate }) => {
 
   // Estado para el ejercicio actual que se está agregando
   const [ejercicioActual, setEjercicioActual] = useState({
-    nombre_ejercicio: '',
+    ejercicios: '',
     series: '',
     repeticiones: '',
     partes_musculo: ''  // String, no array
@@ -63,7 +63,7 @@ const CrearRutinaModal = ({ isOpen, onClose, onCreate }) => {
   // Agregar ejercicio a la rutina
   const agregarEjercicio = () => {
     // Validaciones
-    if (!ejercicioActual.nombre_ejercicio.trim()) {
+    if (!ejercicioActual.ejercicios.trim()) {
       setMensaje('El nombre del ejercicio es requerido');
       return;
     }
@@ -83,7 +83,7 @@ const CrearRutinaModal = ({ isOpen, onClose, onCreate }) => {
     // Agregar a los arrays
     setRutina(prev => ({
       ...prev,
-      nombres_ejercicios: [...prev.nombres_ejercicios, ejercicioActual.nombre_ejercicio.trim()],
+      nombres_ejercicios: [...prev.nombres_ejercicios, ejercicioActual.ejercicios.trim()],
       series: [...prev.series, parseInt(ejercicioActual.series)],
       repeticiones: [...prev.repeticiones, parseInt(ejercicioActual.repeticiones)],
       partes_musculo: [...prev.partes_musculo, ejercicioActual.partes_musculo]
@@ -91,7 +91,7 @@ const CrearRutinaModal = ({ isOpen, onClose, onCreate }) => {
 
     // Limpiar formulario
     setEjercicioActual({
-      nombre_ejercicio: '',
+      ejercicios: '',
       series: '',
       repeticiones: '',
       partes_musculo: ''  // String vacío
@@ -142,7 +142,7 @@ const CrearRutinaModal = ({ isOpen, onClose, onCreate }) => {
         id_entrenador: null
       });
       setEjercicioActual({
-        nombre_ejercicio: '',
+        ejercicios: '',
         series: '',
         repeticiones: '',
         partes_musculo: ''
@@ -158,7 +158,7 @@ const CrearRutinaModal = ({ isOpen, onClose, onCreate }) => {
 
   const isEjercicioValid = () => {
     return (
-      ejercicioActual.nombre_ejercicio?.trim() &&
+      ejercicioActual.ejercicios?.trim() &&
       ejercicioActual.partes_musculo &&
       ejercicioActual.repeticiones &&
       ejercicioActual.series
@@ -181,7 +181,7 @@ const CrearRutinaModal = ({ isOpen, onClose, onCreate }) => {
 
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm p-4">
-      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl p-6 w-full max-w-4xl shadow-2xl shadow-yellow-500/20 max-h-[90vh] overflow-y-auto">
+      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl p-6 w-full max-w-4xl shadow-2xl shadow-yellow-500/20 max-h-[95vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">
@@ -215,8 +215,8 @@ const CrearRutinaModal = ({ isOpen, onClose, onCreate }) => {
                 </label>
                 <input
                   type="text"
-                  name="nombre_ejercicio"
-                  value={ejercicioActual.nombre_ejercicio}
+                  name="ejercicios"
+                  value={ejercicioActual.ejercicios}
                   onChange={handleEjercicioChange}
                   placeholder="Ej: Dominadas comando"
                   className="w-full bg-gray-800 border border-gray-600 text-gray-100 rounded-lg px-4 py-3 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all placeholder-gray-400"

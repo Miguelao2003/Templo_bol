@@ -79,7 +79,7 @@ const EliminarHorarioModal = ({ isOpen, onClose, onConfirm, horario }) => {
 
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm p-4">
-      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl shadow-2xl shadow-yellow-500/20 w-full max-w-lg max-h-[80vh] overflow-y-auto">
+      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl shadow-2xl shadow-yellow-500/20 w-full max-w-lg max-h-[95vh] overflow-y-auto">
         
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-700">
@@ -211,23 +211,7 @@ const EliminarHorarioModal = ({ isOpen, onClose, onConfirm, horario }) => {
 
           {/* Confirmación con texto */}
           <div className="space-y-4">
-            <div className="flex items-start gap-3 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-              <input
-                type="checkbox"
-                id="confirmDelete"
-                checked={showConfirmInput}
-                onChange={(e) => {
-                  setShowConfirmInput(e.target.checked);
-                  if (!e.target.checked) {
-                    setConfirmText("");
-                  }
-                }}
-                className="w-4 h-4 text-yellow-500 bg-gray-700 border-gray-600 rounded focus:ring-yellow-500 focus:ring-2 mt-0.5"
-              />
-              <label htmlFor="confirmDelete" className="text-sm text-yellow-400 font-medium">
-                Entiendo que esta acción es irreversible y eliminará permanentemente este horario
-              </label>
-            </div>
+
 
             {showConfirmInput && (
               <div className="space-y-3">

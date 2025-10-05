@@ -514,23 +514,23 @@ const CrearReservaModalCliente = ({ isOpen, onClose, onConfirm, horario }) => {
                       // Parsear ejercicios (mismo código que antes pero más compacto)
                       try {
                         if (
-                          typeof horario.rutina.nombre_ejercicio === "string"
+                          typeof horario.rutina.ejercicios === "string"
                         ) {
-                          if (horario.rutina.nombre_ejercicio.startsWith("[")) {
+                          if (horario.rutina.ejercicios.startsWith("[")) {
                             ejercicios = JSON.parse(
-                              horario.rutina.nombre_ejercicio
+                              horario.rutina.ejercicios
                             );
                           } else {
-                            ejercicios = [horario.rutina.nombre_ejercicio];
+                            ejercicios = [horario.rutina.ejercicios];
                           }
                         } else if (
-                          Array.isArray(horario.rutina.nombre_ejercicio)
+                          Array.isArray(horario.rutina.ejercicios)
                         ) {
-                          ejercicios = horario.rutina.nombre_ejercicio;
+                          ejercicios = horario.rutina.ejercicios;
                         }
                       } catch (e) {
-                        if (horario.rutina.nombre_ejercicio) {
-                          ejercicios = [horario.rutina.nombre_ejercicio];
+                        if (horario.rutina.ejercicios) {
+                          ejercicios = [horario.rutina.ejercicios];
                         }
                       }
 

@@ -274,13 +274,14 @@ const Reservas = () => {
   }
 
   return (
-    <div className="relative z-10 py-8">
-      {/* Notificaciones */}
+    <>
+          {/* Notificaciones */}
       <Notification
         type={notification.type}
         message={notification.message}
         onClose={hideNotification}
       />
+    <div className="relative z-10 py-8">
 
       {/* Header principal */}
       <div className="mb-10">
@@ -509,8 +510,8 @@ const Reservas = () => {
           />
         )}
       </div>
-
-      {/* Modales */}
+    </div>
+          {/* Modales */}
       {modalCrear && (
         <CrearReservaModal
           isOpen={modalCrear}
@@ -527,7 +528,7 @@ const Reservas = () => {
           onSuccess={handleReservaCancelada}
         />
       )}
-    </div>
+    </>
   );
 };
 

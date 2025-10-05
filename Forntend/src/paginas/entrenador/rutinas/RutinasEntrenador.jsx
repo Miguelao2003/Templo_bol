@@ -264,11 +264,13 @@ const RutinasEntrenador = () => {
   };
 
   return (
-    <div className="relative z-10 py-8">
+    <>
       <Notification
         notification={notification}
         onClose={() => showNotification(null, null)}
       />
+    <div className="relative z-10 py-8">
+
 
       {/* Header principal */}
       <div className="mb-10">
@@ -555,7 +557,8 @@ const RutinasEntrenador = () => {
           }}
         />
       </div>
-
+    </div>
+    
       {/* Modales */}
       <CrearRutinaModal
         isOpen={modalState.crear}
@@ -577,7 +580,7 @@ const RutinasEntrenador = () => {
         rutina={selectedRutina}
         error={deleteError}
       />
-    </div>
+    </>
   );
 };
 

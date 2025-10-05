@@ -6,6 +6,8 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel
+from datetime import datetime, timedelta
+
 
 # Importar el modelo de IA mejorado
 from app.models.ai_routines import ai_model
@@ -290,60 +292,93 @@ async def get_descanso_info():
 
 @router.post("/predict-routine-for-user/{user_id}", response_model=RoutinePredictionResponse)
 async def predict_routine_for_user(user_id: int, db: Session = Depends(get_db)):
-    """CORREGIDO: Generar rutina personalizada para un usuario existente con soporte completo para principiantes"""
+    """
+    VERSIÓN FINAL CORREGIDA: Genera rutina desde HOY usando generar_plan_semanal_completo()
+    """
     
-    # Buscar usuario en la base de datos
+    # Buscar usuario
     usuario = db.query(Usuario).filter(Usuario.id_usuario == user_id).first()
     
     if not usuario:
-        raise HTTPException(
-            status_code=404,
-            detail=f"Usuario con ID {user_id} no encontrado"
-        )
+        raise HTTPException(status_code=404, detail=f"Usuario con ID {user_id} no encontrado")
     
-    # Validar datos completos con nueva función
+    # Validar datos completos
     errores, nivel_usuario = validar_datos_usuario(usuario)
     
     if errores:
-        campos_faltantes = ", ".join(errores)
         raise HTTPException(
             status_code=400,
-            detail=f"El usuario no tiene datos completos. Faltan o son inválidos: {campos_faltantes}"
+            detail=f"Usuario con datos incompletos: {', '.join(errores)}"
         )
     
-    # Verificar que el modelo esté entrenado
+    # Verificar modelo entrenado
     if not hasattr(ai_model.model, 'feature_importances_') or ai_model.dataset is None:
         if not ai_model.cargar_modelo():
-            raise HTTPException(
-                status_code=503,
-                detail="Modelo no entrenado. Ejecuta /ai/train-model primero."
-            )
+            raise HTTPException(status_code=503, detail="Modelo no entrenado")
     
     try:
-        # Convertir altura si está en cm
+        # Preparar datos del usuario
         altura_metros = usuario.altura if usuario.altura < 10 else usuario.altura / 100
+        genero_input = usuario.genero
         
-        # Mapear género correctamente para el dataset
-        genero_input = usuario.genero  # Ya viene como 'Masculino' o 'Femenino' de la BD
+        # ANALIZAR RENDIMIENTO HISTÓRICO
+        print(f"📊 Analizando rendimiento histórico del usuario {user_id}...")
+        historial_entrenamientos = obtener_rutinas_realizadas_usuario(db, user_id, dias_historial=14)
         
-        # Predecir perfil usando IA
+        tiene_historial = len(historial_entrenamientos) > 0
+        nivel_ajustado_por_rendimiento = nivel_usuario
+        
+        if tiene_historial:
+            estadisticas = calcular_frecuencia_entrenamiento(historial_entrenamientos)
+            
+            print(f"📈 Estadísticas de rendimiento:")
+            print(f"   - Total entrenamientos: {estadisticas['total_entrenamientos']}")
+            print(f"   - Entrenamientos/semana: {estadisticas['entrenamientos_por_semana']}")
+            print(f"   - Asistencia: {estadisticas['asistencia_promedio']}%")
+            
+            # Lógica de ajuste de nivel por rendimiento (tu código actual está bien)
+            if estadisticas['asistencia_promedio'] >= 90 and estadisticas['entrenamientos_por_semana'] >= 4:
+                if nivel_usuario == 'principiante' and estadisticas['total_entrenamientos'] >= 12:
+                    nivel_ajustado_por_rendimiento = 'intermedio'
+                    print(f"   ⬆️ Usuario promovido a INTERMEDIO por rendimiento")
+                elif nivel_usuario == 'intermedio' and estadisticas['total_entrenamientos'] >= 24:
+                    nivel_ajustado_por_rendimiento = 'avanzado'
+                    print(f"   ⬆️ Usuario promovido a AVANZADO por rendimiento")
+            
+            elif estadisticas['asistencia_promedio'] < 60:
+                if nivel_usuario == 'intermedio':
+                    nivel_ajustado_por_rendimiento = 'principiante'
+                    print(f"   ⬇️ Usuario ajustado a PRINCIPIANTE por baja asistencia")
+                elif nivel_usuario == 'avanzado':
+                    nivel_ajustado_por_rendimiento = 'intermedio'
+                    print(f"   ⬇️ Usuario ajustado a INTERMEDIO por baja asistencia")
+            
+            if estadisticas['nivel_mas_frecuente'] and estadisticas['total_entrenamientos'] >= 10:
+                nivel_ajustado_por_rendimiento = estadisticas['nivel_mas_frecuente']
+                print(f"   📊 Usando nivel del historial: {nivel_ajustado_por_rendimiento}")
+        
+        # Predecir perfil base con IA
         nivel_ia, tmb, imc = ai_model.predecir_perfil(
-            genero_input,
-            usuario.edad,
-            usuario.peso,
-            altura_metros,
-            usuario.objetivo
+            genero_input, usuario.edad, usuario.peso, altura_metros, usuario.objetivo
         )
         
-        # Usar el nivel del usuario si lo tiene, sino el predicho por IA
-        nivel_final = nivel_usuario if nivel_usuario != 'intermedio' else nivel_ia
+        # DECISIÓN FINAL DEL NIVEL
+        if tiene_historial:
+            nivel_final = nivel_ajustado_por_rendimiento
+            tipo_prediccion = "ajustado por rendimiento histórico"
+        elif nivel_usuario and nivel_usuario != 'intermedio':
+            nivel_final = nivel_usuario
+            tipo_prediccion = "del perfil del usuario"
+        else:
+            nivel_final = nivel_ia
+            tipo_prediccion = "predicho por IA"
         
-        print(f"Usuario {user_id}: Nivel BD='{nivel_usuario}', IA='{nivel_ia}', Final='{nivel_final}'")
+        print(f"🎯 Nivel final: {nivel_final} ({tipo_prediccion})")
         
-        # NUEVO: Obtener configuración del nivel
+        # Configuración del nivel
         config_nivel = ai_model.config_ejercicios.get(nivel_final, ai_model.config_ejercicios['intermedio'])
         
-        # Crear perfil del usuario con información extendida
+        # Crear perfil
         perfil = PerfilUsuarioResponse(
             nivel=nivel_final,
             tmb=tmb,
@@ -353,34 +388,26 @@ async def predict_routine_for_user(user_id: int, db: Session = Depends(get_db)):
             frecuencia_semanal=config_nivel['frecuencia_semanal']
         )
         
-        # CORREGIDO: Generar plan según el nivel específico
-        plan_muscular = ai_model.generar_plan_inteligente(
-            genero_input,
-            usuario.edad,
-            usuario.peso,
-            altura_metros,
-            usuario.objetivo,
-            nivel_final
+        # ================================================================
+        # ✅ GENERAR PLAN SEMANAL COMPLETO
+        # ================================================================
+        hoy = datetime.now()
+        
+        print(f"\n🎯 Generando plan semanal completo desde {hoy.strftime('%d/%m/%Y')}...")
+        plan_semanal_completo = ai_model.generar_plan_semanal_completo(
+            usuario_nivel=nivel_final,
+            fecha_inicio=hoy
         )
         
-        # Generar rutina detallada para cada día
+        # Convertir plan a formato de respuesta del API
         plan_detallado = []
-        dias_semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
         
-        for dia in dias_semana:
-            musculos_dia = plan_muscular.get(dia, [])
-            es_dia_descanso = len(musculos_dia) == 0
-            
-            if not es_dia_descanso:
-                # Usar función que respeta límites por nivel y tipo de entrenamiento
-                ejercicios_dia_raw = ai_model.generar_rutina_inteligente(
-                    genero_input,
-                    usuario.objetivo,
-                    nivel_final,
-                    dia
-                )
-                
-                # Convertir a formato de respuesta
+        for dia_data in plan_semanal_completo:
+            if dia_data['es_dia_descanso']:
+                # Día de descanso - sin ejercicios
+                ejercicios_response = []
+            else:
+                # Día de entrenamiento - convertir ejercicios
                 ejercicios_response = [
                     EjercicioResponse(
                         musculo=ej['musculo'],
@@ -388,32 +415,36 @@ async def predict_routine_for_user(user_id: int, db: Session = Depends(get_db)):
                         repeticiones=ej['repeticiones'],
                         series=ej['series']
                     )
-                    for ej in ejercicios_dia_raw
+                    for ej in dia_data['ejercicios']
                 ]
-            else:
-                ejercicios_response = []
             
             dia_rutina = DiaRutinaResponse(
-                dia=dia,
-                grupos_musculares=musculos_dia,
+                dia=dia_data['dia'],  # "Jueves (03/10)"
+                fecha_real=dia_data['fecha_real'],  # "2025-10-03"
+                grupos_musculares=dia_data['grupos_musculares'],
                 ejercicios=ejercicios_response,
-                tipo_entrenamiento=config_nivel['tipo_entrenamiento'],
-                es_dia_descanso=es_dia_descanso,
-                total_ejercicios=len(ejercicios_response)
+                tipo_entrenamiento=dia_data.get('tipo_entrenamiento', config_nivel['tipo_entrenamiento']),
+                es_dia_descanso=dia_data['es_dia_descanso'],
+                total_ejercicios=dia_data['total_ejercicios']
             )
             
             plan_detallado.append(dia_rutina)
         
-        # NUEVO: Crear resumen de la rutina
+        # Crear resumen
         resumen = crear_resumen_rutina(plan_detallado, nivel_final)
         
-        # Mensaje personalizado según el nivel usado
-        if nivel_usuario and nivel_usuario != 'intermedio':
-            mensaje_nivel = f"Rutina generada para tu nivel: {nivel_final}"
+        # Mensaje personalizado
+        if tiene_historial:
+            mensaje = (f"Plan de 7 días desde HOY ({hoy.strftime('%d/%m/%Y')}). "
+                      f"Basado en {estadisticas['total_entrenamientos']} entrenamientos, "
+                      f"{estadisticas['asistencia_promedio']}% asistencia. "
+                      f"Nivel {nivel_final} {tipo_prediccion}.")
         else:
-            mensaje_nivel = f"Rutina generada para nivel {nivel_final} (predicho por IA)"
+            mensaje = (f"Plan de 7 días desde HOY ({hoy.strftime('%d/%m/%Y')}). "
+                      f"Nivel {nivel_final} {tipo_prediccion}. "
+                      f"Comenzaremos a optimizar según tu rendimiento.")
         
-        # NUEVO: Guardar automáticamente la rutina generada por IA
+        # Guardar rutina generada
         try:
             rutina_ia_data = RutinaIACreate(
                 usuario_id=user_id,
@@ -424,6 +455,11 @@ async def predict_routine_for_user(user_id: int, db: Session = Depends(get_db)):
                     "metadata": {
                         "modelo_usado": "random_forest",
                         "precision": 0.995,
+                        "fecha_inicio_plan": hoy.isoformat(),
+                        "fecha_fin_plan": (hoy + timedelta(days=6)).isoformat(),
+                        "tiene_historial": tiene_historial,
+                        "nivel_ajustado_por_rendimiento": tiene_historial,
+                        "estadisticas_rendimiento": estadisticas if tiene_historial else None,
                         "fecha_generacion": datetime.now().isoformat()
                     }
                 },
@@ -438,11 +474,10 @@ async def predict_routine_for_user(user_id: int, db: Session = Depends(get_db)):
             )
             
             rutina_guardada = create_rutina_ia(db, rutina_ia_data)
-            print(f"✅ Rutina IA guardada con ID: {rutina_guardada.id_rutina_ia}")
+            print(f"✅ Rutina guardada con ID: {rutina_guardada.id_rutina_ia}")
             
         except Exception as e:
-            print(f"⚠️ Warning: No se pudo guardar rutina IA: {e}")
-            # No fallar la respuesta principal por esto
+            print(f"⚠️ Warning: No se pudo guardar rutina: {e}")
 
         return RoutinePredictionResponse(
             usuario_id=user_id,
@@ -450,14 +485,11 @@ async def predict_routine_for_user(user_id: int, db: Session = Depends(get_db)):
             perfil=perfil,
             plan_semanal=plan_detallado,
             resumen=resumen,
-            mensaje=f"{mensaje_nivel} - {config_nivel['tipo_entrenamiento'].upper()} con descanso muscular inteligente"
+            mensaje=mensaje
         )
         
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error generando rutina para usuario {user_id}: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error generando rutina: {str(e)}")
 
 @router.post("/predict-routine", response_model=RoutinePredictionResponse)
 async def predict_routine(

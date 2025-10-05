@@ -280,12 +280,12 @@ def get_reservas_detalladas(db: Session, usuario_id: Optional[int] = None):
             
             # Rutina - CORREGIDO
             "rutina_id": r.horario.rutina.id_rutina if r.horario.rutina else None,
-            # ✅ CAMPO CALCULADO: Convertir nombre_ejercicio (JSON) a rutina_nombre (string)
+            # ✅ CAMPO CALCULADO: Convertir ejercicios (JSON) a rutina_nombre (string)
             "rutina_nombre": get_rutina_nombre_from_ejercicios(
-                r.horario.rutina.nombre_ejercicio if r.horario.rutina else None
+                r.horario.rutina.ejercicios if r.horario.rutina else None
             ),
             # ✅ CAMPOS JSON DIRECTOS
-            "rutina_ejercicios": r.horario.rutina.nombre_ejercicio if r.horario.rutina else [],
+            "rutina_ejercicios": r.horario.rutina.ejercicios if r.horario.rutina else [],
             "rutina_partes_musculo": r.horario.rutina.partes_musculo if r.horario.rutina else [],
             "rutina_repeticiones": r.horario.rutina.repeticiones if r.horario.rutina else [],
             "rutina_series": r.horario.rutina.series if r.horario.rutina else [],
@@ -408,116 +408,155 @@ def registrar_asistencia(
     
     return reserva
 
-def obtener_rutinas_realizadas_usuario(db: Session, user_id: int, dias_atras: int = 7) -> List[Dict[str, Any]]:
+def obtener_rutinas_realizadas_usuario(db: Session, user_id: int, dias_historial: int = 14) -> List[Dict[str, Any]]:
     """
-    Obtener rutinas que el usuario realmente realizó basándose en reservas confirmadas
-    con asistencia registrada
+    VERSIÓN CORREGIDA: Obtener rutinas realizadas con asistencia > 0
+    Parámetro renombrado: dias_atras -> dias_historial
     """
-    desde = datetime.now() - timedelta(days=dias_atras)
+    from datetime import datetime, timedelta
+    
+    fecha_limite = datetime.now() - timedelta(days=dias_historial)
     
     # Consultar reservas con asistencia registrada
     reservas_realizadas = db.execute("""
         SELECT 
+            r.id_reserva,
             r.fecha_reserva,
             r.asistencia,
-            h.nivel as horario_nivel,
+            r.comentarios,
+            COALESCE(h.nivel, 'intermedio') as horario_nivel,
+            h.fecha as horario_fecha,
+            h.tipo as horario_tipo,
+            h.nombre_horario,
+            ru.id_rutina,
             ru.partes_musculo,
-            ru.nombre_ejercicio,
+            ru.ejercicios,
             ru.repeticiones,
             ru.series
         FROM reserva r
         JOIN horario h ON r.id_horario = h.id_horario
-        LEFT JOIN rutina ru ON r.id_rutina = ru.id_rutina
+        LEFT JOIN rutina ru ON h.id_rutina = ru.id_rutina
         WHERE r.id_usuario = :user_id
         AND r.asistencia IS NOT NULL
         AND r.asistencia > 0
-        AND r.fecha_reserva >= :desde
         AND r.estado = 'confirmada'
-        ORDER BY r.fecha_reserva DESC
+        AND h.fecha >= :fecha_limite
+        ORDER BY h.fecha DESC
     """, {
         "user_id": user_id,
-        "desde": desde
+        "fecha_limite": fecha_limite.date()
     }).fetchall()
     
     historial_rutinas = []
     for reserva in reservas_realizadas:
-        # Calcular días desde el entrenamiento
-        dias_desde = (datetime.now() - reserva.fecha_reserva).days
+        # Calcular días desde el entrenamiento usando la fecha del horario
+        fecha_entrenamiento = datetime.combine(reserva.horario_fecha, datetime.min.time())
+        dias_desde = (datetime.now() - fecha_entrenamiento).days
         
-        # Generar nombre de rutina a partir de los ejercicios
-        ejercicios_lista = parse_json_field(reserva.nombre_ejercicio) if reserva.nombre_ejercicio else []
-        nombre_rutina = "Rutina sin nombre"
-        if ejercicios_lista and len(ejercicios_lista) > 0:
-            if len(ejercicios_lista) == 1:
-                nombre_rutina = ejercicios_lista[0]
-            else:
-                nombre_rutina = f"{ejercicios_lista[0]} + {len(ejercicios_lista)-1} más"
+        # Parsear grupos musculares
+        grupos = parse_json_field(reserva.partes_musculo) if reserva.partes_musculo else []
+        
+        # Parsear ejercicios
+        ejercicios = parse_json_field(reserva.ejercicios) if reserva.ejercicios else []
+        
+        # Generar nombre de rutina
+        if ejercicios and len(ejercicios) > 0:
+            nombre_rutina = ejercicios[0] if len(ejercicios) == 1 else f"{ejercicios[0]} + {len(ejercicios)-1} más"
+        elif reserva.nombre_horario:
+            nombre_rutina = reserva.nombre_horario
+        else:
+            nombre_rutina = "Rutina sin nombre"
         
         rutina_data = {
-            'fecha': reserva.fecha_reserva,
+            'id_reserva': reserva.id_reserva,
+            'fecha': fecha_entrenamiento,
             'dias_desde': dias_desde,
             'nivel': reserva.horario_nivel,
             'asistencia': reserva.asistencia,
-            'grupos_musculares': parse_json_field(reserva.partes_musculo) if reserva.partes_musculo else [],
-            'ejercicios': ejercicios_lista,
+            'comentarios': reserva.comentarios,
+            'grupos_musculares': grupos,
+            'ejercicios': ejercicios,
             'repeticiones': parse_json_field(reserva.repeticiones) if reserva.repeticiones else [],
             'series': parse_json_field(reserva.series) if reserva.series else [],
-            'nombre_rutina': nombre_rutina  # Generado dinámicamente
+            'nombre_rutina': nombre_rutina,
+            'tipo_entrenamiento': reserva.horario_tipo
         }
         historial_rutinas.append(rutina_data)
     
+    print(f"📊 Historial obtenido: {len(historial_rutinas)} entrenamientos en últimos {dias_historial} días")
     return historial_rutinas
+
+
+def calcular_frecuencia_entrenamiento(historial: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """
+    VERSIÓN CORREGIDA: Agregado campo ultimo_entrenamiento
+    """
+    if not historial:
+        return {
+            'total_entrenamientos': 0,
+            'entrenamientos_por_semana': 0,
+            'asistencia_promedio': 0,
+            'nivel_mas_frecuente': 'intermedio',
+            'grupos_mas_trabajados': [],
+            'ultimo_entrenamiento': None
+        }
+    
+    from collections import Counter
+    
+    total_entrenamientos = len(historial)
+    
+    # Calcular entrenamientos por semana
+    fechas_unicas = list(set(r['fecha'].date() for r in historial))
+    if len(fechas_unicas) >= 2:
+        rango_dias = (max(fechas_unicas) - min(fechas_unicas)).days + 1
+        entrenamientos_por_semana = round((len(fechas_unicas) / rango_dias) * 7, 1)
+    else:
+        entrenamientos_por_semana = len(fechas_unicas)
+    
+    # Asistencia promedio (ya viene como porcentaje)
+    asistencias = [r.get('asistencia', 0) for r in historial]
+    asistencia_promedio = round(sum(asistencias) / len(asistencias), 1) if asistencias else 0
+    
+    # Nivel más frecuente
+    niveles = [r['nivel'] for r in historial if r.get('nivel')]
+    if niveles:
+        nivel_mas_frecuente = Counter(niveles).most_common(1)[0][0]
+    else:
+        nivel_mas_frecuente = 'intermedio'
+    
+    # Grupos musculares más trabajados
+    todos_grupos = []
+    for rutina in historial:
+        todos_grupos.extend(rutina.get('grupos_musculares', []))
+    
+    if todos_grupos:
+        grupos_counter = Counter(todos_grupos)
+        grupos_mas_trabajados = [grupo for grupo, _ in grupos_counter.most_common(5)]
+    else:
+        grupos_mas_trabajados = []
+    
+    # Último entrenamiento (AGREGADO)
+    ultimo_entrenamiento = max(historial, key=lambda x: x['fecha'])['fecha'] if historial else None
+    
+    return {
+        'total_entrenamientos': total_entrenamientos,
+        'entrenamientos_por_semana': entrenamientos_por_semana,
+        'asistencia_promedio': asistencia_promedio,
+        'nivel_mas_frecuente': nivel_mas_frecuente,
+        'grupos_mas_trabajados': grupos_mas_trabajados,
+        'ultimo_entrenamiento': ultimo_entrenamiento  # CAMPO NUEVO
+    }
 
 def analizar_grupos_musculares_recientes(historial: List[Dict[str, Any]], dias_limite: int = 2) -> Dict[str, int]:
     """
-    Analizar qué grupos musculares trabajó recientemente el usuario
-    Retorna: {grupo_muscular: dias_desde_ultimo_entrenamiento}
+    Esta función ya está correcta - NO necesita cambios
     """
     grupos_trabajados = {}
     
     for rutina in historial:
         if rutina['dias_desde'] <= dias_limite:
-            for grupo in rutina['grupos_musculares']:
+            for grupo in rutina.get('grupos_musculares', []):
                 if grupo not in grupos_trabajados or rutina['dias_desde'] < grupos_trabajados[grupo]:
                     grupos_trabajados[grupo] = rutina['dias_desde']
     
     return grupos_trabajados
-
-def calcular_frecuencia_entrenamiento(historial: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """
-    Calcular estadísticas de frecuencia de entrenamiento del usuario
-    """
-    if not historial:
-        return {
-            'entrenamientos_por_semana': 0,
-            'asistencia_promedio': 0,
-            'nivel_mas_frecuente': 'intermedio',
-            'grupos_mas_trabajados': []
-        }
-    
-    # Calcular entrenamientos por semana (últimos 7 días)
-    entrenamientos_semana = len([r for r in historial if r['dias_desde'] <= 7])
-    
-    # Asistencia promedio
-    asistencia_promedio = sum(r['asistencia'] for r in historial) / len(historial)
-    
-    # Nivel más frecuente
-    niveles = [r['nivel'] for r in historial]
-    nivel_mas_frecuente = max(set(niveles), key=niveles.count) if niveles else 'intermedio'
-    
-    # Grupos musculares más trabajados
-    todos_grupos = []
-    for rutina in historial:
-        todos_grupos.extend(rutina['grupos_musculares'])
-    
-    from collections import Counter
-    grupos_counter = Counter(todos_grupos)
-    grupos_mas_trabajados = [grupo for grupo, _ in grupos_counter.most_common(5)]
-    
-    return {
-        'entrenamientos_por_semana': entrenamientos_semana,
-        'asistencia_promedio': round(asistencia_promedio, 1),
-        'nivel_mas_frecuente': nivel_mas_frecuente,
-        'grupos_mas_trabajados': grupos_mas_trabajados,
-        'total_entrenamientos': len(historial)
-    }

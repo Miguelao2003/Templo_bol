@@ -63,12 +63,12 @@ const HorarioTable = ({
       }
 
       if (sortField === "rutina_nombre") {
-        aValue = Array.isArray(a.rutina?.nombre_ejercicio) 
-          ? a.rutina.nombre_ejercicio.join(', ') 
-          : a.rutina?.nombre_ejercicio || "";
-        bValue = Array.isArray(b.rutina?.nombre_ejercicio) 
-          ? b.rutina.nombre_ejercicio.join(', ') 
-          : b.rutina?.nombre_ejercicio || "";
+        aValue = Array.isArray(a.rutina?.ejercicios) 
+          ? a.rutina.ejercicios.join(', ') 
+          : a.rutina?.ejercicios || "";
+        bValue = Array.isArray(b.rutina?.ejercicios) 
+          ? b.rutina.ejercicios.join(', ') 
+          : b.rutina?.ejercicios || "";
       }
 
       if (typeof aValue === "string") {
@@ -450,7 +450,7 @@ const HorarioTable = ({
                                 <div className="flex items-center gap-2">
                                   <FaDumbbell className="w-4 h-4 text-green-400" />
                                   <span className="text-white text-sm font-medium">
-                                    {formatEjercicios(horario.rutina?.nombre_ejercicio)}
+                                    {formatEjercicios(horario.rutina?.ejercicios)}
                                   </span>
                                 </div>
                                 <button
@@ -547,9 +547,9 @@ const HorarioTable = ({
                               Detalles de la Rutina - {horario.nombre_horario}
                             </h4>
                             
-                            {Array.isArray(horario.rutina.nombre_ejercicio) && horario.rutina.nombre_ejercicio.length > 0 ? (
+                            {Array.isArray(horario.rutina.ejercicios) && horario.rutina.ejercicios.length > 0 ? (
                               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {horario.rutina.nombre_ejercicio.map((ejercicio, idx) => (
+                                {horario.rutina.ejercicios.map((ejercicio, idx) => (
                                   <div key={idx} className="bg-gray-800/50 rounded-lg p-3 border border-gray-600">
                                     <div className="flex items-start justify-between mb-2">
                                       <h5 className="text-gray-100 font-medium text-sm">

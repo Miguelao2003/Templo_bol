@@ -167,7 +167,7 @@ const EditarRutinaModal = ({ isOpen, onClose, onSave, rutina }) => {
 
   // Estado para el ejercicio que se está editando o agregando
   const [ejercicioActual, setEjercicioActual] = useState({
-    nombre_ejercicio: "",
+    ejercicios: "",
     series: "",
     repeticiones: "",
     partes_musculo: "",
@@ -247,7 +247,7 @@ const EditarRutinaModal = ({ isOpen, onClose, onSave, rutina }) => {
 
       setModoEdicion(null);
       setEjercicioActual({
-        nombre_ejercicio: "",
+        ejercicios: "",
         series: "",
         repeticiones: "",
         partes_musculo: "",
@@ -312,7 +312,7 @@ const EditarRutinaModal = ({ isOpen, onClose, onSave, rutina }) => {
   const iniciarEdicionEjercicio = (index) => {
     setModoEdicion(index);
     setEjercicioActual({
-      nombre_ejercicio: rutinaEditada.nombres_ejercicios[index] || "",
+      ejercicios: rutinaEditada.nombres_ejercicios[index] || "",
       series: rutinaEditada.series[index]?.toString() || "",
       repeticiones: rutinaEditada.repeticiones[index]?.toString() || "",
       partes_musculo: rutinaEditada.partes_musculo[index] || "",
@@ -327,14 +327,14 @@ const EditarRutinaModal = ({ isOpen, onClose, onSave, rutina }) => {
 
     if (modoEdicion === "agregar") {
       nuevaRutina.nombres_ejercicios.push(
-        ejercicioActual.nombre_ejercicio.trim()
+        ejercicioActual.ejercicios.trim()
       );
       nuevaRutina.series.push(parseInt(ejercicioActual.series));
       nuevaRutina.repeticiones.push(parseInt(ejercicioActual.repeticiones));
       nuevaRutina.partes_musculo.push(ejercicioActual.partes_musculo);
     } else if (typeof modoEdicion === "number") {
       nuevaRutina.nombres_ejercicios[modoEdicion] =
-        ejercicioActual.nombre_ejercicio.trim();
+        ejercicioActual.ejercicios.trim();
       nuevaRutina.series[modoEdicion] = parseInt(ejercicioActual.series);
       nuevaRutina.repeticiones[modoEdicion] = parseInt(
         ejercicioActual.repeticiones
@@ -371,7 +371,7 @@ const EditarRutinaModal = ({ isOpen, onClose, onSave, rutina }) => {
   const cancelarEdicion = () => {
     setModoEdicion(null);
     setEjercicioActual({
-      nombre_ejercicio: "",
+      ejercicios: "",
       series: "",
       repeticiones: "",
       partes_musculo: "",
@@ -380,7 +380,7 @@ const EditarRutinaModal = ({ isOpen, onClose, onSave, rutina }) => {
 
   // Validar ejercicio actual
   const validarEjercicio = () => {
-    if (!ejercicioActual.nombre_ejercicio.trim()) {
+    if (!ejercicioActual.ejercicios.trim()) {
       setMensaje("El nombre del ejercicio es requerido");
       return false;
     }
@@ -679,8 +679,8 @@ const EditarRutinaModal = ({ isOpen, onClose, onSave, rutina }) => {
                     </label>
                     <input
                       type="text"
-                      name="nombre_ejercicio"
-                      value={ejercicioActual.nombre_ejercicio}
+                      name="ejercicios"
+                      value={ejercicioActual.ejercicios}
                       onChange={handleEjercicioChange}
                       placeholder="Ej: Dominadas comando"
                       className="w-full bg-gray-800 border border-gray-600 text-gray-100 rounded-lg px-4 py-3 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all placeholder-gray-400"

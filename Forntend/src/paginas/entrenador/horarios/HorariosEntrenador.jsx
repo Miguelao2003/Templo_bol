@@ -318,11 +318,12 @@ const HorariosEntrenador = () => {
   };
 
   return (
-    <div className="relative z-10 py-8">
+    <>
       <Notification
         notification={notification}
         onClose={() => showNotification(null, null)}
       />
+    <div className="relative z-10 py-8">
 
       {/* Header principal */}
       <div className="mb-10">
@@ -605,8 +606,8 @@ const HorariosEntrenador = () => {
           onDelete={handleOpenEliminarModal}
         />
       </div>
-
-      {/* Modales */}
+    </div>
+          {/* Modales */}
       <CrearHorarioModal
         isOpen={modalState.crear}
         onClose={() => setModalState({ ...modalState, crear: false })}
@@ -641,7 +642,7 @@ const HorariosEntrenador = () => {
         onConfirm={handleEliminarHorario}
         horario={horarioEliminacionTarget}
       />
-    </div>
+    </>
   );
 };
 

@@ -130,7 +130,7 @@ const CambiarEstadoModal = ({ isOpen, onClose, onConfirm, equipo }) => {
         </div>
 
         {/* Botones de acción */}
-        <div className="flex justify-end space-x-4 p-6 pt-0 border-t border-gray-700">
+        <div className="flex justify-end space-x-4 p-6 pt-4 border-t border-gray-700">
           <button
             onClick={onClose}
             className="px-6 py-3 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-800 hover:border-gray-500 transition-all duration-200 font-medium"

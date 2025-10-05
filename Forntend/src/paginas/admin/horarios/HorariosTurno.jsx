@@ -370,7 +370,7 @@ const HorariosTurno = () => {
                             <div className="flex items-center gap-2">
                               <RiBookOpenLine className="w-3 h-3 text-gray-400" />
                               <span className="text-gray-300">
-                                {horario.rutina.nombre_ejercicio || "Sin especificar"}
+                                {horario.rutina.ejercicios || "Sin especificar"}
                               </span>
                             </div>
                             

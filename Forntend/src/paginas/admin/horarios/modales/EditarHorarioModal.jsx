@@ -201,7 +201,7 @@ const EditarHorarioModal = ({ isOpen, onClose, onSave, horario, onChange }) => {
   const formatRutinaName = (rutina) => {
     if (!rutina) return "Sin rutina asignada";
     
-    const ejercicios = rutina.nombres_ejercicios || rutina.nombre_ejercicio || rutina.ejercicios || [];
+    const ejercicios = rutina.nombres_ejercicios || rutina.ejercicios || rutina.ejercicios || [];
     const ejerciciosText = ejercicios.length > 0 
       ? ejercicios.slice(0, 2).join(', ') + (ejercicios.length > 2 ? '...' : '')
       : 'Sin ejercicios';
@@ -337,7 +337,7 @@ const EditarHorarioModal = ({ isOpen, onClose, onSave, horario, onChange }) => {
 
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm p-4">
-      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl p-6 w-full max-w-4xl shadow-2xl shadow-yellow-500/20 max-h-[80vh] overflow-y-auto">
+      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl p-6 w-full max-w-4xl shadow-2xl shadow-yellow-500/20 max-h-[90vh] overflow-y-auto">
         
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -654,9 +654,9 @@ const EditarHorarioModal = ({ isOpen, onClose, onSave, horario, onChange }) => {
                 <p className="text-sm text-gray-300">
                   {formatRutinaName(rutinaActual)}
                 </p>
-                {(rutinaActual.nombres_ejercicios || rutinaActual.nombre_ejercicio) && (rutinaActual.nombres_ejercicios || rutinaActual.nombre_ejercicio).length > 0 && (
+                {(rutinaActual.nombres_ejercicios || rutinaActual.ejercicios) && (rutinaActual.nombres_ejercicios || rutinaActual.ejercicios).length > 0 && (
                   <p className="text-xs text-gray-400 mt-1">
-                    Ejercicios: {(rutinaActual.nombres_ejercicios || rutinaActual.nombre_ejercicio).join(', ')}
+                    Ejercicios: {(rutinaActual.nombres_ejercicios || rutinaActual.ejercicios).join(', ')}
                   </p>
                 )}
               </div>

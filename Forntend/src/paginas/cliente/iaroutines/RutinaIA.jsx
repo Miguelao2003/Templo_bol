@@ -956,7 +956,7 @@ const ResultadoRutina = ({
 const EstadisticasPanel = ({ estadisticas, rutina }) => {
   return (
     <div className="mt-4 pt-4 border-t border-gray-600">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-gray-700/50 rounded-lg p-4">
           <h4 className="text-sm font-medium text-gray-400 mb-2">Promedio por día</h4>
           <p className="text-2xl font-bold text-white">
@@ -975,13 +975,7 @@ const EstadisticasPanel = ({ estadisticas, rutina }) => {
           </p>
         </div>
 
-        <div className="bg-gray-700/50 rounded-lg p-4">
-          <h4 className="text-sm font-medium text-gray-400 mb-2">Volumen semanal</h4>
-          <p className="text-2xl font-bold text-white">
-            {rutina.resumen.volumenSemanal}
-          </p>
-          <p className="text-xs text-gray-400">repeticiones totales</p>
-        </div>
+
       </div>
 
       <div className="mt-4">

@@ -27,7 +27,6 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     encoding='utf-8',
     handlers=[
-        logging.FileHandler("app.log"),
         logging.StreamHandler()  # ✅ Agregar esta línea para ver en consola
     ]
 )

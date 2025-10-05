@@ -15,10 +15,16 @@ class EjercicioResponse(BaseModel):
     repeticiones: int
     series: int
 
+# app/schemas/rutina_ia.py
+
 class DiaRutinaResponse(BaseModel):
-    dia: str
+    dia: str  # "Jueves (03/10)"
+    fecha_real: Optional[str] = None  # "2025-10-03" formato ISO
     grupos_musculares: List[str]
     ejercicios: List[EjercicioResponse]
+    tipo_entrenamiento: str
+    es_dia_descanso: bool
+    total_ejercicios: int
 
 class PerfilUsuarioResponse(BaseModel):
     nivel: str
@@ -31,6 +37,10 @@ class RoutinePredictionResponse(BaseModel):
     perfil: PerfilUsuarioResponse
     plan_semanal: List[DiaRutinaResponse]
     mensaje: str
+
+    # NUEVO: Indicar si se usó análisis de rendimiento
+    analisis_rendimiento_aplicado: bool = False
+    estadisticas_rendimiento: Optional[Dict[str, Any]] = None
 
 class ModelStatusResponse(BaseModel):
     modelo_entrenado: bool

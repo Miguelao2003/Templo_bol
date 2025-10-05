@@ -17,7 +17,7 @@ const CrearEquipoModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm p-4">
-      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl w-full max-w-2xl shadow-2xl shadow-yellow-500/20 max-h-[80vh] overflow-y-auto">
+      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl w-full max-w-2xl shadow-2xl shadow-yellow-500/20 max-h-[95vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-700">
           <div className="flex items-center space-x-3">
@@ -156,7 +156,7 @@ const CrearEquipoModal = ({
         </div>
 
         {/* Botones de acción */}
-        <div className="flex justify-end space-x-4 p-6 pt-0 border-t border-gray-700 mt-4">
+        <div className="flex justify-end space-x-4 p-6 pt-4 border-t border-gray-700 mt-4">
           <button
             type="button"
             onClick={onClose}

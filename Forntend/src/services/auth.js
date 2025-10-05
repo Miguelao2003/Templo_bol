@@ -7,18 +7,26 @@ export const loginUser = async (email, password) => {
       contrasena: password
     });
 
-    // ⚠️ PROBLEMA SOLUCIONADO: Usar access_token en lugar de token
-    const { access_token, user } = response.data;
+    const { access_token, user, message } = response.data; // ✅ Extraer message
 
     // Guardar token y usuario completo
     localStorage.setItem("token", access_token);
     localStorage.setItem("user", JSON.stringify(user));
 
-    return response.data;
+    // ✅ Retornar todo incluyendo el mensaje
+    return {
+      success: true,
+      access_token,
+      user,
+      message // ✅ Incluir el mensaje para mostrarlo como notificación
+    };
   } catch (error) {
     const errorData = error.response?.data;
     if (error.response?.status === 401) {
       throw new Error("Correo o contraseña incorrectos");
+    }
+    if (error.response?.status === 403) {
+      throw new Error("Cuenta desactivada. Contacta al administrador.");
     }
     throw new Error(errorData?.detail || error.message);
   }

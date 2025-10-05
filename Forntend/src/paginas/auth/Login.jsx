@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import * as RiIcons from "react-icons/ri";
 import { toast } from "react-toastify";
 import { loginUser } from "../../services/auth";
+import { useNotification } from "../../hooks/useNotification";
+import Notification from "../../componentes/Notification";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,6 +14,7 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const { notification, showNotification, hideNotification } = useNotification();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,26 +24,18 @@ const Login = () => {
       [name]: value,
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      console.log("🔐 Login: Iniciando proceso de login...");
-      
       const response = await loginUser(formData.email, formData.password);
       
-      console.log("✅ Login: Respuesta del servidor:", response);
-      
-      toast.success(`Bienvenido ${response.user.nombre}`);
+      // ✅ USAR TU SISTEMA DE NOTIFICACIONES
+      showNotification("success", response.message || `Bienvenido ${response.user.nombre}`);
 
-      // Redirección mejorada basada en rol
       let redirectPath;
       const userRole = response.user.rol.toLowerCase();
-      
-      console.log("🚀 Login: Determinando ruta de redirección...");
-      console.log("   - User role (lowercase):", userRole);
       
       switch (userRole) {
         case 'administrador':
@@ -56,14 +51,14 @@ const Login = () => {
           redirectPath = "/perfil";
       }
 
-      console.log("🎯 Login: Redirigiendo a:", redirectPath);
-      
-      // Forzar la recarga de la página después del login
-      window.location.href = redirectPath;
+      // ✅ DAR TIEMPO PARA VER LA NOTIFICACIÓN ANTES DE REDIRIGIR
+      setTimeout(() => {
+        window.location.href = redirectPath;
+      }, 1500);
       
     } catch (error) {
       console.error("❌ Login: Error en el proceso:", error);
-      toast.error(error.message || "Error al iniciar sesión");
+      showNotification("error", error.message || "Error al iniciar sesión");
     } finally {
       setLoading(false);
     }
@@ -71,6 +66,10 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-gray-950 via-gray-900 to-black relative overflow-hidden">
+      <Notification
+        notification={notification}
+        onClose={() => showNotification(null, null)}
+      />
       {/* Efectos de fondo animados */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-yellow-400/8 via-transparent to-transparent"></div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-yellow-500/5 via-transparent to-transparent"></div>

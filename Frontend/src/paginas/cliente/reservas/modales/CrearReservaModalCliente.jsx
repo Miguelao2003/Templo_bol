@@ -316,7 +316,7 @@ const CrearReservaModalCliente = ({ isOpen, onClose, onConfirm, horario }) => {
 
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm p-2">
-      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl shadow-2xl shadow-yellow-500/20 w-full max-w-6xl max-h-[95vh] overflow-hidden flex flex-col">
+      <div className="bg-gray-900 border-2 border-yellow-500/30 rounded-xl shadow-2xl shadow-yellow-500/20 w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header - Compacto */}
         <div className="flex items-center justify-between p-4 border-b border-gray-700 flex-shrink-0">
           <div className="flex items-center space-x-3">

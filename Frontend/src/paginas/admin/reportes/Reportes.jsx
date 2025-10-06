@@ -26,6 +26,7 @@ import {
   BarElement,
   LineElement,
   PointElement,
+  LineController,  // ⬅️ AGREGAR ESTE
   Title,
   Tooltip,
   Legend,
@@ -55,6 +56,7 @@ ChartJS.register(
   Tooltip,
   Legend,
   TimeScale,
+  LineController,  // ⬅️ REGISTRAR ESTE
   Filler,
   ArcElement,
   DoughnutController,

@@ -20,6 +20,7 @@ import {
   BarElement,
   LineElement,
   PointElement,
+  LineController,  // ⬅️ AGREGAR ESTE
   Title,
   Tooltip,
   Legend,
@@ -34,6 +35,7 @@ ChartJS.register(
   LinearScale,
   BarElement,
   LineElement,
+  LineController,  // ⬅️ REGISTRAR ESTE
   PointElement,
   Title,
   Tooltip,

@@ -6,7 +6,9 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
+import json
+from decimal import Decimal
 
 
 # Importar el modelo de IA mejorado
@@ -88,6 +90,31 @@ class DescansoInfoResponse(BaseModel):
     musculos_pequenos: List[str]
     distribucion_actual: Dict[str, Dict[str, List[str]]]  # CORREGIDO: por nivel
     config_ejercicios: Dict[str, Dict[str, Any]]
+
+
+# NUEVO: Funciones de serialización
+def convertir_a_json_serializable(obj):
+    """
+    Convierte objetos datetime, date y Decimal a formatos JSON serializables
+    """
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    elif isinstance(obj, Decimal):
+        return float(obj)
+    elif isinstance(obj, dict):
+        return {key: convertir_a_json_serializable(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [convertir_a_json_serializable(item) for item in obj]
+    return obj
+
+class JSONEncoder(json.JSONEncoder):
+    """Encoder personalizado para manejar datetime y Decimal"""
+    def default(self, obj):
+        if isinstance(obj, (datetime, date)):
+            return obj.isoformat()
+        elif isinstance(obj, Decimal):
+            return float(obj)
+        return super().default(obj)
 
 def calcular_rango_imc(imc: float) -> str:
     """Calcular rango de IMC"""
@@ -446,23 +473,29 @@ async def predict_routine_for_user(user_id: int, db: Session = Depends(get_db)):
         
         # Guardar rutina generada
         try:
+            # IMPORTANTE: Convertir plan_semanal a JSON serializable
+            plan_semanal_dict = {
+                "plan_detallado": [dia.dict() for dia in plan_detallado],
+                "resumen": resumen.dict(),
+                "perfil": perfil.dict(),
+                "metadata": {
+                    "modelo_usado": "random_forest",
+                    "precision": 0.995,
+                    "fecha_inicio_plan": hoy.strftime('%Y-%m-%d'),  # Ya como string
+                    "fecha_fin_plan": (hoy + timedelta(days=6)).strftime('%Y-%m-%d'),  # Ya como string
+                    "tiene_historial": tiene_historial,
+                    "nivel_ajustado_por_rendimiento": tiene_historial,
+                    "estadisticas_rendimiento": convertir_a_json_serializable(estadisticas) if tiene_historial else None,
+                    "fecha_generacion": datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Ya como string
+                }
+            }
+            
+            # Convertir todo a JSON serializable
+            plan_semanal_serializable = convertir_a_json_serializable(plan_semanal_dict)
+            
             rutina_ia_data = RutinaIACreate(
                 usuario_id=user_id,
-                plan_semanal={
-                    "plan_detallado": [dia.dict() for dia in plan_detallado],
-                    "resumen": resumen.dict(),
-                    "perfil": perfil.dict(),
-                    "metadata": {
-                        "modelo_usado": "random_forest",
-                        "precision": 0.995,
-                        "fecha_inicio_plan": hoy.isoformat(),
-                        "fecha_fin_plan": (hoy + timedelta(days=6)).isoformat(),
-                        "tiene_historial": tiene_historial,
-                        "nivel_ajustado_por_rendimiento": tiene_historial,
-                        "estadisticas_rendimiento": estadisticas if tiene_historial else None,
-                        "fecha_generacion": datetime.now().isoformat()
-                    }
-                },
+                plan_semanal=plan_semanal_serializable,  # Ya serializado
                 nivel_usuario=nivel_final,
                 edad_usuario=usuario.edad,
                 peso_usuario=float(usuario.peso),
@@ -471,13 +504,17 @@ async def predict_routine_for_user(user_id: int, db: Session = Depends(get_db)):
                 genero_usuario=usuario.genero,
                 tmb_usuario=float(tmb),
                 imc_usuario=float(imc)
+                # NO incluir fecha_actualizacion, dejará que use el default del modelo
             )
             
             rutina_guardada = create_rutina_ia(db, rutina_ia_data)
             print(f"✅ Rutina guardada con ID: {rutina_guardada.id_rutina_ia}")
             
         except Exception as e:
+            db.rollback()  # IMPORTANTE: hacer rollback si falla
             print(f"⚠️ Warning: No se pudo guardar rutina: {e}")
+            import traceback
+            traceback.print_exc()  # Para ver el error completo
 
         return RoutinePredictionResponse(
             usuario_id=user_id,
@@ -972,13 +1009,25 @@ async def predict_routine_with_history(
         recomendaciones = ai_model.generar_recomendaciones_basadas_en_historial(historial_entrenamientos)
         
         # PASO 6: Preparar respuesta del historial
+        # CORREGIDO: Convertir fechas a strings
+        ultimo_entrenamiento_str = None
+        if historial_entrenamientos:
+            fecha = historial_entrenamientos[0]['fecha']
+            # Si es datetime, convertir a string
+            if isinstance(fecha, datetime):
+                ultimo_entrenamiento_str = fecha.strftime('%Y-%m-%d')
+            elif isinstance(fecha, date):
+                ultimo_entrenamiento_str = fecha.strftime('%Y-%m-%d')
+            elif isinstance(fecha, str):
+                ultimo_entrenamiento_str = fecha
+        
         historial_response = HistorialUsuarioResponse(
-            entrenamientos_por_semana=estadisticas_historial['entrenamientos_por_semana'],
-            asistencia_promedio=estadisticas_historial['asistencia_promedio'],
-            nivel_mas_frecuente=estadisticas_historial['nivel_mas_frecuente'],
-            grupos_mas_trabajados=estadisticas_historial['grupos_mas_trabajados'],
-            total_entrenamientos=estadisticas_historial['total_entrenamientos'],
-            ultimo_entrenamiento=historial_entrenamientos[0]['fecha'].strftime('%Y-%m-%d') if historial_entrenamientos else None
+            entrenamientos_por_semana=float(estadisticas_historial['entrenamientos_por_semana']),
+            asistencia_promedio=float(estadisticas_historial['asistencia_promedio']),
+            nivel_mas_frecuente=estadisticas_historial['nivel_mas_frecuente'] or 'intermedio',
+            grupos_mas_trabajados=estadisticas_historial['grupos_mas_trabajados'] or [],
+            total_entrenamientos=int(estadisticas_historial['total_entrenamientos']),
+            ultimo_entrenamiento=ultimo_entrenamiento_str
         )
         
         # Mensaje final
@@ -986,6 +1035,78 @@ async def predict_routine_with_history(
             mensaje = f"Rutina personalizada basada en {len(historial_entrenamientos)} entrenamientos previos. La IA ha ajustado automáticamente la intensidad según tu patrón de entrenamiento real."
         else:
             mensaje = f"Rutina base para comenzar. Una vez que tengas historial de entrenamientos, la IA podrá personalizar mejor tus rutinas."
+        
+        # NUEVO: Guardar la rutina generada en la base de datos
+        try:
+            # Convertir plan_semanal a formato serializable
+            plan_semanal_dict = {
+                "plan_detallado": [
+                    {
+                        "dia": dia.dia,
+                        "grupos_musculares": dia.grupos_musculares,
+                        "ejercicios": [
+                            {
+                                "musculo": ej.musculo,
+                                "ejercicio": ej.ejercicio,
+                                "repeticiones": ej.repeticiones,
+                                "series": ej.series
+                            }
+                            for ej in dia.ejercicios
+                        ],
+                        "es_dia_descanso": dia.es_dia_descanso,
+                        "ajustes_aplicados": dia.ajustes_aplicados,
+                        "intensidad_modificada": dia.intensidad_modificada
+                    }
+                    for dia in plan_semanal
+                ],
+                "historial_analizado": {
+                    "entrenamientos_por_semana": float(estadisticas_historial['entrenamientos_por_semana']),
+                    "asistencia_promedio": float(estadisticas_historial['asistencia_promedio']),
+                    "nivel_mas_frecuente": estadisticas_historial['nivel_mas_frecuente'],
+                    "grupos_mas_trabajados": estadisticas_historial['grupos_mas_trabajados'],
+                    "total_entrenamientos": estadisticas_historial['total_entrenamientos']
+                },
+                "recomendaciones_personales": recomendaciones,
+                "metadata": {
+                    "modelo_usado": "random_forest_con_historial",
+                    "precision": 0.995,
+                    "dias_historial_analizados": dias_historial,
+                    "total_entrenamientos_analizados": len(historial_entrenamientos),
+                    "fecha_generacion": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                }
+            }
+            
+            # Convertir todo a JSON serializable
+            plan_semanal_serializable = convertir_a_json_serializable(plan_semanal_dict)
+            
+            # Predecir perfil para obtener TMB e IMC
+            _, tmb, imc = ai_model.predecir_perfil(
+                genero_input, usuario.edad, usuario.peso, altura_metros, usuario.objetivo
+            )
+            
+            rutina_ia_data = RutinaIACreate(
+                usuario_id=user_id,
+                plan_semanal=plan_semanal_serializable,
+                nivel_usuario=nivel_usuario,
+                edad_usuario=usuario.edad,
+                peso_usuario=float(usuario.peso),
+                altura_usuario=float(altura_metros),
+                objetivo_usuario=usuario.objetivo,
+                genero_usuario=usuario.genero,
+                tmb_usuario=float(tmb),
+                imc_usuario=float(imc),
+                modelo_usado="random_forest_con_historial",
+                precision_modelo=0.995
+            )
+            
+            rutina_guardada = create_rutina_ia(db, rutina_ia_data)
+            print(f"✅ Rutina con historial guardada con ID: {rutina_guardada.id_rutina_ia}")
+            
+        except Exception as e:
+            db.rollback()
+            print(f"⚠️ Warning: No se pudo guardar rutina con historial: {e}")
+            import traceback
+            traceback.print_exc()
         
         return RoutineWithHistoryResponse(
             usuario_id=user_id,
@@ -996,7 +1117,13 @@ async def predict_routine_with_history(
             mensaje=mensaje
         )
         
+    except HTTPException:
+        raise
     except Exception as e:
+        db.rollback()
+        print(f"❌ Error generando rutina con historial: {e}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(
             status_code=500,
             detail=f"Error generando rutina con historial para usuario {user_id}: {str(e)}"

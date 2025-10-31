@@ -14,6 +14,10 @@ class RutinaIACreate(BaseModel):
     genero_usuario: Optional[str] = None
     tmb_usuario: Optional[Decimal] = None
     imc_usuario: Optional[Decimal] = None
+    # AGREGAR ESTOS CAMPOS:
+    modelo_usado: Optional[str] = "random_forest"
+    precision_modelo: Optional[Decimal] = Decimal("0.85")
+    activa: Optional[bool] = True
 
 class RutinaIAResponse(BaseModel):
     id_rutina_ia: int
@@ -22,6 +26,8 @@ class RutinaIAResponse(BaseModel):
     fecha_generacion: datetime
     nivel_usuario: Optional[str]
     activa: bool
+    plan_semanal: Optional[Dict[str, Any]] = None  # Agregar este campo también
+    precision_modelo: Optional[Decimal] = None
     
     class Config:
         from_attributes = True

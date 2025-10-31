@@ -18,6 +18,7 @@ const ReservaTable = ({
   permisos,
   usuario,
   onCancelar,
+  onMarcarAsistencia, // ✅ Recibir la función del padre
   onRefresh,
 }) => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
@@ -331,8 +332,7 @@ const ReservaTable = ({
                   {/* Rutina */}
                   <td className="px-6 py-4">
                     <div className="max-w-xs">
-                      <div className="text-sm font-medium text-white truncate">
-                      </div>
+                      <div className="text-sm font-medium text-white truncate"></div>
                       {reserva.rutina_partes_musculo &&
                         reserva.rutina_partes_musculo.length > 0 && (
                           <div className="flex flex-wrap gap-1 mt-2">
@@ -418,9 +418,7 @@ const ReservaTable = ({
                             ) : puedeMarcarAsistencia ? (
                               // Botón para marcar asistencia (horario ya pasó)
                               <button
-                                onClick={() =>
-                                  handleMarcarAsistenciaDirecta(reserva)
-                                }
+                                onClick={() => onMarcarAsistencia(reserva)} // ✅ Usar la prop en lugar de handleMarcarAsistenciaDirecta
                                 className="inline-flex items-center gap-1 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 px-3 py-1 rounded-lg text-xs transition-all duration-200 font-medium border border-blue-500/30 hover:border-blue-400"
                                 title="Marcar asistencia"
                               >

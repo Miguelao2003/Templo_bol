@@ -24,6 +24,7 @@ import {
   PointElement,
   Title,
   Tooltip,
+  LineController,  // ⬅️ AGREGAR ESTE
   Legend,
   ArcElement,
   DoughnutController,
@@ -41,6 +42,7 @@ ChartJS.register(
   BarElement,
   LineElement,
   PointElement,
+  LineController,  // ⬅️ AGREGAR ESTE
   Title,
   Tooltip,
   Legend,

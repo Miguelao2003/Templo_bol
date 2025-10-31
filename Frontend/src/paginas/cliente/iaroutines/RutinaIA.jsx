@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import iaClientService from "../../../services/ia_routines_client";
 import { useAuth } from "../../../hooks/useAuth";
-import HistorialPanel from './HistorialPanel';  // Ajustar ruta según tu estructura
+import HistorialPanel from "./HistorialPanel"; // Ajustar ruta según tu estructura
 
 import {
   RiRobotLine,
@@ -21,7 +21,7 @@ import {
   RiCheckboxCircleLine,
   RiEyeLine,
   RiTimeLine,
-  RiHistoryLine  // AGREGADO: Import para historial
+  RiHistoryLine, // AGREGADO: Import para historial
 } from "react-icons/ri";
 
 const RutinaIA = () => {
@@ -32,7 +32,7 @@ const RutinaIA = () => {
     peso: "",
     altura: "",
     objetivo: "",
-    nivel: "intermedio" // Valor por defecto
+    nivel: "intermedio", // Valor por defecto
   });
   const [rutina, setRutina] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -42,12 +42,20 @@ const RutinaIA = () => {
   const [mostrandoInfoDescanso, setMostrandoInfoDescanso] = useState(false);
   const [historialUsuario, setHistorialUsuario] = useState(null);
   const [mostrandoHistorial, setMostrandoHistorial] = useState(false);
-  
+
   // Hooks y autenticación
-  const { user, authenticated, hasCompleteProfile, profileForIA, getDataCompleteness } = useAuth();
+  const {
+    user,
+    authenticated,
+    hasCompleteProfile,
+    profileForIA,
+    getDataCompleteness,
+  } = useAuth();
 
   // Verificar completeness de datos usando la nueva función
-  const dataCompleteness = getDataCompleteness ? getDataCompleteness() : { complete: false, missing: [] };
+  const dataCompleteness = getDataCompleteness
+    ? getDataCompleteness()
+    : { complete: false, missing: [] };
   const tienePerfilCompleto = hasCompleteProfile;
 
   // Efectos
@@ -62,7 +70,7 @@ const RutinaIA = () => {
         peso: user.peso || "",
         altura: user.altura || "",
         objetivo: user.objetivo || "",
-        nivel: user.nivel || "intermedio"
+        nivel: user.nivel || "intermedio",
       });
     }
   }, [user]);
@@ -100,36 +108,71 @@ const RutinaIA = () => {
       let resultado;
 
       // Si el usuario tiene perfil completo, usar endpoint con historial
-      if (user && tienePerfilCompleto) {
-        console.log('🎯 Usuario con perfil completo, intentando usar historial');
-        
+      if (user && tienePerfilCompleto && user.id_usuario) {
+        console.log(
+          "🎯 Usuario con perfil completo, intentando usar historial"
+        );
+
         try {
-          // Primero obtener historial
-          const historialResponse = await iaClientService.obtenerHistorialUsuario(user.id_usuario);
-          setHistorialUsuario(historialResponse.data);
-          
-          // Usar rutina con historial (intentará usar historial si existe)
-          resultado = await iaClientService.generarRutinaUsuarioLogueado(user, true);
+          // Primero obtener historial para mostrarlo
+          const historialResponse =
+            await iaClientService.obtenerHistorialUsuario(user.id_usuario);
+          console.log("📊 Historial obtenido:", historialResponse);
+
+          if (historialResponse.success && historialResponse.data) {
+            setHistorialUsuario(historialResponse.data);
+
+            // Si tiene entrenamientos, usar rutina con historial
+            if (historialResponse.data.total_reservas_analizadas > 0) {
+              console.log("✅ Generando rutina CON historial");
+              resultado = await iaClientService.generarRutinaConHistorial(
+                user.id_usuario
+              );
+            } else {
+              console.log(
+                "ℹ️ No hay historial suficiente, usando rutina estándar"
+              );
+              resultado = await iaClientService.generarRutinaUsuarioLogueado(
+                user,
+                false
+              );
+            }
+          } else {
+            console.log(
+              "⚠️ No se pudo obtener historial, usando rutina estándar"
+            );
+            resultado = await iaClientService.generarRutinaUsuarioLogueado(
+              user,
+              false
+            );
+          }
         } catch (errorHistorial) {
-          console.warn('⚠️ Problema con historial, usando rutina estándar:', errorHistorial);
-          resultado = await iaClientService.generarRutinaUsuarioLogueado(user, false);
+          console.warn(
+            "⚠️ Error con historial, usando rutina estándar:",
+            errorHistorial
+          );
+          resultado = await iaClientService.generarRutinaUsuarioLogueado(
+            user,
+            false
+          );
         }
       } else {
-        console.log('🎯 Usando formulario, datos:', formData);
+        console.log("🎯 Usando formulario, datos:", formData);
         // Validar datos del formulario antes de enviar
         if (!formData.altura) {
           setError("La altura es requerida para generar la rutina");
           setLoading(false);
           return;
         }
-        
+
         resultado = await iaClientService.generarRutinaPersonalizada(formData);
       }
 
+      console.log("✅ Rutina generada:", resultado);
       setRutina(resultado.data);
       setMostrandoFormulario(false);
     } catch (err) {
-      console.error('❌ Error generando rutina:', err);
+      console.error("❌ Error generando rutina:", err);
       setError(err.message || "Error al generar rutina");
     } finally {
       setLoading(false);
@@ -140,10 +183,12 @@ const RutinaIA = () => {
   const toggleHistorial = async () => {
     if (!historialUsuario && user?.id_usuario) {
       try {
-        const historialResponse = await iaClientService.obtenerHistorialUsuario(user.id_usuario);
+        const historialResponse = await iaClientService.obtenerHistorialUsuario(
+          user.id_usuario
+        );
         setHistorialUsuario(historialResponse.data);
       } catch (error) {
-        console.error('Error obteniendo historial:', error);
+        console.error("Error obteniendo historial:", error);
       }
     }
     setMostrandoHistorial(!mostrandoHistorial);
@@ -184,7 +229,8 @@ const RutinaIA = () => {
                 Sistema de IA no disponible
               </h2>
               <p className="text-gray-400 mb-8 max-w-md mx-auto leading-relaxed">
-                {sistemaInfo?.error || "El sistema está inicializándose. Intenta de nuevo en unos momentos."}
+                {sistemaInfo?.error ||
+                  "El sistema está inicializándose. Intenta de nuevo en unos momentos."}
               </p>
 
               <button
@@ -267,7 +313,7 @@ const FormularioRutina = ({
   // PROPS PARA HISTORIAL:
   toggleHistorial,
   mostrandoHistorial,
-  historialUsuario
+  historialUsuario,
 }) => {
   return (
     <div className="max-w-4xl mx-auto">
@@ -286,7 +332,8 @@ const FormularioRutina = ({
               Rutina con IA
             </h1>
             <p className="text-gray-400 text-lg leading-relaxed">
-              Obtén una rutina personalizada de calistenia con sistema de descanso muscular inteligente
+              Obtén una rutina personalizada de calistenia con sistema de
+              descanso muscular inteligente
             </p>
           </div>
         </div>
@@ -312,30 +359,30 @@ const FormularioRutina = ({
                 className="flex items-center gap-2 px-4 py-2 bg-blue-800 hover:bg-blue-700 border border-blue-600 rounded-lg text-sm text-blue-300 transition-all duration-300"
               >
                 <RiHistoryLine className="w-4 h-4" />
-                {mostrandoHistorial ? 'Ocultar' : 'Ver'} mi historial
+                {mostrandoHistorial ? "Ocultar" : "Ver"} mi historial
               </button>
             )}
-            
+
             <button
               onClick={toggleInfoDescanso}
               className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg text-sm text-gray-300 transition-all duration-300"
             >
               <RiInformationLine className="w-4 h-4" />
-              {mostrandoInfoDescanso ? 'Ocultar info' : 'Ver sistema de descanso'}
+              {mostrandoInfoDescanso
+                ? "Ocultar info"
+                : "Ver sistema de descanso"}
             </button>
           </div>
         </div>
       </div>
 
       {/* Panel de información del sistema de descanso */}
-      {mostrandoInfoDescanso && (
-        <InfoDescansoPanel sistemaInfo={sistemaInfo} />
-      )}
+      {mostrandoInfoDescanso && <InfoDescansoPanel sistemaInfo={sistemaInfo} />}
 
       {/* NUEVO: Panel de historial */}
       {mostrandoHistorial && historialUsuario && (
-        <HistorialPanel 
-          historial={historialUsuario.estadisticas} 
+        <HistorialPanel
+          historial={historialUsuario.estadisticas}
           mostrarDetalle={true}
         />
       )}
@@ -350,7 +397,8 @@ const FormularioRutina = ({
             <div>
               <h3 className="text-2xl font-bold">Hola {user.nombre}</h3>
               <p className="text-black/80">
-                Tu perfil está completo para generar rutinas personalizadas con descanso muscular inteligente
+                Tu perfil está completo para generar rutinas personalizadas con
+                descanso muscular inteligente
               </p>
             </div>
           </div>
@@ -370,11 +418,15 @@ const FormularioRutina = ({
             </div>
             <div className="bg-black/20 rounded-lg p-3 text-center">
               <p className="font-medium">Altura</p>
-              <p className="text-black/80">{user.altura > 10 ? user.altura + ' cm' : user.altura + ' m'}</p>
+              <p className="text-black/80">
+                {user.altura > 10 ? user.altura + " cm" : user.altura + " m"}
+              </p>
             </div>
             <div className="bg-black/20 rounded-lg p-3 text-center">
               <p className="font-medium">Nivel</p>
-              <p className="text-black/80 capitalize">{user.nivel || 'intermedio'}</p>
+              <p className="text-black/80 capitalize">
+                {user.nivel || "intermedio"}
+              </p>
             </div>
           </div>
 
@@ -429,11 +481,12 @@ const FormularioRutina = ({
             <div>
               <h3 className="text-2xl font-bold">Hola {user.nombre}</h3>
               <p className="text-gray-400">
-                Para generar tu rutina personalizada, necesitamos completar algunos datos:
+                Para generar tu rutina personalizada, necesitamos completar
+                algunos datos:
               </p>
               {dataCompleteness.missing.length > 0 && (
                 <p className="text-red-400 text-sm mt-2">
-                  Faltan: {dataCompleteness.missing.join(', ')}
+                  Faltan: {dataCompleteness.missing.join(", ")}
                 </p>
               )}
             </div>
@@ -447,7 +500,8 @@ const FormularioRutina = ({
           {user && (
             <div className="bg-yellow-400/10 border border-yellow-400/30 p-4 rounded-xl mb-6">
               <p className="text-yellow-400 text-sm">
-                Completa los datos que faltan para generar tu rutina personalizada.
+                Completa los datos que faltan para generar tu rutina
+                personalizada.
               </p>
             </div>
           )}
@@ -534,7 +588,8 @@ const FormularioRutina = ({
                 required
               />
               <p className="text-xs text-gray-400 mt-2">
-                Requerida para calcular TMB e IMC. Puedes usar cm (175) o metros (1.75)
+                Requerida para calcular TMB e IMC. Puedes usar cm (175) o metros
+                (1.75)
               </p>
             </div>
 
@@ -621,7 +676,9 @@ const InfoDescansoPanel = ({ sistemaInfo }) => {
         <div className="p-2 bg-blue-500/20 rounded-lg">
           <RiShieldCheckLine className="w-6 h-6 text-blue-400" />
         </div>
-        <h3 className="text-xl font-bold text-white">Sistema de Descanso Muscular Inteligente</h3>
+        <h3 className="text-xl font-bold text-white">
+          Sistema de Descanso Muscular Inteligente
+        </h3>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -676,12 +733,17 @@ const InfoDescansoPanel = ({ sistemaInfo }) => {
           <div className="space-y-3">
             <div className="bg-gray-800/50 rounded-lg p-3">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-red-400 font-medium">Músculos Grandes</span>
+                <span className="text-red-400 font-medium">
+                  Músculos Grandes
+                </span>
                 <span className="text-sm text-gray-400">(48-72h descanso)</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {['pecho', 'espalda', 'pierna'].map(musculo => (
-                  <span key={musculo} className="px-2 py-1 bg-red-400/20 text-red-300 rounded text-sm">
+                {["pecho", "espalda", "pierna"].map((musculo) => (
+                  <span
+                    key={musculo}
+                    className="px-2 py-1 bg-red-400/20 text-red-300 rounded text-sm"
+                  >
                     {musculo}
                   </span>
                 ))}
@@ -690,12 +752,17 @@ const InfoDescansoPanel = ({ sistemaInfo }) => {
 
             <div className="bg-gray-800/50 rounded-lg p-3">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-orange-400 font-medium">Músculos Medianos/Pequeños</span>
+                <span className="text-orange-400 font-medium">
+                  Músculos Medianos/Pequeños
+                </span>
                 <span className="text-sm text-gray-400">(24-48h descanso)</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {['hombro', 'bicep', 'tricep'].map(musculo => (
-                  <span key={musculo} className="px-2 py-1 bg-orange-400/20 text-orange-300 rounded text-sm">
+                {["hombro", "bicep", "tricep"].map((musculo) => (
+                  <span
+                    key={musculo}
+                    className="px-2 py-1 bg-orange-400/20 text-orange-300 rounded text-sm"
+                  >
                     {musculo}
                   </span>
                 ))}
@@ -704,8 +771,12 @@ const InfoDescansoPanel = ({ sistemaInfo }) => {
 
             <div className="bg-gray-800/50 rounded-lg p-3">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-green-400 font-medium">Músculo de Resistencia</span>
-                <span className="text-sm text-gray-400">(puede entrenar diario)</span>
+                <span className="text-green-400 font-medium">
+                  Músculo de Resistencia
+                </span>
+                <span className="text-sm text-gray-400">
+                  (puede entrenar diario)
+                </span>
               </div>
               <span className="px-2 py-1 bg-green-400/20 text-green-300 rounded text-sm">
                 abdomen
@@ -721,8 +792,8 @@ const InfoDescansoPanel = ({ sistemaInfo }) => {
           <div>
             <p className="text-yellow-400 font-medium mb-1">Sistema Activo</p>
             <p className="text-sm text-gray-300">
-              El sistema valida automáticamente que no haya conflictos de descanso muscular 
-              y respeta los límites de ejercicios por nivel.
+              El sistema valida automáticamente que no haya conflictos de
+              descanso muscular y respeta los límites de ejercicios por nivel.
             </p>
           </div>
         </div>
@@ -776,11 +847,17 @@ const ResultadoRutina = ({
             <h1 className="text-3xl font-bold">Tu Rutina Personalizada</h1>
             <span className="text-2xl">{rutina.perfil.nivelEmoji}</span>
           </div>
-          
+
           <p className="text-black/80 mb-6">{rutina.perfil.nivelDescripcion}</p>
 
           {/* MODIFICADO: Grid con historial si está disponible */}
-          <div className={`grid grid-cols-1 ${rutina.historial && rutina.historial.totalEntrenamientos > 0 ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-4`}>
+          <div
+            className={`grid grid-cols-1 ${
+              rutina.historial && rutina.historial.totalEntrenamientos > 0
+                ? "md:grid-cols-4"
+                : "md:grid-cols-3"
+            } gap-4`}
+          >
             <div className="bg-black/20 backdrop-blur-sm p-4 rounded-xl text-center">
               <RiFireLine className="text-3xl mx-auto mb-2" />
               <strong className="block text-sm">TMB</strong>
@@ -800,9 +877,7 @@ const ResultadoRutina = ({
             <div className="bg-black/20 backdrop-blur-sm p-4 rounded-xl text-center">
               <RiTrophyLine className="text-3xl mx-auto mb-2" />
               <strong className="block text-sm">Nivel</strong>
-              <p className="font-semibold capitalize">
-                {rutina.perfil.nivel}
-              </p>
+              <p className="font-semibold capitalize">{rutina.perfil.nivel}</p>
             </div>
 
             {/* NUEVO: Mostrar historial si está disponible */}
@@ -826,7 +901,9 @@ const ResultadoRutina = ({
             <div className="p-3 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl">
               <RiTrophyLine className="w-6 h-6 text-black" />
             </div>
-            <h3 className="text-xl font-bold text-white">Resumen de tu rutina</h3>
+            <h3 className="text-xl font-bold text-white">
+              Resumen de tu rutina
+            </h3>
           </div>
 
           <button
@@ -834,7 +911,7 @@ const ResultadoRutina = ({
             className="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm text-gray-300 transition-all"
           >
             <RiEyeLine className="w-4 h-4" />
-            {mostrandoEstadisticas ? 'Ocultar' : 'Ver'} estadísticas
+            {mostrandoEstadisticas ? "Ocultar" : "Ver"} estadísticas
           </button>
         </div>
 
@@ -879,47 +956,55 @@ const ResultadoRutina = ({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {rutina.planSemanal.map(dia => (
+          {rutina.planSemanal.map((dia) => (
             <DiaCard key={dia.dia} dia={dia} />
           ))}
         </div>
       </div>
 
       {/* NUEVO: Recomendaciones personales basadas en historial */}
-      {rutina.recomendacionesPersonales && rutina.recomendacionesPersonales.length > 0 && (
-        <div className="bg-green-900/30 border border-green-500/30 p-6 rounded-2xl mt-8">
-          <div className="flex items-center gap-3 mb-4">
-            <RiTrophyLine className="w-6 h-6 text-green-400" />
-            <h3 className="text-lg font-bold text-white">Recomendaciones Personales</h3>
+      {rutina.recomendacionesPersonales &&
+        rutina.recomendacionesPersonales.length > 0 && (
+          <div className="bg-green-900/30 border border-green-500/30 p-6 rounded-2xl mt-8">
+            <div className="flex items-center gap-3 mb-4">
+              <RiTrophyLine className="w-6 h-6 text-green-400" />
+              <h3 className="text-lg font-bold text-white">
+                Recomendaciones Personales
+              </h3>
+            </div>
+            <div className="space-y-2">
+              {rutina.recomendacionesPersonales.map((recomendacion, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <RiCheckboxCircleLine className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                  <p className="text-sm text-gray-300">{recomendacion}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="space-y-2">
-            {rutina.recomendacionesPersonales.map((recomendacion, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <RiCheckboxCircleLine className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-gray-300">{recomendacion}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        )}
 
       {/* Recomendaciones de descanso */}
-      {rutina.resumen.recomendacionesDescanso && rutina.resumen.recomendacionesDescanso.length > 0 && (
-        <div className="bg-blue-900/30 border border-blue-500/30 p-6 rounded-2xl mt-8">
-          <div className="flex items-center gap-3 mb-4">
-            <RiShieldCheckLine className="w-6 h-6 text-blue-400" />
-            <h3 className="text-lg font-bold text-white">Recomendaciones de Descanso</h3>
+      {rutina.resumen.recomendacionesDescanso &&
+        rutina.resumen.recomendacionesDescanso.length > 0 && (
+          <div className="bg-blue-900/30 border border-blue-500/30 p-6 rounded-2xl mt-8">
+            <div className="flex items-center gap-3 mb-4">
+              <RiShieldCheckLine className="w-6 h-6 text-blue-400" />
+              <h3 className="text-lg font-bold text-white">
+                Recomendaciones de Descanso
+              </h3>
+            </div>
+            <div className="space-y-2">
+              {rutina.resumen.recomendacionesDescanso.map(
+                (recomendacion, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <RiCheckboxCircleLine className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-gray-300">{recomendacion}</p>
+                  </div>
+                )
+              )}
+            </div>
           </div>
-          <div className="space-y-2">
-            {rutina.resumen.recomendacionesDescanso.map((recomendacion, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <RiCheckboxCircleLine className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-gray-300">{recomendacion}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        )}
 
       <div className="space-y-6 mt-8">
         <div className="bg-yellow-400/10 border border-yellow-400/30 p-6 rounded-2xl">
@@ -958,7 +1043,9 @@ const EstadisticasPanel = ({ estadisticas, rutina }) => {
     <div className="mt-4 pt-4 border-t border-gray-600">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-gray-700/50 rounded-lg p-4">
-          <h4 className="text-sm font-medium text-gray-400 mb-2">Promedio por día</h4>
+          <h4 className="text-sm font-medium text-gray-400 mb-2">
+            Promedio por día
+          </h4>
           <p className="text-2xl font-bold text-white">
             {estadisticas.promedioEjerciciosPorDia.toFixed(1)}
           </p>
@@ -966,35 +1053,45 @@ const EstadisticasPanel = ({ estadisticas, rutina }) => {
         </div>
 
         <div className="bg-gray-700/50 rounded-lg p-4">
-          <h4 className="text-sm font-medium text-gray-400 mb-2">Grupo más trabajado</h4>
+          <h4 className="text-sm font-medium text-gray-400 mb-2">
+            Grupo más trabajado
+          </h4>
           <p className="text-lg font-bold text-white capitalize">
-            {estadisticas.grupoMasTrabjado?.[0] || 'N/A'}
+            {estadisticas.grupoMasTrabjado?.[0] || "N/A"}
           </p>
           <p className="text-xs text-gray-400">
             {estadisticas.grupoMasTrabjado?.[1] || 0} días en la semana
           </p>
         </div>
-
-
       </div>
 
       <div className="mt-4">
-        <h4 className="text-sm font-medium text-gray-400 mb-3">Distribución semanal por grupo</h4>
+        <h4 className="text-sm font-medium text-gray-400 mb-3">
+          Distribución semanal por grupo
+        </h4>
         <div className="flex flex-wrap gap-2">
-          {Object.entries(rutina.resumen.distribucionGrupos).map(([grupo, cantidad]) => (
-            <div
-              key={grupo}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm"
-              style={{ backgroundColor: `${iaClientService.getColorMusculo(grupo)}20` }}
-            >
+          {Object.entries(rutina.resumen.distribucionGrupos).map(
+            ([grupo, cantidad]) => (
               <div
-                className="w-3 h-3 rounded-full"
-                style={{ backgroundColor: iaClientService.getColorMusculo(grupo) }}
-              ></div>
-              <span className="text-white capitalize">{grupo}</span>
-              <span className="text-gray-400">({cantidad})</span>
-            </div>
-          ))}
+                key={grupo}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm"
+                style={{
+                  backgroundColor: `${iaClientService.getColorMusculo(
+                    grupo
+                  )}20`,
+                }}
+              >
+                <div
+                  className="w-3 h-3 rounded-full"
+                  style={{
+                    backgroundColor: iaClientService.getColorMusculo(grupo),
+                  }}
+                ></div>
+                <span className="text-white capitalize">{grupo}</span>
+                <span className="text-gray-400">({cantidad})</span>
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>
@@ -1019,7 +1116,7 @@ const DiaCard = ({ dia }) => {
               <span>Día de Descanso</span>
             </div>
           </div>
-          
+
           <div className="flex flex-wrap gap-2 mb-3">
             <span className="px-3 py-1 rounded-full text-blue-300 text-xs lg:text-sm font-medium bg-blue-500/20">
               Recuperación
@@ -1033,14 +1130,16 @@ const DiaCard = ({ dia }) => {
             </span>
           </div>
         </div>
-        
+
         <div className="p-4 lg:p-6 text-center">
           <div className="flex flex-col items-center justify-center py-8">
             <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-4">
               <RiShieldCheckLine className="w-8 h-8 text-blue-400" />
             </div>
-            
-            <h5 className="text-xl font-bold text-white mb-2">Día de Descanso</h5>
+
+            <h5 className="text-xl font-bold text-white mb-2">
+              Día de Descanso
+            </h5>
             <p className="text-gray-400 text-sm mb-4 max-w-xs">
               Tu cuerpo necesita tiempo para recuperarse y crecer más fuerte.
             </p>
@@ -1055,26 +1154,25 @@ const DiaCard = ({ dia }) => {
     <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-2xl overflow-hidden hover:border-yellow-400/50 transition-all duration-300 transform hover:scale-[1.01]">
       <div className="bg-gradient-to-r from-gray-700 to-gray-800 p-4 lg:p-6 border-b border-gray-600">
         <div className="flex items-center justify-between mb-3">
-          <h4 className="text-lg lg:text-xl font-bold text-white">
-            {dia.dia}
-          </h4>
+          <h4 className="text-lg lg:text-xl font-bold text-white">{dia.dia}</h4>
           <div className="flex items-center gap-2 text-xs text-gray-400">
-            <span>{dia.tipoEntrenamiento || 'Entrenamiento'}</span>
+            <span>{dia.tipoEntrenamiento || "Entrenamiento"}</span>
           </div>
         </div>
-        
+
         <div className="flex flex-wrap gap-2 mb-3">
-          {dia.gruposMusculares && dia.gruposMusculares.slice(0, 3).map((grupo) => (
-            <span
-              key={grupo}
-              className="px-2 lg:px-3 py-1 rounded-full text-white text-xs lg:text-sm font-medium"
-              style={{
-                backgroundColor: iaClientService.getColorMusculo(grupo),
-              }}
-            >
-              {grupo}
-            </span>
-          ))}
+          {dia.gruposMusculares &&
+            dia.gruposMusculares.slice(0, 3).map((grupo) => (
+              <span
+                key={grupo}
+                className="px-2 lg:px-3 py-1 rounded-full text-white text-xs lg:text-sm font-medium"
+                style={{
+                  backgroundColor: iaClientService.getColorMusculo(grupo),
+                }}
+              >
+                {grupo}
+              </span>
+            ))}
           {dia.gruposMusculares && dia.gruposMusculares.length > 3 && (
             <span className="px-2 lg:px-3 py-1 rounded-full text-gray-300 text-xs lg:text-sm font-medium bg-gray-600">
               +{dia.gruposMusculares.length - 3} más
@@ -1099,14 +1197,16 @@ const DiaCard = ({ dia }) => {
         <div className="bg-yellow-400/10 border border-yellow-400/30 rounded-lg p-3 mx-4 lg:mx-6 mb-4">
           <div className="flex items-center gap-2">
             <RiInformationLine className="w-4 h-4 text-yellow-400" />
-            <span className="text-yellow-400 text-sm font-medium">Intensidad ajustada</span>
+            <span className="text-yellow-400 text-sm font-medium">
+              Intensidad ajustada
+            </span>
           </div>
           <p className="text-xs text-gray-400 mt-1">
             Rutina modificada basándose en tu historial de entrenamientos
           </p>
         </div>
       )}
-      
+
       <div className="p-4 lg:p-6">
         <div className="space-y-3 lg:space-y-4">
           {dia.ejercicios.map((ejercicio, ejIndex) => (
@@ -1126,11 +1226,15 @@ const DiaCard = ({ dia }) => {
                     ({ejercicio.musculo})
                   </span>
                   {ejercicio.intensidad && (
-                    <span className={`text-xs px-2 py-0.5 rounded ${
-                      ejercicio.intensidad === 'Alta' ? 'bg-red-500/20 text-red-400' :
-                      ejercicio.intensidad === 'Media' ? 'bg-yellow-500/20 text-yellow-400' :
-                      'bg-green-500/20 text-green-400'
-                    }`}>
+                    <span
+                      className={`text-xs px-2 py-0.5 rounded ${
+                        ejercicio.intensidad === "Alta"
+                          ? "bg-red-500/20 text-red-400"
+                          : ejercicio.intensidad === "Media"
+                          ? "bg-yellow-500/20 text-yellow-400"
+                          : "bg-green-500/20 text-green-400"
+                      }`}
+                    >
                       {ejercicio.intensidad}
                     </span>
                   )}

@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Boolean, DECIMAL, JSON
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.database import Base
+from datetime import datetime
 
 class RutinaIA(Base):
     __tablename__ = "rutina_ia"
@@ -29,7 +30,7 @@ class RutinaIA(Base):
     
     # Control
     activa = Column(Boolean, default=True)
-    fecha_actualizacion = Column(DateTime(timezone=True), onupdate=func.now())
+    fecha_actualizacion = Column(DateTime, default=datetime.now,onupdate=datetime.now,nullable=True)
     
     # Relación con Usuario
     usuario = relationship("Usuario", back_populates="rutinas_ia")

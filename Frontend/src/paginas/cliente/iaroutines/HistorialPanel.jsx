@@ -12,9 +12,18 @@ import {
 } from 'react-icons/ri';
 
 const HistorialPanel = ({ historial, mostrarDetalle = false }) => {
-  if (!historial || historial.totalEntrenamientos === 0) {
+  console.log('📊 HistorialPanel recibió:', historial);
+  
+  // Manejar diferentes estructuras de datos
+  const estadisticas = historial?.estadisticas || historial;
+  
+  // Verificar si hay datos válidos
+  const tieneEntrenamientos = estadisticas?.total_entrenamientos > 0 || 
+                              estadisticas?.totalEntrenamientos > 0;
+  
+  if (!estadisticas || !tieneEntrenamientos) {
     return (
-      <div className="bg-gray-800/50 border border-gray-600 rounded-xl p-6 text-center">
+      <div className="bg-gray-800/50 border border-gray-600 rounded-xl p-6 text-center mb-8">
         <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
           <RiHistoryLine className="w-8 h-8 text-gray-400" />
         </div>
@@ -26,8 +35,22 @@ const HistorialPanel = ({ historial, mostrarDetalle = false }) => {
     );
   }
 
+  // Normalizar los nombres de las propiedades
+  const entrenamientosPorSemana = estadisticas.entrenamientos_por_semana || 
+                                  estadisticas.entrenamientosPorSemana || 0;
+  const asistenciaPromedio = estadisticas.asistencia_promedio || 
+                             estadisticas.asistenciaPromedio || 0;
+  const nivelMasFrecuente = estadisticas.nivel_mas_frecuente || 
+                            estadisticas.nivelMasFrecuente || 'intermedio';
+  const totalEntrenamientos = estadisticas.total_entrenamientos || 
+                              estadisticas.totalEntrenamientos || 0;
+  const gruposMasTrabajados = estadisticas.grupos_mas_trabajados || 
+                              estadisticas.gruposMasTrabajados || [];
+  const ultimoEntrenamiento = estadisticas.ultimo_entrenamiento || 
+                              estadisticas.ultimoEntrenamiento;
+
   return (
-    <div className="bg-gradient-to-br from-blue-900/30 to-indigo-900/30 border border-blue-500/30 rounded-xl p-6">
+    <div className="bg-gradient-to-br from-blue-900/30 to-indigo-900/30 border border-blue-500/30 rounded-xl p-6 mb-8">
       <div className="flex items-center gap-3 mb-6">
         <div className="p-2 bg-blue-500/20 rounded-lg">
           <RiHistoryLine className="w-6 h-6 text-blue-400" />
@@ -35,7 +58,7 @@ const HistorialPanel = ({ historial, mostrarDetalle = false }) => {
         <div>
           <h3 className="text-lg font-bold text-white">Tu Historial de Entrenamientos</h3>
           <p className="text-sm text-gray-400">
-            Basado en {historial.totalEntrenamientos} entrenamientos completados
+            Basado en {totalEntrenamientos} entrenamientos completados
           </p>
         </div>
       </div>
@@ -45,7 +68,7 @@ const HistorialPanel = ({ historial, mostrarDetalle = false }) => {
         <div className="bg-blue-800/30 rounded-lg p-4 text-center">
           <RiCalendarLine className="w-6 h-6 text-blue-400 mx-auto mb-2" />
           <div className="text-2xl font-bold text-white">
-            {historial.entrenamientosPorSemana}
+            {entrenamientosPorSemana.toFixed(1)}
           </div>
           <div className="text-xs text-gray-400">por semana</div>
         </div>
@@ -53,7 +76,7 @@ const HistorialPanel = ({ historial, mostrarDetalle = false }) => {
         <div className="bg-green-800/30 rounded-lg p-4 text-center">
           <RiCheckboxCircleLine className="w-6 h-6 text-green-400 mx-auto mb-2" />
           <div className="text-2xl font-bold text-white">
-            {historial.asistenciaPromedio}%
+            {Math.round(asistenciaPromedio)}%
           </div>
           <div className="text-xs text-gray-400">asistencia</div>
         </div>
@@ -61,7 +84,7 @@ const HistorialPanel = ({ historial, mostrarDetalle = false }) => {
         <div className="bg-yellow-800/30 rounded-lg p-4 text-center">
           <RiTrophyLine className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
           <div className="text-lg font-bold text-white capitalize">
-            {historial.nivelMasFrecuente}
+            {nivelMasFrecuente}
           </div>
           <div className="text-xs text-gray-400">nivel usual</div>
         </div>
@@ -69,27 +92,27 @@ const HistorialPanel = ({ historial, mostrarDetalle = false }) => {
         <div className="bg-purple-800/30 rounded-lg p-4 text-center">
           <RiBarChart2Line className="w-6 h-6 text-purple-400 mx-auto mb-2" />
           <div className="text-2xl font-bold text-white">
-            {historial.totalEntrenamientos}
+            {totalEntrenamientos}
           </div>
           <div className="text-xs text-gray-400">total</div>
         </div>
       </div>
 
       {/* Grupos musculares más trabajados */}
-      {historial.gruposMasTrabajados && historial.gruposMasTrabajados.length > 0 && (
+      {gruposMasTrabajados && gruposMasTrabajados.length > 0 && (
         <div className="mb-6">
           <h4 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
             <RiHeartPulseLine className="w-4 h-4 text-blue-400" />
             Grupos musculares más trabajados
           </h4>
           <div className="flex flex-wrap gap-2">
-            {historial.gruposMasTrabajados.slice(0, 5).map((grupo, index) => (
+            {gruposMasTrabajados.slice(0, 5).map((grupo, index) => (
               <span
-                key={grupo}
+                key={`${grupo}-${index}`}
                 className="px-3 py-1 rounded-full text-white text-sm font-medium"
                 style={{
                   backgroundColor: getColorMusculo(grupo),
-                  opacity: 1 - (index * 0.15) // Degradado de opacidad
+                  opacity: 1 - (index * 0.15)
                 }}
               >
                 {grupo}
@@ -100,13 +123,13 @@ const HistorialPanel = ({ historial, mostrarDetalle = false }) => {
       )}
 
       {/* Último entrenamiento */}
-      {historial.ultimoEntrenamiento && (
+      {ultimoEntrenamiento && (
         <div className="bg-gray-800/50 rounded-lg p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-white">Último entrenamiento</p>
               <p className="text-xs text-gray-400">
-                {new Date(historial.ultimoEntrenamiento).toLocaleDateString('es-ES', {
+                {new Date(ultimoEntrenamiento).toLocaleDateString('es-ES', {
                   weekday: 'long',
                   year: 'numeric',
                   month: 'long',
@@ -116,7 +139,7 @@ const HistorialPanel = ({ historial, mostrarDetalle = false }) => {
             </div>
             <div className="text-right">
               <p className="text-sm text-blue-400">
-                {calcularDiasDesde(historial.ultimoEntrenamiento)} días atrás
+                {calcularDiasDesde(ultimoEntrenamiento)} días atrás
               </p>
             </div>
           </div>
